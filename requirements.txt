@@ -1,0 +1,8 @@
+# Pour l'interaction avec les modèles de langage (LLM)
+openai
+
+# Pour la gestion des variables d'environnement
+python-dotenv
+
+# Pour la journalisation (optionnel, mais utile)
+# tqdm (si vous voulez une barre de progression)
