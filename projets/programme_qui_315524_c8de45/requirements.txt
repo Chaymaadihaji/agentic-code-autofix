@@ -1,0 +1,3 @@
+# requirements.txt
+
+# Ce projet utilise Python 3.x, aucune dépendance spécifique n'est requise pour un programme "Hello World"

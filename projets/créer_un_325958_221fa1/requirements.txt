@@ -1,0 +1,99 @@
+# app.py
+import tkinter as tk
+from tkinter import ttk, messagebox
+import matplotlib.pyplot as plt
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
+class GestionnaireDeTaches:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Gestionnaire de tâches")
+        self.root.geometry("800x600")
+        self.tasks = []
+        self.stats = {"total": 0, "fait": 0}
+
+        # Création des widgets
+        self.notebook = ttk.Notebook(self.root)
+        self.notebook.pack(pady=10, expand=True)
+
+        self.frame_taches = tk.Frame(self.notebook)
+        self.frame_stats = tk.Frame(self.notebook)
+
+        self.notebook.add(self.frame_taches, text="Tâches")
+        self.notebook.add(self.frame_stats, text="Statistiques")
+
+        # Frame Tâches
+        self.label_tache = tk.Label(self.frame_taches, text="Tâche :")
+        self.label_tache.pack()
+
+        self.entry_tache = tk.Entry(self.frame_taches, width=50)
+        self.entry_tache.pack()
+
+        self.button_ajouter = tk.Button(self.frame_taches, text="Ajouter", command=self.ajouter_tache)
+        self.button_ajouter.pack()
+
+        self.listbox_taches = tk.Listbox(self.frame_taches)
+        self.listbox_taches.pack(pady=10)
+
+        self.button_editer = tk.Button(self.frame_taches, text="Éditer", command=self.editer_tache)
+        self.button_editer.pack()
+
+        self.button_supprimer = tk.Button(self.frame_taches, text="Supprimer", command=self.supprimer_tache)
+        self.button_supprimer.pack()
+
+        # Frame Statistiques
+        self.label_stats = tk.Label(self.frame_stats, text="Statistiques de progression")
+        self.label_stats.pack()
+
+        self.figure = Figure(figsize=(5, 4), dpi=100)
+        self.ax = self.figure.add_subplot(111)
+        self.ax.bar(["Fait", "Non fait"], [self.stats["fait"], self.stats["total"] - self.stats["fait"]])
+        self.canvas = FigureCanvasTkAgg(self.figure, master=self.frame_stats)
+        self.canvas.draw()
+        self.canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+
+    def ajouter_tache(self):
+        tache = self.entry_tache.get()
+        if tache:
+            self.tasks.append(tache)
+            self.listbox_taches.insert(tk.END, tache)
+            self.stats["total"] += 1
+            self.entry_tache.delete(0, tk.END)
+            self.mettre_a_jour_stats()
+
+    def editer_tache(self):
+        try:
+            index = self.listbox_taches.curselection()[0]
+            tache = self.listbox_taches.get(index)
+            self.listbox_taches.delete(index)
+            self.tasks.pop(index)
+            self.stats["total"] -= 1
+            self.mettre_a_jour_stats()
+            self.entry_tache.insert(0, tache)
+        except IndexError:
+            messagebox.showerror("Erreur", "Sélectionnez une tâche à éditer")
+
+    def supprimer_tache(self):
+        try:
+            index = self.listbox_taches.curselection()[0]
+            tache = self.listbox_taches.get(index)
+            self.listbox_taches.delete(index)
+            self.tasks.pop(index)
+            self.stats["total"] -= 1
+            self.mettre_a_jour_stats()
+        except IndexError:
+            messagebox.showerror("Erreur", "Sélectionnez une tâche à supprimer")
+
+    def mettre_a_jour_stats(self):
+        self.ax.clear()
+        self.ax.bar(["Fait", "Non fait"], [self.stats["fait"], self.stats["total"] - self.stats["fait"]])
+        self.canvas.draw()
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = GestionnaireDeTaches(root)
+    root.mainloop()

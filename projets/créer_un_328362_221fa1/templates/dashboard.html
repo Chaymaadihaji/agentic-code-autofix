@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionnaire de tâches</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Gestionnaire de tâches</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Accueil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Tâches</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Statistiques</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>Tâches</h2>
+                    <form class="form-horizontal" id="form-taches">
+                        <div class="form-group">
+                            <label for="nom-tache">Nom de la tâche</label>
+                            <input type="text" class="form-control" id="nom-tache" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="description-tache">Description de la tâche</label>
+                            <textarea class="form-control" id="description-tache" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Ajouter</button>
+                    </form>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nom de la tâche</th>
+                                <th>Description de la tâche</th>
+                                <th>Statut</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-taches">
+                            <!-- Les tâches seront affichées ici -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <h2>Statistiques</h2>
+                    <canvas id="chart-statistiques" width="400" height="200"></canvas>
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                    <script>
+                        let statutTaches = {
+                            "En attente": 0,
+                            "En cours": 0,
+                            "Terminée": 0
+                        };
+                        let taches = [];
+                        // Les données seront ajoutées ici
+                        const ctx = document.getElementById('chart-statistiques').getContext('2d');
+                        const chart = new Chart(ctx, {
+                            type: 'pie',
+                            data: {
+                                labels: Object.keys(statutTaches),
+                                datasets: [{
+                                    label: 'Statut des tâches',
+                                    data: Object.values(statutTaches),
+                                    backgroundColor: [
+                                        'rgba(255, 99, 132, 0.2)',
+                                        'rgba(54, 162, 235, 0.2)',
+                                        'rgba(255, 206, 86, 0.2)'
+                                    ],
+                                    borderColor: [
+                                        'rgba(255, 99, 132, 1)',
+                                        'rgba(54, 162, 235, 1)',
+                                        'rgba(255, 206, 86, 1)'
+                                    ],
+                                    borderWidth: 1
+                                }]
+                            }
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Gestion des formulaires et des erreurs
+        const formTaches = document.getElementById('form-taches');
+        formTaches.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const nomTache = document.getElementById('nom-tache').value;
+            const descriptionTache = document.getElementById('description-tache').value;
+            // Envoi des données au serveur
+            fetch('/taches', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ nomTache, descriptionTache })
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                // Ajout de la tâche à la liste
+                const tableTaches = document.getElementById('table-taches');
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${nomTache}</td>
+                    <td>${descriptionTache}</td>
+                    <td>En attente</td>
+                `;
+                tableTaches.appendChild(row);
+                // Mise à jour des statistiques
+                const statutTaches = {
+                    "En attente": 1,
+                    "En cours": 0,
+                    "Terminée": 0
+                };
+                chart.data.labels = Object.keys(statutTaches);
+                chart.data.datasets[0].data = Object.values(statutTaches);
+                chart.update();
+            })
+            .catch((error) => console.error(error));
+        });
+    </script>
+</body>
+</html>

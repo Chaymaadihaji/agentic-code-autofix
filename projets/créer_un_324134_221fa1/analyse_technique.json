@@ -1,0 +1,16 @@
+{
+  "type_application": "web",
+  "besoin_interface": true,
+  "type_interface": "web_gui",
+  "complexite_interface": "moyenne",
+  "composants_ui_attendus": [],
+  "langage_backend": "python",
+  "framework_ui": "flask_html",
+  "description_technique": "Application basée sur la demande : Créer un gestionnaire de tâches avec liste interactive et statistiques de progression...",
+  "fonctionnalites_cles": [
+    "statistique"
+  ],
+  "dependances": [
+    "Flask"
+  ]
+}

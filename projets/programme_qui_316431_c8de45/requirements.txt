@@ -1,0 +1,9 @@
+# requirements.txt pour le projet "Hello World" en Python
+
+# Ce projet utilise Python 3.x, aucune dépendance spécifique n'est requise
+# pour afficher "Hello World" à la console.
+
+# Il est possible d'ajouter des dépendances si le projet évolue, mais pour
+# l'instant, seules les bibliothèques standard de Python sont nécessaires.
+
+# Par conséquent, le fichier requirements.txt reste vide pour ce projet simple.

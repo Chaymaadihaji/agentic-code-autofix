@@ -1,0 +1,52 @@
+form.title.data = task.title
+from flask_sqlalchemy import SQLAlchemy
+title = StringField('Titre', validators=[DataRequired()])
+from flask import Flask, render_template, request, redirect, url_for
+@app.route('/edit/<int:id>', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
+db.session.commit()
+class Task(db.Model):
+from flask_fontawesome import FontAwesome
+completed = db.Column(db.Boolean, default=False)
+return redirect(url_for('index'))
+tasks = Task.query.all()
+return render_template('index.html', form=form, tasks=tasks)
+if __name__ == '__main__':
+Flask-SQLAlchemy
+db = SQLAlchemy(app)
+@app.route('/stats')
+Bootstrap(app)
+if form.validate_on_submit():
+return render_template('stats.html', completed=completed, total=total)
+return render_template('edit.html', form=form, task=task)
+app.run(debug=True)
+db.session.add(task)
+task.title = form.title.data
+@app.route('/delete/<int:id>')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tasks.db'
+from wtforms import StringField, SubmitField
+id = db.Column(db.Integer, primary_key=True)
+def delete(id):
+Flask-Bootstrap
+from wtforms.validators import DataRequired
+Flask-WTF
+db.session.delete(task)
+class TaskForm(FlaskForm):
+fa = FontAwesome(app)
+import os
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+total = len(tasks)
+from flask_bootstrap import Bootstrap
+from flask_wtf import FlaskForm
+app = Flask(__name__)
+task = Task(title=form.title.data)
+def stats():
+completed = len([task for task in tasks if task.completed])
+def index():
+title = db.Column(db.String(100), nullable=False)
+submit = SubmitField('Ajouter')
+def edit(id):
+Flask
+task = Task.query.get_or_404(id)
+app.config['SECRET_KEY'] = 'secretkey'
+form = TaskForm()

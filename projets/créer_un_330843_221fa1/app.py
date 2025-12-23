@@ -1,0 +1,64 @@
+from flask import Flask, render_template, request, jsonify
+import json
+from datetime import datetime, timedelta
+
+app = Flask(__name__)
+
+# Datas pour le dashboard
+datas = [
+    {"id": 1, "title": "Tâche 1", "description": "Description de la tâche 1", "status": "En cours"},
+    {"id": 2, "title": "Tâche 2", "description": "Description de la tâche 2", "status": "Terminée"},
+    {"id": 3, "title": "Tâche 3", "description": "Description de la tâche 3", "status": "En cours"},
+]
+
+# Fonction pour calculer les statistiques
+def calcul_statistiques(datas):
+    total = len(datas)
+    en_cours = sum(1 for data in datas if data["status"] == "En cours")
+    terminée = sum(1 for data in datas if data["status"] == "Terminée")
+    return total, en_cours, terminée
+
+# Route pour afficher le dashboard
+@app.route("/")
+def index():
+    total, en_cours, terminée = calcul_statistiques(datas)
+    return render_template("index.html", datas=datas, total=total, en_cours=en_cours, terminée=terminée)
+
+# Route pour ajouter une tâche
+@app.route("/ajout", methods=["POST"])
+def ajout():
+    title = request.form["title"]
+    description = request.form["description"]
+    status = request.form["status"]
+    datas.append({"id": len(datas) + 1, "title": title, "description": description, "status": status})
+    return jsonify({"message": "Tâche ajoutée"})
+
+# Route pour supprimer une tâche
+@app.route("/supprimer", methods=["POST"])
+def supprimer():
+    id = request.form["id"]
+    global datas
+    datas = [data for data in datas if data["id"] != int(id)]
+    return jsonify({"message": "Tâche supprimée"})
+
+# Route pour filtrer les tâches
+@app.route("/filtrer", methods=["POST"])
+def filtrer():
+    status = request.form["status"]
+    filtered_datas = [data for data in datas if data["status"] == status]
+    return jsonify({"datas": filtered_datas})
+    return jsonify({"datas": datas})
+
+# Route pour trier les tâches
+@app.route("/trier", methods=["POST"])
+def trier():
+    ordre = request.form["ordre"]
+    if ordre == "asc":
+        datas.sort(key=lambda x: x["id"])
+    elif ordre == "desc":
+        datas.sort(key=lambda x: x["id"], reverse=True)
+    return jsonify({"datas": datas})
+
+# Lancement de l'application
+if __name__ == "__main__":
+    app.run(debug=True)

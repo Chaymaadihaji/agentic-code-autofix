@@ -1,0 +1,29 @@
+from flask import Flask, render_template
+from flask import request, redirect, url_for
+from flask import flash
+import json
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'secret_key'
+
+tasks = [
+    {'nom': 'Tâche 1', 'debut': '2022-01-01', 'fin': '2022-01-31'},
+    {'nom': 'Tâche 2', 'debut': '2022-02-01', 'fin': '2022-02-28'},
+    {'nom': 'Tâche 3', 'debut': '2022-03-01', 'fin': '2022-03-31'}
+]
+
+@app.route('/')
+def index():
+    return render_template('dashboard.html', tasks=tasks)
+
+@app.route('/create_task', methods=['POST'])
+def create_task():
+    nom = request.form['nom']
+    debut = request.form['debut']
+    fin = request.form['fin']
+    task = {'nom': nom, 'debut': debut, 'fin': fin}
+    tasks.append(task)
+    return redirect(url_for('index'))
+
+if __name__ == '__main__':
+    app.run(debug=True)

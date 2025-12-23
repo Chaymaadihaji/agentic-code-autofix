@@ -1,0 +1,20 @@
+from flask import Flask, render_template
+from flask_sqlalchemy import SQLAlchemy
+
+app = Flask(__name__)
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///taches.db"
+db = SQLAlchemy(app)
+
+class Tache(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nom = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    date_creation = db.Column(db.DateTime, nullable=False, default=db.func.current_timestamp())
+
+@app.route("/")
+def index():
+    tasks = Tache.query.all()
+    return render_template("dashboard.html", tasks=tasks)
+
+if __name__ == "__main__":
+    app.run(debug=True)

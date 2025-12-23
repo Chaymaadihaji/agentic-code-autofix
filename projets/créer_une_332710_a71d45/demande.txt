@@ -1,0 +1,1 @@
+Créer une calculatrice web avec Flask qui fait les 4 opérations de base (+, -, , ), affiche une interface avec boutons comme une vraie calculatrice, garde un historique des 10 derniers calculs en mémoire, a un bouton pour effacer l'historique, une interface colorée avec CSS, et n'utilise PAS de fichiers externes (tout en mémoire).

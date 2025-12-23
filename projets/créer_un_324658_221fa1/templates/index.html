@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionnaire de tâches</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-8tYc5U0pp40gsB9/hPcRcahYgNznmulNpSS1JDVobh2LdlYqGy1i9ICpOgXC4OCSkW7rpA7t9UrX3fWzRjL9" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+        .card:hover {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Gestionnaire de tâches</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Accueil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Tâches</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Statistiques</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="container">
+        <h1>Gestionnaire de tâches</h1>
+        <section class="row">
+            <div class="col-md-6">
+                <h2>Créer une tâche</h2>
+                <form id="create-task-form">
+                    <div class="mb-3">
+                        <label for="task-name" class="form-label">Nom de la tâche</label>
+                        <input type="text" class="form-control" id="task-name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="task-description" class="form-label">Description de la tâche</label>
+                        <textarea class="form-control" id="task-description" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Créer</button>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <h2>Liste des tâches</h2>
+                <table class="table table-striped table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nom</th>
+                            <th>Description</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tasks-list">
+                        {% for task in tasks %}
+                        <tr>
+                            <td>{{ task.id }}</td>
+                            <td>{{ task.name }}</td>
+                            <td>{{ task.description }}</td>
+                            <td>
+                                <button class="btn btn-sm btn-primary" onclick="editTask({{ task.id }})">Éditer</button>
+                                <button class="btn btn-sm btn-danger" onclick="deleteTask({{ task.id }})">Supprimer</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <section class="row">
+            <div class="col-md-6">
+                <h2>Statistiques de progression</h2>
+                <canvas id="progress-chart"></canvas>
+            </div>
+            <div class="col-md-6">
+                <h2>Graphique de progression</h2>
+                <canvas id="progress-graph"></canvas>
+            </div>
+        </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <script>
+        // Fonction pour créer une tâche
+        function createTask() {
+            const taskName = document.getElementById('task-name').value;
+            const taskDescription = document.getElementById('task-description').value;
+            // Envoi de la requête pour créer la tâche
+            fetch('/create-task', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name: taskName, description: taskDescription })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Mise à jour de la liste des tâches
+                const tasksList = document.getElementById('tasks-list');
+                const taskRow = document.createElement('tr');
+                taskRow.innerHTML = `
+                    <td>${data.id}</td>
+                    <td>${data.name}</td>
+                    <td>${data.description}</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" onclick="editTask(${data.id})">Éditer</button>
+                        <button class="btn btn-sm btn-danger" onclick="deleteTask(${data.id})">Supprimer</button>
+                    </td>
+                `;
+                tasksList.appendChild(taskRow);
+            })
+            .catch(error => console.error(error));
+        }
+
+        // Fonction pour éditer une tâche
+        function editTask(id) {
+            // Récupération de la tâche à éditer
+            fetch(`/edit-task/${id}`)
+            .then(response => response.json())
+            .then(data => {
+                // Mise à jour du formulaire d'édition
+                const taskName = document.getElementById('task-name');
+                const taskDescription = document.getElementById('task-description');
+                taskName.value = data.name;
+                taskDescription.value = data.description;
+                // Envoi de la requête pour éditer la tâche
+                fetch('/edit-task', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ id: id, name: taskName.value, description: taskDescription.value })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Mise à jour de la liste des tâches
+                    const tasksList = document.getElementById('tasks-list');
+                    const taskRow = tasksList.querySelector(`tr:nth-child(${id + 1})`);
+                    taskRow.innerHTML = `
+                        <td>${data.id}</td>
+                        <td>${data.name}</td>
+                        <td>${data.description}</td>
+                        <td>
+                            <button class="btn btn-sm btn-primary" onclick="editTask(${data.id})">Éditer</button>
+                            <button class="btn btn-sm btn-danger" onclick="deleteTask(${data.id})">Supprimer</button>
+                        </td>
+                    `;
+                })
+                .catch(error => console.error(error));
+            })
+            .catch(error => console.error(error));
+        }
+
+        // Fonction pour supprimer une tâche
+        function deleteTask(id) {
+            // Envoi de la requête pour supprimer la tâche
+            fetch(`/delete-task/${id}`, {
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Mise à jour de la liste des tâches
+                const tasksList = document.getElementById('tasks-list');
+                const taskRow = tasksList.querySelector(`tr:nth-child(${id + 1})`);
+                tasksList.removeChild(taskRow);
+            })
+            .catch(error => console.error(error));
+        }
+
+        // Création du graphique de progression
+        const progressChart = document.getElementById('progress-chart').getContext('2d');
+        const progressGraph = new Chart(progressChart, {
+            type: 'bar',
+            data: {
+                labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+                datasets: [{
+                    label: 'Progression',
+                    data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Création du graphique de progression
+        const progressGraphCtx = document.getElementById('progress-graph').getContext('2d');
+        const progressGraphChart = new Chart(progressGraphCtx, {
+            type: 'line',
+            data: {
+                labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+                datasets: [{
+                    label: 'Progression',
+                    data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Ajout d'un événement pour créer une tâche
+        document.getElementById('create-task-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            createTask();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+{
+  "type_application": "dashboard",
+  "besoin_interface": true,
+  "type_interface": "web_gui",
+  "complexite_interface": "moyenne",
+  "composants_ui_attendus": [
+    "formulaires",
+    "tableaux",
+    "graphiques",
+    "galerie",
+    "dashboard"
+  ],
+  "langage_backend": "python",
+  "framework_ui": "flask_html",
+  "description_technique": "Application web permettant de créer, modifier et supprimer des tâches, ainsi que de visualiser les statistiques de progression.",
+  "fonctionnalites_cles": [
+    "liste interactive des tâches",
+    "statistiques de progression",
+    "création, modification et suppression de tâches"
+  ],
+  "dependances": [
+    "Flask",
+    "Flask-SQLAlchemy",
+    "Flask-WTF",
+    "Bootstrap"
+  ]
+}

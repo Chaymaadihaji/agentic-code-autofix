@@ -1,0 +1,8 @@
+# Dépendances générées automatiquement
+# Application: dashboard
+
+Flask>=2.0.0
+Bootstrap
+Matplotlib
+SQLite
+python-dotenv==1.0.0

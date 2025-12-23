@@ -1,0 +1,1 @@
+{"nom_fichier": "config.py", "code": "class Config:\n    SECRET_KEY = 'secret_key'\n    DATABASE = []\n    HISTORY = []\n", "timestamp": 1766332746.3049605}

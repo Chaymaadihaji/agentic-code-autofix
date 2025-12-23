@@ -1,0 +1,1 @@
+{"nom_fichier": "main.py", "code": "# main.py\n\ndef est_palindrome(mot):\n    return mot == mot[::-1]\n\nif __name__ == \"__main__\":\n    print(est_palindrome(\"radar\"))  # True\n    print(est_palindrome(\"python\"))  # False\n    print(est_palindrome(\"a\"))  # True\n    print(est_palindrome(\"\"))  # True\n", "timestamp": 1766333535.9115968}

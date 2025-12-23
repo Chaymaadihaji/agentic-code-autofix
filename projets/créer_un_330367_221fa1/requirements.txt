@@ -1,0 +1,46 @@
+# main.py
+
+from flask import Flask, render_template, request, redirect, url_for
+from flask_dotenv import load_dotenv
+import pandas as pd
+import matplotlib.pyplot as plt
+
+app = Flask(__name__)
+load_dotenv()
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/ajouter_tache', methods=['POST'])
+def ajouter_tache():
+    tache = request.form['tache']
+    # Code pour ajouter la tache dans la bdd
+    return redirect(url_for('index'))
+
+@app.route('/filtrer_tache', methods=['POST'])
+def filtrer_tache():
+    filtre = request.form['filtre']
+    # Code pour filtrer les taches
+    return redirect(url_for('index'))
+
+@app.route('/tri_tache', methods=['POST'])
+def tri_tache():
+    tri = request.form['tri']
+    # Code pour trier les taches
+    return redirect(url_for('index'))
+
+@app.route('/statistiques')
+def statistiques():
+    # Code pour recuperer les taches de la bdd
+    taches = pd.DataFrame({
+        'tache': ['Tache 1', 'Tache 2', 'Tache 3'],
+        'etat': ['En cours', 'Terminé', 'En cours']
+    })
+    # Code pour creer les graphiques
+    plt.bar(taches['tache'], taches['etat'])
+    plt.savefig('static/statistiques.png')
+    return render_template('statistiques.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)

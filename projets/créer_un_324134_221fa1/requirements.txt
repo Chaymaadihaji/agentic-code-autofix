@@ -1,0 +1,6 @@
+# Dépendances générées automatiquement
+# Application: web
+
+Flask>=2.0.0
+python-dotenv==1.0.0
+Flask\nBootstrap via CDN (dans HTML)\n

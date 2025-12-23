@@ -1,0 +1,25 @@
+{
+  "type_application": "dashboard",
+  "besoin_interface": true,
+  "type_interface": "web_gui",
+  "complexite_interface": "moyenne",
+  "composants_ui_attendus": [
+    "cartes",
+    "graphiques",
+    "dashboard"
+  ],
+  "langage_backend": "python",
+  "framework_ui": "flask_html",
+  "description_technique": "Application météo affichant les cartes et les graphiques de température pour 5 villes",
+  "fonctionnalites_cles": [
+    "afficher les cartes météo",
+    "afficher les graphiques de température",
+    "sélectionner les 5 villes"
+  ],
+  "dependances": [
+    "Flask",
+    "Leaflet",
+    "Matplotlib",
+    "Requests"
+  ]
+}

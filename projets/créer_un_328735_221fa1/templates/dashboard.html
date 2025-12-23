@@ -1,0 +1,31 @@
+# app.py
+
+from flask import Flask, render_template, request
+from flask_sqlalchemy import SQLAlchemy
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///taches.db'
+db = SQLAlchemy(app)
+
+class Tache(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nom = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    etat = db.Column(db.String(100), nullable=False)
+
+@app.route('/')
+def index():
+    taches = Tache.query.all()
+    return render_template('dashboard.html', taches=taches)
+
+@app.route('/create', methods=['POST'])
+def create():
+    nom = request.form['nom']
+    description = request.form['description']
+    tache = Tache(nom=nom, description=description, etat='en cours')
+    db.session.add(tache)
+    db.session.commit()
+    return 'Tâche créée avec succès'
+
+if __name__ == '__main__':
+    app.run(debug=True)

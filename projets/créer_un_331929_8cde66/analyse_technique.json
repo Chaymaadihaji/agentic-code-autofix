@@ -1,0 +1,24 @@
+{
+  "type_application": "web",
+  "besoin_interface": true,
+  "type_interface": "web_gui",
+  "complexite_interface": "simple",
+  "composants_ui_attendus": [
+    "cartes",
+    "formulaires",
+    "tableaux"
+  ],
+  "langage_backend": "python",
+  "framework_ui": "flask_html",
+  "description_technique": "Générateur de citations aléatoires avec une page web qui affiche une nouvelle citation à chaque rafraîchissement.",
+  "fonctionnalites_cles": [
+    "Génération de citations aléatoires",
+    "Affichage de citations sur une page web",
+    "Rafraîchissement automatique de la citation"
+  ],
+  "dependances": [
+    "Flask",
+    "requests",
+    "random"
+  ]
+}

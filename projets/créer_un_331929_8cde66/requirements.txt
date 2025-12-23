@@ -1,0 +1,25 @@
+# Récupération des citations
+def index():
+API_URL = "https://type.fit/api/quotes"
+return render_template("index.html", quote=quote)
+quote = get_random_quote()
+app = Flask(__name__)
+Flask-Bootstrap
+def get_quotes():
+response = requests.get(API_URL)
+return random.choice(quotes)
+def get_random_quote():
+from flask import Flask, render_template, request
+import random
+quotes = get_quotes()
+if __name__ == "__main__":
+# API pour les citations
+Flask
+return response.json()
+random
+requests
+# Page principale
+import requests
+@app.route("/")
+app.run(debug=True)
+# Génération d'une citation aléatoire

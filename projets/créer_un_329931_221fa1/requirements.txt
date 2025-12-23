@@ -1,0 +1,12 @@
+# requirements.txt
+
+Flask==2.3.3
+Flask-SQLAlchemy==2.5.1
+Flask-WTF==1.0.5
+python-dotenv==0.20.0
+WTForms==3.0.1
+Flask-Bootstrap==3.3.7.1
+Flask-Login==0.5.0
+Flask-SQLAlchemy==2.5.1
+Flask-WTF==1.0.5
+sqlalchemy==1.4.39

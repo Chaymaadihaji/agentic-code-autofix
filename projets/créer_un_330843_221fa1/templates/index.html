@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionnaire de Tâches</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .task { border: 1px solid #ccc; padding: 10px; margin: 5px; }
+        .completed { background-color: #d4edda; }
+        .in-progress { background-color: #fff3cd; }
+    </style>
+</head>
+<body>
+    <h1>Gestionnaire de Tâches</h1>
+    
+    <h2>Statistiques</h2>
+    <p>Total: {{ total }}</p>
+    <p>En cours: {{ en_cours }}</p>
+    <p>Terminées: {{ terminée }}</p>
+    
+    <h2>Tâches</h2>
+    <div id="tasks">
+        {% for data in datas %}
+        <div class="task {% if data.status == 'Terminée' %}completed{% else %}in-progress{% endif %}">
+            <h3>{{ data.title }}</h3>
+            <p>{{ data.description }}</p>
+            <p><strong>Statut:</strong> {{ data.status }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <h2>Ajouter une tâche</h2>
+    <form action="/ajout" method="POST">
+        <input type="text" name="title" placeholder="Titre" required><br>
+        <textarea name="description" placeholder="Description"></textarea><br>
+        <select name="status">
+            <option value="En cours">En cours</option>
+            <option value="Terminée">Terminée</option>
+        </select><br>
+        <button type="submit">Ajouter</button>
+    </form>
+</body>
+</html>

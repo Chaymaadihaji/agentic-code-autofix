@@ -1,0 +1,14 @@
+{
+  "erreur": "Flask d\u00e9marr\u00e9 mais code HTTP: 500",
+  "correction": {
+    "corrige": true,
+    "fichiers": [
+      "app.py"
+    ],
+    "action": "Correction compl\u00e8te: Extraction et remplacement de code",
+    "type_correction": "complete_api",
+    "details": "Correction bas\u00e9e sur l'extraction de code"
+  },
+  "date": "2025-12-21T15:54:31.877561",
+  "utilisations": 11
+}

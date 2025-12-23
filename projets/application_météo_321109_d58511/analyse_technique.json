@@ -1,0 +1,16 @@
+{
+  "type_application": "web",
+  "besoin_interface": true,
+  "type_interface": "web_gui",
+  "complexite_interface": "moyenne",
+  "composants_ui_attendus": [],
+  "langage_backend": "python",
+  "framework_ui": "flask_html",
+  "description_technique": "Application basée sur la demande : application météo avec cartes pour 5 villes et graphiques de température...",
+  "fonctionnalites_cles": [
+    "graphique"
+  ],
+  "dependances": [
+    "Flask"
+  ]
+}

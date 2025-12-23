@@ -1,0 +1,14 @@
+{
+  "erreur": "Timeout - L'application a pris trop de temps (10s)",
+  "correction": {
+    "corrige": true,
+    "fichiers": [
+      "gestionnaire.py"
+    ],
+    "action": "Correction compl\u00e8te: Extraction et remplacement de code",
+    "type_correction": "complete_api",
+    "details": "Correction bas\u00e9e sur l'extraction de code"
+  },
+  "date": "2025-12-21T15:08:52.885360",
+  "utilisations": 4
+}

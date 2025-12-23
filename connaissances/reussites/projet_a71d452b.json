@@ -1,0 +1,7 @@
+{
+  "demande": "Cr\u00e9er une calculatrice web avec Flask qui fait les 4 op\u00e9rations de base (+, -, , ), affiche une interface avec boutons comme une vraie calculatrice, garde un historique des 10 derniers calculs en m\u00e9moire, a un bouton pour effacer l'historique, une interface color\u00e9e avec CSS, et n'utilise PAS de fichiers externes (tout en m\u00e9moire).",
+  "chemin": "projets\\cr\u00e9er_une_332710_a71d45",
+  "tentatives": 1,
+  "date": "2025-12-21T17:00:03.409915",
+  "statut": "reussi"
+}

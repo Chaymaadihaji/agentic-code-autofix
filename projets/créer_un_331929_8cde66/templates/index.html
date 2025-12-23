@@ -1,0 +1,25 @@
+# app.py
+from flask import Flask, jsonify, request
+import random
+
+app = Flask(__name__)
+
+# citations aléatoires
+citations = [
+    "La vie est belle, mais la vie est courte.",
+    "L'amour est la réponse à toutes les questions.",
+    "La liberté est la plus grande richesse.",
+    "L'apprentissage est une vie à part entière.",
+    "La confiance est la base de tout.",
+    "La patience est la clé de la réussite.",
+    "La persévérance est la qualité la plus importante.",
+    "La responsabilité est la pierre angulaire de la confiance.",
+    "La tolérance est la clé de la compréhension.",
+]
+
+@app.route("/citation", methods=["GET"])
+def get_citation():
+    return jsonify({"citation": random.choice(citations)})
+
+if __name__ == "__main__":
+    app.run(debug=True)

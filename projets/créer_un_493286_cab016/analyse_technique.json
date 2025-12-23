@@ -1,0 +1,27 @@
+{
+  "type_application": "jeu",
+  "besoin_interface": true,
+  "type_interface": "web_gui",
+  "complexite_interface": "moyenne",
+  "composants_ui_attendus": [
+    "cartes",
+    "formulaires",
+    "tableaux",
+    "graphiques",
+    "jeu"
+  ],
+  "langage_backend": "javascript",
+  "framework_ui": "React",
+  "description_technique": "Application web permettant de jouer à pierre-papier-ciseaux avec un système de scores et d'historique des parties",
+  "fonctionnalites_cles": [
+    "Gestion des scores",
+    "Historique des parties",
+    "Jeu de pierre-papier-ciseaux",
+    "Interface utilisateur intuitive"
+  ],
+  "dependances": [
+    "React",
+    "Redux",
+    "Express"
+  ]
+}

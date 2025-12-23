@@ -1,0 +1,26 @@
+import unittest
+from unittest.mock import patch
+from flask import Flask, render_template
+from werkzeug.datastructures import MultiDict
+
+app = Flask(__name__)
+
+def est_palindrome(mot):
+    """Vérifie si un mot est le même à l'endroit et à l'envers"""
+    return mot == mot[::-1]
+
+class TestEstPalindrome(unittest.TestCase):
+    def test_palindrome(self):
+        self.assertTrue(est_palindrome("radar"))
+
+    def test_pas_palindrome(self):
+        self.assertFalse(est_palindrome("python"))
+
+    def test_mot_vide(self):
+        self.assertTrue(est_palindrome(""))
+
+    def test_espace(self):
+        self.assertFalse(est_palindrome("h el o"))
+
+if __name__ == "__main__":
+    unittest.main()

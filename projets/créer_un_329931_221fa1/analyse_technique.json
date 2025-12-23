@@ -1,0 +1,26 @@
+{
+  "type_application": "dashboard",
+  "besoin_interface": true,
+  "type_interface": "web_gui",
+  "complexite_interface": "moyenne",
+  "composants_ui_attendus": [
+    "formulaires",
+    "tableaux",
+    "graphiques",
+    "dashboard"
+  ],
+  "langage_backend": "python",
+  "framework_ui": "flask_html",
+  "description_technique": "Gestionnaire de tâches avec liste interactive et statistiques de progression",
+  "fonctionnalites_cles": [
+    "Création et gestion de tâches",
+    "Liste interactive des tâches",
+    "Statistiques de progression",
+    "Filtrage et tri des tâches"
+  ],
+  "dependances": [
+    "Flask",
+    "Flask-SQLAlchemy",
+    "Flask-WTF"
+  ]
+}

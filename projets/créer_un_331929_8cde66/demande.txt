@@ -1,0 +1,1 @@
+Créer un générateur de citations aléatoires avec une page web qui affiche une nouvelle citation à chaque rafraîchissement.

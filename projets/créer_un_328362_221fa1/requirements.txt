@@ -1,0 +1,55 @@
+from flask import Flask, render_template, request, redirect, url_for
+from flask_bootstrap import Bootstrap
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField
+from wtforms.validators import DataRequired
+import pandas as pd
+import matplotlib.pyplot as plt
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'secret_key'
+Bootstrap(app)
+
+class TaskForm(FlaskForm):
+    name = StringField('Nom de la tâche', validators=[DataRequired()])
+    submit = SubmitField('Ajouter')
+
+class Dashboard:
+    def __init__(self):
+        self.tasks = pd.DataFrame(columns=['Nom', 'Statut'])
+        self.stats = {'En cours': 0, 'Terminé': 0, 'En attente': 0}
+
+    def add_task(self, name):
+        new_row = pd.DataFrame({'Nom': [name], 'Statut': ['En cours']})
+        self.tasks = pd.concat([self.tasks, new_row])
+        self.stats['En cours'] += 1
+
+    def update_status(self, name, status):
+        self.tasks.loc[self.tasks['Nom'] == name, 'Statut'] = status
+        if status == 'Terminé':
+            self.stats['Terminé'] += 1
+        elif status == 'En attente':
+            self.stats['En attente'] += 1
+
+    def get_stats(self):
+        return self.stats
+
+dashboard = Dashboard()
+
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    form = TaskForm()
+    if form.validate_on_submit():
+        dashboard.add_task(form.name.data)
+        return redirect(url_for('index'))
+    return render_template('index.html', form=form, tasks=dashboard.tasks, stats=dashboard.get_stats())
+
+@app.route('/stats')
+def stats():
+    fig, ax = plt.subplots()
+    ax.bar(dashboard.stats.keys(), dashboard.stats.values())
+    plt.savefig('static/stats.png')
+    return redirect(url_for('static', filename='stats.png'))
+
+if __name__ == '__main__':
+    app.run(debug=True)

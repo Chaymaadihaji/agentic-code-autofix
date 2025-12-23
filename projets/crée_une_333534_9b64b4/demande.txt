@@ -1,0 +1,1 @@
+Crée une fonction Python nommée 'est_palindrome' qui vérifie si un mot est le même à l'endroit et à l'envers, et ajoute quelques tests print pour vérifier que ça marche.

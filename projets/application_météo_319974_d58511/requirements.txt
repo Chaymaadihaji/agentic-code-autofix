@@ -1,0 +1,9 @@
+# Dépendances générées automatiquement
+# Application: dashboard
+
+Flask>=2.0.0
+Leaflet
+Matplotlib
+requests
+Bootstrap via CDN (dans HTML)
+python-dotenv==1.0.0

@@ -1,0 +1,14 @@
+{
+  "erreur": "SyntaxError Flask: invalid syntax",
+  "correction": {
+    "corrige": true,
+    "fichiers": [
+      "app.py"
+    ],
+    "action": "Correction compl\u00e8te: Extraction et remplacement de code",
+    "type_correction": "complete_api",
+    "details": "Correction bas\u00e9e sur l'extraction de code"
+  },
+  "date": "2025-12-21T16:13:51.738762",
+  "utilisations": 2
+}

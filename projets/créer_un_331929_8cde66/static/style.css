@@ -1,0 +1,105 @@
+/* Variables CSS */
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2ecc71;
+  --background-color: #f9f9f9;
+  --text-color: #333;
+  --hover-color: #ccc;
+}
+
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--background-color);
+}
+
+/* Layout */
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Components */
+.custom-card {
+  transition: all 0.3s ease;
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.custom-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card-content {
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.card-text {
+  font-size: 18px;
+  color: var(--text-color);
+}
+
+/* Utilities */
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+/* Media Queries */
+@media only screen and (max-width: 600px) {
+  .container {
+    max-width: 100%;
+  }
+  .custom-card {
+    margin-bottom: 20px;
+  }
+}
+
+/* Commentaires */
+/* Styles pour les cartes */
+.custom-card {
+  /* Transition pour l'effet de survol */
+  transition: all 0.3s ease;
+  /* Suppression de la bordure */
+  border: none;
+  /* Ombre pour donner un effet de profondeur */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.custom-card:hover {
+  /* Déplacement horizontal pour l'effet de survol */
+  transform: translateY(-5px);
+  /* Ombre plus forte pour l'effet de survol */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}

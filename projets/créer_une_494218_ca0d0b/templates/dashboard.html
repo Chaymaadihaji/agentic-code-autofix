@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">Dashboard</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#graphiques">Graphiques</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#filtres">Filtres</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#statistiques">Statistiques</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <h1 class="mb-4">Dashboard</h1>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Graphiques</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="graphique"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Filtres</h5>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="date_debut">Date de début</label>
+                                    <input type="date" id="date_debut" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="date_fin">Date de fin</label>
+                                    <input type="date" id="date_fin" class="form-control">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Appliquer</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Statistiques</h5>
+                        </div>
+                        <div class="card-body">
+                            <p>Nombre de lignes : <span id="nombre_lignes">0</span></p>
+                            <p>Nombre de colonnes : <span id="nombre_colonnes">0</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const graphique = document.getElementById('graphique').getContext('2d');
+        const chart = new Chart(graphique, {
+            type: 'bar',
+            data: {
+                labels: ['Janvier', 'Février', 'Mars'],
+                datasets: [{
+                    label: 'Données',
+                    data: [10, 20, 30],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+    <script>
+        const date_debut = document.getElementById('date_debut');
+        const date_fin = document.getElementById('date_fin');
+        const nombre_lignes = document.getElementById('nombre_lignes');
+        const nombre_colonnes = document.getElementById('nombre_colonnes');
+        
+        date_debut.addEventListener('input', () => {
+            nombre_lignes.textContent = '0';
+        });
+        
+        date_fin.addEventListener('input', () => {
+            nombre_colonnes.textContent = '0';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+# Ce projet n'a pas besoin de dépendances externes pour fonctionner
+# Il utilise uniquement les bibliothèques standard de Python
+
+# Aucune dépendance externe n'est requise pour ce projet simple
+# Le fichier requirements.txt est généralement utilisé pour les projets qui ont des dépendances externes
+# Dans ce cas, le fichier est vide car le projet "Hello World" en Python ne nécessite pas de dépendances supplémentaires
+
+# Pour information, si vous aviez besoin d'ajouter des dépendances, vous les listeriez ici
+# Par exemple :
+# numpy==1.23.4
+# pandas==1.5.2
+
+# Mais pour ce projet spécifique, rien n'est nécessaire

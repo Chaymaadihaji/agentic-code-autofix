@@ -1,0 +1,104 @@
+/* Feuille de style CSS pour le projet 'créer un générateur de citations aléatoires' */
+
+/* Variables de couleur et de thème */
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #f1c40f;
+  --background-color: #f9f9f9;
+  --text-color: #333;
+  --border-color: #ddd;
+}
+
+/* Reset des styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--background-color);
+}
+
+/* Styles pour les cartes */
+.custom-card {
+  transition: all 0.3s ease;
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.custom-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Styles pour les formulaires */
+.custom-form {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.custom-form input, .custom-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+}
+
+.custom-form button {
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.custom-form button:hover {
+  background-color: var(--secondary-color);
+}
+
+/* Styles pour les tableaux */
+.custom-table {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.custom-table th, .custom-table td {
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-collapse: collapse;
+}
+
+.custom-table th {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+/* Styles pour les graphiques */
+.custom-graph {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Media queries pour le responsive */
+@media (max-width: 768px) {
+  /* Styles pour les petits écrans */
+}
+
+@media (max-width: 480px) {
+  /* Styles pour les écrans très petits */
+}

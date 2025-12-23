@@ -1,0 +1,23 @@
+{
+  "type_application": "web",
+  "besoin_interface": true,
+  "type_interface": "web_gui",
+  "complexite_interface": "moyenne",
+  "composants_ui_attendus": [
+    "calculatrice",
+    "boutons",
+    "historique"
+  ],
+  "langage_backend": "python",
+  "framework_ui": "flask_html",
+  "description_technique": "Créer une calculatrice web qui fait les 4 opérations de base, garde un historique des 10 derniers calculs en mémoire et a un bouton pour effacer l'historique.",
+  "fonctionnalites_cles": [
+    "calcul de base (+, -, *, /)",
+    "historique des calculs",
+    "bouton pour effacer l'historique"
+  ],
+  "dependances": [
+    "Flask",
+    "css pour l'interface graphique"
+  ]
+}

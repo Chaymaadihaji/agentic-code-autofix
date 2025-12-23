@@ -1,0 +1,16 @@
+{
+  "type_application": "utilitaire",
+  "besoin_interface": false,
+  "type_interface": "cli",
+  "complexite_interface": "simple",
+  "composants_ui_attendus": [],
+  "langage_backend": "python",
+  "framework_ui": "tkinter",
+  "description_technique": "Fonction Python pour vérifier si un mot est le même à l'endroit et à l'envers",
+  "fonctionnalites_cles": [
+    "fonction 'est_palindrome'"
+  ],
+  "dependances": [
+    "tkinter"
+  ]
+}

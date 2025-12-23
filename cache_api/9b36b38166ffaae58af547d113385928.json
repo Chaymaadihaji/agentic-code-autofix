@@ -1,0 +1,1 @@
+{"nom_fichier": "README.md", "code": "from flask import Flask, render_template, request\nfrom flask_sqlalchemy import SQLAlchemy\nfrom flask_bootstrap import Bootstrap\n\napp = Flask(__name__)\napp.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///taches.db'\ndb = SQLAlchemy(app)\nBootstrap(app)\n", "timestamp": 1766328373.6023693}
