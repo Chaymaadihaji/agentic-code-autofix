@@ -1,0 +1,1 @@
+{"nom_fichier": "requirements.txt", "code": "Flask==2.3.3\nDash==2.5.1\nPlotly==5.13.0\nFlask-Bootstrap==3.3.7\nFlask-WTF==1.0.0\npython-dotenv==1.0.0\nrequests==2.28.1\nbs4==0.0.1\npandas==1.5.3\ngeopy==2.2.0\nopenweathermap==0.4.1\n", "timestamp": 1766829826.3323982}

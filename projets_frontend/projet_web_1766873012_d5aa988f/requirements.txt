@@ -1,0 +1,46 @@
+markdown
+# Dépendances nécessaires pour le projet
+
+# Bibliothèques
+flask==2.0.2
+flask-sqlalchemy==2.5.1
+flask-restful==0.3.9
+flask-login==0.5.0
+flask-mail==0.9.1
+flask-wtf==1.0.3
+wtforms==3.0.0
+wtforms-flask==3.0.0
+pytest==7.1.2
+sphinx==4.4.0
+sphinx-rtd-theme==1.0.0
+sphinxcontrib-napoleon==0.8.0
+docker==5.0.3
+docker-compose==2.12.0
+sqlite==3.38.5
+pandas==1.4.2
+numpy==1.22.4
+pymongo==3.12.0
+pandas-datareader==0.10.0
+beautifulsoup4==4.11.1
+requests==2.28.1
+scipy==1.9.1
+scikit-learn==1.1.1
+matplotlib==3.5.1
+seaborn==0.12.1
+plotly==5.14.0
+
+# Dépendances pour le système d'emprunt
+schedule==1.13.0
+apscheduler==3.10.1
+
+# Dépendances pour les notifications par email
+yagmail==4.4.0
+
+# Dépendances pour le dashboard administrateur
+matplotlib==3.5.1
+seaborn==0.12.1
+plotly==5.14.0
+
+# Dépendances pour la documentation
+sphinx-rtd-theme==1.0.0
+sphinxcontrib-napoleon==0.8.0

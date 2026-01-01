@@ -1,0 +1,24 @@
+{
+  "type_application": "jeu",
+  "besoin_interface": true,
+  "type_interface": "web_gui",
+  "complexite_interface": "moyenne",
+  "composants_ui_attendus": [
+    "formulaires",
+    "tableaux",
+    "graphiques",
+    "jeu"
+  ],
+  "langage_backend": "python",
+  "framework_ui": "tkinter",
+  "description_technique": "Application de jeu du pendu avec interface utilisateur graphique",
+  "fonctionnalites_cles": [
+    "génération de mots au hasard",
+    "comptage de tentatives",
+    "affichage de l'état du jeu"
+  ],
+  "dependances": [
+    "tkinter",
+    "random"
+  ]
+}

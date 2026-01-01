@@ -1,5 +1,5 @@
 """
-🔧 Module d'auto-réparation de code COMPLÈTE
+ Module d'auto-réparation de code COMPLÈTE
 Corrige backend + frontend intelligemment
 """
 
@@ -24,15 +24,18 @@ class AutoReparateur:
         print(f"\n🔧 CORRECTION INTELLIGENTE - Application complète")
         print(f"   Demande: {demande[:60]}...")
         print(f"   Type app: {analyse.get('type_application', 'inconnu')}")
-        print(f"   Interface: {'✅ OUI' if analyse.get('besoin_interface', False) else '❌ NON'}")
+        print(f"   Interface: {' OUI' if analyse.get('besoin_interface', False) else ' NON'}")
         print(f"   Erreur: {bugs.get('type', 'inconnu')}")
         print(f"   Message: {bugs.get('message', 'Aucun')[:80]}...")
+        type_app = analyse.get('type_application', '').lower()
+        if type_app == 'dashboard' or 'streamlit' in demande.lower():
+            print("   Détection Streamlit - Correction adaptée...")
+            return self._corriger_application_streamlit(chemin_projet, bugs, demande, analyse)
         
-        # Vérifier si c'est une erreur SQLite
         error_type = bugs.get('type', '').lower()
         error_message = bugs.get('message', '').lower()
         if 'sqlite' in error_type or 'sqlalchemy' in error_type or 'sqlite' in error_message or 'sqlalchemy' in error_message:
-            print("   🔧 Détection erreur SQLite - Correction spécifique...")
+            print("   Détection erreur SQLite - Correction spécifique...")
             if self._corriger_erreur_sqlite(chemin_projet, bugs):
                 return {
                     "corrige": True, 
@@ -42,23 +45,22 @@ class AutoReparateur:
                     "details": "Correction d'erreur SQLite/SQLAlchemy"
                 }
         
-        # 1. Lire TOUS les fichiers du projet
         tous_les_fichiers = self._lire_tous_fichiers_projet(chemin_projet)
         if not tous_les_fichiers:
-            print("   ❌ Aucun fichier trouvé dans le projet")
+            print("   Aucun fichier trouvé dans le projet")
             return self._correction_de_secours(chemin_projet, demande, analyse)
         
-        # 2. Analyser l'état actuel du projet
+       
         etat_projet = self._analyser_etat_projet(tous_les_fichiers, bugs)
         
-        # 3. Créer un prompt de correction intelligent
+        
         prompt = self._creer_prompt_correction_complete(
             demande, analyse, bugs, tous_les_fichiers, etat_projet
         )
         
-        # 4. Appeler l'API Groq pour une correction intelligente
+        
         try:
-            print("   📡 Appel à l'API Groq pour correction complète...")
+            print("   Appel à l'API Groq pour correction complète...")
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=[
@@ -70,26 +72,26 @@ class AutoReparateur:
             )
             
             correction_text = response.choices[0].message.content.strip()
-            print(f"   ✅ Réponse API reçue ({len(correction_text)} caractères)")
+            print(f"  Réponse API reçue ({len(correction_text)} caractères)")
             
-            # 5. Parser et appliquer les corrections
+          
             corrections = self._parser_corrections_api(correction_text, tous_les_fichiers)
             
             if corrections:
                 return self._appliquer_corrections_completes(chemin_projet, corrections, demande, analyse)
             else:
-                print("   ⚠️  Aucune correction valide trouvée dans la réponse")
+                print("   Aucune correction valide trouvée dans la réponse")
                 return self._correction_de_secours(chemin_projet, demande, analyse)
             
         except Exception as e:
-            print(f"   ❌ Erreur lors de la correction API: {e}")
+            print(f"  Erreur lors de la correction API: {e}")
             return self._correction_de_secours(chemin_projet, demande, analyse)
     
     def _corriger_erreur_sqlite(self, chemin_projet, bugs):
         """Corrige spécifiquement les erreurs SQLite/SQLAlchemy"""
-        print("   🔧 Correction erreur SQLite...")
+        print("  Correction erreur SQLite...")
         
-        # Chercher le fichier principal
+       
         for fichier in ['main.py', 'app.py']:
             fichier_path = os.path.join(chemin_projet, fichier)
             
@@ -98,11 +100,11 @@ class AutoReparateur:
                     with open(fichier_path, 'r', encoding='utf-8') as f:
                         code = f.read()
                     
-                    # Si le code utilise SQLAlchemy
+                  
                     if 'SQLAlchemy' in code:
-                        print(f"   ⚠️  SQLAlchemy détecté dans {fichier}")
+                        print(f"  SQLAlchemy détecté dans {fichier}")
                         
-                        # Vérifier et ajouter db.create_all() si manquant
+                        
                         if 'db.create_all()' not in code and 'if __name__ == "__main__":' in code:
                             code = code.replace(
                                 'if __name__ == "__main__":',
@@ -112,11 +114,11 @@ class AutoReparateur:
                             with open(fichier_path, 'w', encoding='utf-8') as f:
                                 f.write(code)
                             
-                            print(f"   ✅ {fichier}: db.create_all() ajouté")
+                            print(f"  {fichier}: db.create_all() ajouté")
                             return True
                         
                 except Exception as e:
-                    print(f"   ❌ Erreur correction {fichier}: {e}")
+                    print(f"   Erreur correction {fichier}: {e}")
         
         return False
     
@@ -132,7 +134,7 @@ class AutoReparateur:
                         with open(chemin_complet, 'r', encoding='utf-8', errors='ignore') as f:
                             contenu = f.read()
                             
-                            # Chemin relatif pour l'affichage
+                            
                             chemin_relatif = os.path.relpath(chemin_complet, chemin_projet)
                             tous_fichiers[chemin_relatif] = {
                                 "chemin_complet": chemin_complet,
@@ -141,13 +143,13 @@ class AutoReparateur:
                                 "extension": os.path.splitext(file)[1]
                             }
                     except Exception as e:
-                        print(f"   ⚠️  Impossible de lire {file}: {e}")
+                        print(f"  Impossible de lire {file}: {e}")
             
-            print(f"   📁 {len(tous_fichiers)} fichiers trouvés dans le projet")
+            print(f"    {len(tous_fichiers)} fichiers trouvés dans le projet")
             return tous_fichiers
             
         except Exception as e:
-            print(f"   ❌ Erreur lecture projet: {e}")
+            print(f"  Erreur lecture projet: {e}")
             return {}
     
     def _analyser_etat_projet(self, fichiers, bugs):
@@ -168,18 +170,18 @@ class AutoReparateur:
             if ext == '.py':
                 etat["fichiers_python"].append(chemin_rel)
                 
-                # Détecter le fichier principal
+                
                 if any(nom in chemin_rel.lower() for nom in ['main.py', 'app.py', 'application.py']):
                     etat["fichier_principal"] = chemin_rel
                 
-                # Analyser le contenu Python
+                
                 if self._detecter_problemes_python(info["contenu"]):
                     etat["problemes_detectes"].append(f"Problème Python dans {chemin_rel}")
             
             elif ext in ['.html', '.htm']:
                 etat["fichiers_html"].append(chemin_rel)
                 
-                # Analyser HTML
+               
                 if not self._valider_html_basique(info["contenu"]):
                     etat["problemes_detectes"].append(f"HTML problématique dans {chemin_rel}")
             
@@ -189,7 +191,7 @@ class AutoReparateur:
             elif ext in ['.js', '.javascript']:
                 etat["fichiers_js"].append(chemin_rel)
             
-            # Détecter la structure
+            
             if 'templates/' in chemin_rel:
                 etat["structure_detectee"].append("templates")
             elif 'static/' in chemin_rel:
@@ -197,7 +199,7 @@ class AutoReparateur:
             elif 'requirements.txt' in chemin_rel:
                 etat["structure_detectee"].append("requirements")
         
-        # Si pas de fichier principal détecté, prendre le premier .py
+        
         if not etat["fichier_principal"] and etat["fichiers_python"]:
             etat["fichier_principal"] = etat["fichiers_python"][0]
         
@@ -207,7 +209,7 @@ class AutoReparateur:
         """Détecte les problèmes courants dans le code Python"""
         problemes = []
         
-        # Vérifier les imports manquants
+        
         import_patterns = [
             r'import\s+(\w+)',
             r'from\s+(\w+)\s+import'
@@ -217,10 +219,10 @@ class AutoReparateur:
             imports = re.findall(pattern, code)
             for imp in imports:
                 if imp not in ['os', 'sys', 'json', 're', 'datetime', 'time', 'math', 'random']:
-                    # Vérifier si c'est un module standard ou non
+                  
                     problemes.append(f"Import potentiellement problématique: {imp}")
         
-        # Vérifier les fonctions non définies
+       
         func_defs = re.findall(r'def\s+(\w+)', code)
         func_calls = re.findall(r'(\w+)\s*\(', code)
         
@@ -241,9 +243,9 @@ class AutoReparateur:
         fonctionnalites = analyse.get('fonctionnalites_cles', [])
         
         prompt = f"""
-        🚨 CORRECTION D'APPLICATION COMPLÈTE - URGENT
+         CORRECTION D'APPLICATION COMPLÈTE - URGENT
         
-        🎯 CONTEXTE DU PROJET :
+         CONTEXTE DU PROJET :
         - Demande originale : "{demande}"
         - Type d'application : {analyse.get('type_application')}
         - Interface nécessaire : {'OUI' if besoin_interface else 'NON'}
@@ -251,12 +253,12 @@ class AutoReparateur:
         - Fonctionnalités clés : {fonctionnalites}
         - Description technique : {analyse.get('description_technique')}
         
-        🐛 ERREUR RENCONTRÉE :
+         ERREUR RENCONTRÉE :
         - Type : {bugs.get('type', 'inconnu')}
         - Message : {bugs.get('message', 'Aucun détail')}
         - Suggestions : {bugs.get('suggestions', [])}
         
-        📊 ÉTAT ACTUEL DU PROJET :
+         ÉTAT ACTUEL DU PROJET :
         - Fichier principal : {etat_projet.get('fichier_principal', 'Non détecté')}
         - Fichiers Python : {len(etat_projet.get('fichiers_python', []))}
         - Fichiers HTML : {len(etat_projet.get('fichiers_html', []))}
@@ -264,37 +266,37 @@ class AutoReparateur:
         - Fichiers JS : {len(etat_projet.get('fichiers_js', []))}
         - Problèmes détectés : {etat_projet.get('problemes_detectes', [])}
         
-        📁 CONTENU ACTUEL DES FICHIERS :
+         CONTENU ACTUEL DES FICHIERS :
         """
         
-        # Ajouter le contenu des fichiers principaux
+        
         fichiers_a_inclure = []
         
-        # Inclure le fichier principal
+        
         if etat_projet.get('fichier_principal'):
             fichier_principal = etat_projet['fichier_principal']
             if fichier_principal in fichiers:
                 fichiers_a_inclure.append(fichier_principal)
         
-        # Inclure les premiers fichiers de chaque type
+        
         for file_list in [etat_projet.get('fichiers_html', []),
                          etat_projet.get('fichiers_css', []),
                          etat_projet.get('fichiers_js', [])]:
             if file_list:
                 fichiers_a_inclure.append(file_list[0])
         
-        # Ajouter le contenu des fichiers
-        for fichier_rel in fichiers_a_inclure[:3]:  # Limiter à 3 fichiers
+        
+        for fichier_rel in fichiers_a_inclure[:3]:  
             if fichier_rel in fichiers:
                 info = fichiers[fichier_rel]
                 prompt += f"\n{'='*60}\nFICHIER: {fichier_rel}\n{'='*60}\n"
-                prompt += info["contenu"][:1000]  # Limiter à 1000 caractères
+                prompt += info["contenu"][:1000]  
                 if info["taille"] > 1000:
                     prompt += "\n... [contenu tronqué]"
         
         prompt += f"""
         
-        🛠️ INSTRUCTIONS DE CORRECTION :
+         INSTRUCTIONS DE CORRECTION :
         
         1. ANALYSE COMPLÈTE :
            - Identifie la RACINE du problème
@@ -318,7 +320,7 @@ class AutoReparateur:
         4. CORRECTIONS SPÉCIFIQUES :
         """
         
-        # Ajouter des corrections spécifiques selon l'erreur
+        
         error_type = bugs.get('type', '').lower()
         if 'import' in error_type or 'module' in error_type:
             prompt += "\n   - Ajouter les imports manquants ou corriger les imports"
@@ -366,19 +368,19 @@ class AutoReparateur:
                 json_str = reponse_api[debut_json:fin_json]
                 corrections = json.loads(json_str)
                 
-                # Valider la structure
+                
                 if isinstance(corrections, dict) and "fichiers_corriges" in corrections:
-                    print(f"   ✅ {len(corrections['fichiers_corriges'])} fichiers à corriger")
+                    print(f"    {len(corrections['fichiers_corriges'])} fichiers à corriger")
                     return corrections
             
-            # Si pas de JSON valide, essayer de parser manuellement
+           
             return self._parser_corrections_manuelles(reponse_api, fichiers_existants)
             
         except json.JSONDecodeError as e:
-            print(f"   ❌ Impossible de parser JSON: {e}")
+            print(f"  Impossible de parser JSON: {e}")
             return self._parser_corrections_manuelles(reponse_api, fichiers_existants)
         except Exception as e:
-            print(f"   ❌ Erreur parsing: {e}")
+            print(f"  Erreur parsing: {e}")
             return None
     
     def _parser_corrections_manuelles(self, reponse, fichiers_existants):
@@ -390,7 +392,7 @@ class AutoReparateur:
             "recommandations": []
         }
         
-        # Chercher des blocs de code avec des noms de fichiers
+        
         pattern = r'FICHIER:\s*([^\n]+)\s*(?:```(?:\w+)?\s*)?([\s\S]*?)(?=```|FICHIER:|$)'
         matches = re.findall(pattern, reponse, re.IGNORECASE)
         
@@ -398,12 +400,12 @@ class AutoReparateur:
             chemin_fichier = match[0].strip()
             code = match[1].strip()
             
-            # Nettoyer le code
+           
             if code.startswith('```'):
                 code = code.split('```')[1].split('```')[0].strip()
             
             if code and chemin_fichier:
-                # Vérifier si le fichier existe dans le projet
+                
                 if any(chemin_fichier in f for f in fichiers_existants.keys()):
                     corrections["fichiers_corriges"].append({
                         "chemin": chemin_fichier,
@@ -413,12 +415,12 @@ class AutoReparateur:
         if corrections["fichiers_corriges"]:
             return corrections
         else:
-            # Essayer une autre approche
+            
             return self._extraire_corrections_fallback(reponse, fichiers_existants)
     
     def _extraire_corrections_fallback(self, reponse, fichiers_existants):
         """Fallback si aucune méthode de parsing ne fonctionne"""
-        # Chercher simplement des blocs de code Python
+        
         corrections = {
             "explication": "Correction basée sur l'extraction de code",
             "fichiers_corriges": [],
@@ -426,14 +428,14 @@ class AutoReparateur:
             "recommandations": []
         }
         
-        # Chercher du code Python
+       
         if '```python' in reponse:
             code_blocks = reponse.split('```python')[1:]
             for i, block in enumerate(code_blocks):
                 if '```' in block:
                     code = block.split('```')[0].strip()
                     if code:
-                        # Trouver un fichier Python à corriger
+                        
                         fichiers_py = [f for f in fichiers_existants.keys() 
                                      if f.endswith('.py')]
                         if fichiers_py:
@@ -458,15 +460,15 @@ class AutoReparateur:
             if chemin_rel and contenu:
                 chemin_absolu = os.path.join(chemin_projet, chemin_rel)
                 
-                # Créer les répertoires parents si nécessaire
+               
                 os.makedirs(os.path.dirname(chemin_absolu), exist_ok=True)
                 
-                # Écrire le fichier corrigé
+               
                 with open(chemin_absolu, 'w', encoding='utf-8') as f:
                     f.write(contenu)
                 
                 fichiers_corriges.append(chemin_rel)
-                print(f"      ✅ {chemin_rel} corrigé")
+                print(f"    {chemin_rel} corrigé")
         
         if fichiers_corriges:
             explication = corrections.get("explication", "Correction appliquée")
@@ -480,14 +482,14 @@ class AutoReparateur:
                 "details": explication
             }
         else:
-            print("   ⚠️  Aucun fichier corrigé")
+            print("  Aucun fichier corrigé")
             return None
     
     def _correction_de_secours(self, chemin_projet, demande, analyse):
         """Correction de secours si tout échoue"""
-        print("   ⚠️  Application de la correction de secours...")
+        print("    Application de la correction de secours...")
         
-        # Générer une application simple basée sur l'analyse
+        
         besoin_interface = analyse.get('besoin_interface', False)
         type_app = analyse.get('type_application', 'web')
         
@@ -498,7 +500,7 @@ class AutoReparateur:
     
     def _generer_app_web_simple(self, chemin_projet, demande, analyse):
         """Génère une application web simple de secours"""
-        # Créer app.py
+        
         app_py = '''from flask import Flask, render_template, jsonify
 import json
 import os
@@ -636,13 +638,13 @@ if __name__ == "__main__":
 </body>
 </html>'''
         
-        # Créer requirements.txt
+        
         requirements = '''# Dépendances générées automatiquement
 Flask==2.3.3
 python-dotenv==1.0.0
 '''
         
-        # Écrire les fichiers
+        
         os.makedirs(os.path.join(chemin_projet, "templates"), exist_ok=True)
         
         with open(os.path.join(chemin_projet, "app.py"), 'w', encoding='utf-8') as f:
@@ -654,7 +656,7 @@ python-dotenv==1.0.0
         with open(os.path.join(chemin_projet, "requirements.txt"), 'w', encoding='utf-8') as f:
             f.write(requirements)
         
-        print("   ✅ Application web simple générée")
+        print("  Application web simple générée")
         
         return {
             "corrige": True,
@@ -666,7 +668,7 @@ python-dotenv==1.0.0
     
     def _generer_app_simple(self, chemin_projet, demande, analyse):
         """Génère une application simple (non-web) de secours"""
-        # Code Python simple
+        
         code = f'''#!/usr/bin/env python3
 """
 Application générée automatiquement
@@ -683,7 +685,7 @@ def main():
     print(f"Type d'application : {analyse.get('type_application', 'inconnu')}")
     print(f"Fonctionnalités : {analyse.get('fonctionnalites_cles', [])}")
     print("=" * 50)
-    print("\\n✅ Application fonctionnelle !")
+    print("\\n Application fonctionnelle !")
     return 0
 
 if __name__ == "__main__":
@@ -693,7 +695,7 @@ if __name__ == "__main__":
         with open(os.path.join(chemin_projet, "main.py"), 'w', encoding='utf-8') as f:
             f.write(code)
         
-        print("   ✅ Application simple générée")
+        print(" Application simple générée")
         
         return {
             "corrige": True,
@@ -703,24 +705,24 @@ if __name__ == "__main__":
             "details": "Application Python simple fonctionnelle"
         }
 
-# Test rapide
+
 if __name__ == "__main__":
     print("🧪 Test du AutoReparateur amélioré...")
     
     from dotenv import load_dotenv
     load_dotenv()
     
-    # Créer un dossier test
+    
     import tempfile
     import shutil
     
     test_dir = tempfile.mkdtemp()
     print(f"Dossier test: {test_dir}")
     
-    # Créer une structure de projet simple
+    
     os.makedirs(os.path.join(test_dir, "templates"), exist_ok=True)
     
-    # Créer des fichiers avec erreurs
+    
     app_py_bug = '''from flask import Flask
 app = Flask(__name__)
 
@@ -760,8 +762,60 @@ if __name__ == '__main__':
     print(f"\nTest de correction pour: {demande_test}")
     resultat = reparateur.corriger_erreur_complete(test_dir, bugs_test, demande_test, analyse_test)
     
-    print(f"\n📊 Résultat: {resultat}")
+    print(f"\n Résultat: {resultat}")
     
-    # Nettoyer
+    
     shutil.rmtree(test_dir)
     print(f"\n🧹 Dossier test nettoyé")
+
+    def _corriger_application_streamlit(self, chemin_projet, bugs, demande, analyse):
+        """Correction spécifique pour applications Streamlit"""
+        print("    Correction Streamlit...")
+        
+        
+        for nom_fichier in ["main.py", "app.py", "dashboard.py"]:
+            fichier_path = os.path.join(chemin_projet, nom_fichier)
+            
+            if os.path.exists(fichier_path):
+                try:
+                    with open(fichier_path, 'r', encoding='utf-8') as f:
+                        code = f.read()
+                    
+                   
+                    corrections_appliquees = []
+                    
+                    
+                    if 'import streamlit' not in code and 'import streamlit as' not in code:
+                        code = "import streamlit as st\n" + code
+                        corrections_appliquees.append("Import streamlit ajouté")
+                    
+                    
+                    if 'if __name__ == "__main__":' not in code:
+                        code += "\n\nif __name__ == \"__main__\":\n    pass"
+                        corrections_appliquees.append("Structure __main__ ajoutée")
+                    
+                    
+                    if corrections_appliquees:
+                        with open(fichier_path, 'w', encoding='utf-8') as f:
+                            f.write(code)
+                        
+                        return {
+                            "corrige": True,
+                            "action": "Correction Streamlit: " + ", ".join(corrections_appliquees),
+                            "fichiers": [nom_fichier],
+                            "type_correction": "streamlit_fix",
+                            "details": "Corrections Streamlit appliquées"
+                        }
+                        
+                except Exception as e:
+                    print(f"    Erreur correction {nom_fichier}: {e}")
+        
+        
+        return {
+            "corrige": False,
+            "action": "Aucune correction Streamlit nécessaire",
+            "fichiers": [],
+            "type_correction": "none",
+            "details": "Application Streamlit déjà valide"
+        }
+    

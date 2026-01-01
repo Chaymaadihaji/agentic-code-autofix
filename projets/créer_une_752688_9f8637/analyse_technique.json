@@ -1,0 +1,28 @@
+{
+  "type_application": "streamlit",
+  "besoin_interface": true,
+  "type_interface": "streamlit_gui",
+  "complexite_interface": "simple",
+  "composants_ui_attendus": [
+    "calculatrice",
+    "formulaires",
+    "tableaux",
+    "graphiques",
+    "dashboard",
+    "filtres"
+  ],
+  "langage_backend": "python",
+  "framework_ui": "streamlit",
+  "description_technique": "Application interactive pour afficher des données et permettre à l'utilisateur de les manipuler",
+  "fonctionnalites_cles": [
+    "affichage de données",
+    "filtrage de données",
+    "tri de données"
+  ],
+  "dependances": [
+    "streamlit",
+    "pandas",
+    "numpy",
+    "matplotlib"
+  ]
+}

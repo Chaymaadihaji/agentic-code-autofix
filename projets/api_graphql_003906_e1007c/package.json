@@ -1,0 +1,34 @@
+json
+{
+  "name": "graphql-api",
+  "version": "1.0.0",
+  "description": "API GraphQL avec Gqlgen, authentification JWT et déploiement sur Kubernetes",
+  "scripts": {
+    "build": "go build -o ./graphql-api main.go",
+    "start": "go run main.go",
+    "test": "go test ./...",
+    "lint": "golint ./...",
+    "run": "docker-compose up --build"
+  },
+  "dependencies": {
+    "context": "^4",
+    "encoding/json": "^4",
+    "gqlgen": "^0",
+    "logrus": "^2",
+    "net/http": "^4",
+    "pgx": "^0.9",
+    "uuid": "^4"
+  },
+  "devDependencies": {
+    "docker": "^4",
+    "docker-compose": "^2"
+  },
+  "keywords": ["gqlgen", "graphql", "go", "postgresql", "jwt", "kubernetes"],
+  "author": "Vous",
+  "license": "MIT",
+  "repository": "https://github.com/votre-licence-api-graphql/votre-repo.git",
+  "main": "main.go",
+  "engines": {
+    "go": "^1"
+  }
+}

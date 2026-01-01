@@ -1,0 +1,54 @@
+{
+  "type_application": "web",
+  "type_projet": "fullstack",
+  "besoin_interface": true,
+  "type_interface": "web_gui",
+  "complexite_interface": "moyenne",
+  "composants_ui_attendus": [
+    "cartes",
+    "formulaires",
+    "tableaux",
+    "graphiques",
+    "galerie",
+    "dashboard"
+  ],
+  "technologies_frontend": [
+    "react"
+  ],
+  "technologies_backend": [
+    "node.js",
+    "express"
+  ],
+  "base_de_donnees": [
+    "mongodb"
+  ],
+  "authentification": [
+    "jwt"
+  ],
+  "langage_backend": "javascript",
+  "langage_principal": "typescript",
+  "framework_ui": "react",
+  "description_technique": "Application de gestion de projet avec authentification JWT, upload de fichiers et notifications en temps réel",
+  "fonctionnalites_cles": [
+    "gestion de projet",
+    "authentification",
+    "upload de fichiers",
+    "notifications en temps réel"
+  ],
+  "dependances": [
+    "cors",
+    "express",
+    "react",
+    "bcryptjs",
+    "mongoose",
+    "socket.io",
+    "jsonwebtoken",
+    "mongodb",
+    "typescript",
+    "@types/node",
+    "@types/express"
+  ],
+  "deploiement": [
+    "docker"
+  ]
+}

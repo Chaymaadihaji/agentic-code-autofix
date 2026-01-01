@@ -1,0 +1,1 @@
+{"nom_fichier": "README.md", "code": "# config.py\nimport os\n\nclass Configuration:\n    SQLALCHEMY_DATABASE_URI = 'mysql://username:password@localhost/db_name'\n    SQLALCHEMY_TRACK_MODIFICATIONS = False\n", "timestamp": 1766754900.1775734}

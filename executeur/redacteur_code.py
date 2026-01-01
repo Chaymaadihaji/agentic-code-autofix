@@ -1,16 +1,63 @@
 """
-✍️ Module de génération de code INTELLIGENT
-Génère du code adapté backend + frontend automatiquement
+ Module de génération de code MULTI-LANGAGE avec APPRENTISSAGE INTELLIGENT
+Génère du code et apprend de ses erreurs pour améliorer les futures générations
 """
 
 import os
 import json
 import time
 import hashlib
+import random
+import re
 from groq import Groq
 from dotenv import load_dotenv
 
 load_dotenv()
+
+
+try:
+    from cerveau.apprentissage import MemoireApprentissage
+    from executeur.correcteur import CorrecteurIntelligent
+except ImportError as e:
+    print(f" Import apprentissage échoué: {e}")
+    print(" Création des classes minimales pour l'apprentissage...")
+    
+    
+    class MemoireApprentissage:
+        def __init__(self, fichier_memoire="memoire_apprentissage.json"):
+            self.fichier_memoire = fichier_memoire
+            self.corrections_apprises = []
+            print(" Mémoire d'apprentissage initialisée (mode minimal)")
+        
+        def enregistrer_erreur(self, erreur):
+            self.corrections_apprises.append(erreur)
+            return f"err_{len(self.corrections_apprises)}"
+        
+        def trouver_corrections_similaires(self, erreur):
+            return []
+        
+        def appliquer_corrections_connues(self, code, langage, fichier):
+            return code
+        
+        def get_statistiques(self):
+            return {"total_corrections": len(self.corrections_apprises)}
+        
+        def reset_session(self):
+            pass
+    
+    class CorrecteurIntelligent:
+        def __init__(self, memoire):
+            self.memoire = memoire
+            self.corrections_appliquees = []
+        
+        def corriger_code(self, code, langage, fichier, tentative, projet):
+            return code, []
+        
+        def get_rapport_correction(self):
+            return "Système de correction minimal"
+        
+        def reset_corrections(self):
+            self.corrections_appliquees = []
 
 class CacheAPI:
     """Cache simple pour réduire les appels API"""
@@ -44,594 +91,1010 @@ class RedacteurCode:
     def __init__(self):
         self.client = Groq(api_key=os.getenv("GROQ_API_KEY"))
         self.model = os.getenv("LLM_MODEL", "llama-3.1-8b-instant")
-        self.cache = CacheAPI()  # INITIALISER LE CACHE ICI
+        self.cache = CacheAPI()
+        
+       
+        self.test_mode = False
+        self.tentative_num = 0
+        self.projet_courant = ""
+        self.langage_courant = ""
+        
+       
+        self.memoire = MemoireApprentissage()
+        self.correcteur = CorrecteurIntelligent(self.memoire)
+        self.erreurs_apprises = []
+        
+        print(f" Rédacteur avec apprentissage initialisé - {self.memoire.get_statistiques().get('total_corrections', 0)} corrections apprises")
     
-    SYSTEM_PROMPT_CONCIS = """Tu es un expert en développement Python. Génère du code CONCIS et EFFICACE.
-Utilise des noms de variables courts mais descriptifs.
-Évite les commentaires excessifs.
-Concentre-toi sur la fonctionnalité essentielle.
+    def set_test_mode(self, test_mode, tentative_num):
+        """Active/désactive le mode test avec bugs"""
+        self.test_mode = test_mode
+        self.tentative_num = tentative_num
+        print(f"    Mode test: {'ACTIF' if test_mode else 'INACTIF'}, Tentative {tentative_num}")
+    
+    def set_contexte_projet(self, projet, langage):
+        """Définit le contexte du projet pour l'apprentissage"""
+        self.projet_courant = projet
+        self.langage_courant = langage
+    
+    
+    SYSTEM_PROMPT = """Tu es un expert polyvalent en développement logiciel. Génère du code CONCIS et EFFICACE dans le langage demandé.
 
-Pour les templates HTML, utilise du HTML minimal avec Bootstrap.
-Pour Flask, utilise les routes minimales nécessaires.
+Règles CRITIQUES:
+1. Utilise la syntaxe EXACTE et CORRECTE pour le langage spécifié
+2. Code COMPLET, COMPILABLE/EXÉCUTABLE immédiatement
+3. Respecter les conventions et idiomes du langage
+4. Inclure la gestion d'erreurs appropriée
+5. Éviter les erreurs courantes détectées précédemment
+6. Optimiser pour le langage spécifique
 
-Réponse avec UNIQUEMENT le code demandé, sans explications supplémentaires."""
-    
-    def generer_code(self, demande, fichier_info, analyse):
-        """
-        Ancienne méthode - gardée pour compatibilité
-        """
-        # Utilise la nouvelle méthode adaptative
-        return self.generer_code_adapte(demande, fichier_info, analyse, "")
-    
-    def generer_code_adapte(self, demande, fichier_info, analyse, chemin_projet):
-        """Génère du code adapté avec cache"""
+ERREURS À ÉVITER (basé sur l'apprentissage):
+- Variables non définies
+- Erreurs de type (ex: string + int)
+- Imports manquants
+- Parenthèses non fermées
+- Mauvais opérateurs (= au lieu de ==)
+- Syntaxe incorrecte spécifique au langage
+
+FORMAT DE RÉPONSE:
+- UNIQUEMENT le code source
+- Pas d'explications, pas de markdown sauf si nécessaire
+- Bonne indentation selon le langage
+- Nom de fichier respecté"""
+
+    def generer_code_adapte(self, demande, fichier_info, analyse, chemin_projet, introduire_bugs=False):
+        """Génère du code adapté avec apprentissage"""
         nom_fichier = fichier_info['nom']
-        print(f"      📝 Génération adaptée pour: {nom_fichier}")
+        print(f"      📝 Génération pour: {nom_fichier}")
         
-        # Créer clé de cache
-        cache_key = self.cache.get_cache_key(demande, fichier_info, analyse)
+       
+        langage = self._detecter_langage_fichier(nom_fichier, analyse)
+        self.langage_courant = langage
         
-        # Vérifier cache
+       
+        stats = self.memoire.get_statistiques()
+        cache_key = hashlib.md5(
+            f"{demande}_{nom_fichier}_{self.tentative_num}_{stats.get('total_corrections', 0)}".encode()
+        ).hexdigest()
+        
+        
         cached = self.cache.get(cache_key)
-        if cached and cached.get('nom_fichier') == nom_fichier:
-            print(f"      🔄 Code récupéré du cache: {nom_fichier}")
-            return cached.get('code', '')
+        if cached and not self.test_mode and self.tentative_num > 1:
+            
+            code_cached = cached.get('code', '')
+            code_corrige, _ = self._appliquer_corrections_apprises(code_cached, langage, nom_fichier)
+            return code_corrige
         
-        # Sinon, générer via API
+       
         try:
-            code = self._generer_via_api(demande, fichier_info, analyse, chemin_projet)
+            prompt = self._creer_prompt_avec_apprentissage(demande, fichier_info, analyse, langage)
             
-            # Sauvegarder dans cache
-            self.cache.set(cache_key, {
-                'nom_fichier': nom_fichier,
-                'code': code,
-                'timestamp': time.time()
-            })
             
-            return code
+            temperature = 0.7 + (0.1 * self.tentative_num if self.test_mode else 0)
             
-        except Exception as e:
-            print(f"❌ Erreur génération adaptée pour {nom_fichier}: {e}")
-            # Utiliser du code de secours
-            return self._code_de_secours(demande, nom_fichier, analyse)
-    
-    def _generer_via_api(self, demande, fichier_info, analyse, chemin_projet):
-        """Génère du code via l'API Groq"""
-        prompt = self._creer_prompt_intelligent(demande, fichier_info, analyse, chemin_projet)
-        
-        try:
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=[
-                    {"role": "system", "content": self.SYSTEM_PROMPT_CONCIS},
+                    {"role": "system", "content": self.SYSTEM_PROMPT},
                     {"role": "user", "content": prompt}
                 ],
-                temperature=0.7,
-                max_tokens=4000,
-                timeout=30
+                temperature=temperature,
+                max_tokens=2000
             )
             
             code = response.choices[0].message.content
-            code = self._nettoyer_code_genere(code, fichier_info['nom'])
+            code = self._nettoyer_code(code, langage)
             
-            return code
+           
+            code_corrige_prealable, corrections_appliquees = self._appliquer_corrections_apprises(
+                code, langage, nom_fichier
+            )
+            
+            if corrections_appliquees:
+                print(f"       {len(corrections_appliquees)} corrections apprises appliquées")
+                for correction in corrections_appliquees[:2]:  # Afficher seulement 2
+                    print(f"        → Évité: {correction.get('type', 'inconnu')}")
+            
+           
+            bugs_introduits = []
+            code_final = code_corrige_prealable
+            
+            if introduire_bugs and self.test_mode and self.tentative_num < 4:
+              
+                max_bugs = max(1, 3 - len(corrections_appliquees))
+                code_final, bugs_introduits = self._introduire_bugs_intelligents(
+                    code_corrige_prealable, langage, max_bugs
+                )
+            
+          
+            self._analyser_code_pour_apprentissage(code_final, langage, nom_fichier)
+            
+          
+            self.cache.set(cache_key, {
+                'nom_fichier': nom_fichier,
+                'code': code_final,
+                'langage': langage,
+                'bugs_introduits': bugs_introduits,
+                'corrections_appliquees': [c.get('type', '') for c in corrections_appliquees],
+                'timestamp': time.time(),
+                'tentative': self.tentative_num
+            })
+            
+            return code_final
             
         except Exception as e:
-            raise Exception(f"Erreur API: {e}")
+            print(f"    Erreur génération: {str(e)[:50]}")
+            code_secours = self._code_de_secours_simple(nom_fichier, demande, analyse, langage)
+            
+           
+            code_corrige, _ = self._appliquer_corrections_apprises(code_secours, langage, nom_fichier)
+            return code_corrige
     
-    def _creer_prompt_intelligent(self, demande, fichier_info, analyse, chemin_projet):
-        """
-        Crée un prompt intelligent adapté au type de fichier
-        """
+    def _appliquer_corrections_apprises(self, code, langage, nom_fichier):
+        """Applique les corrections apprises au code"""
+        if not code:
+            return code, []
+        
+      
+        code_corrige, corrections_appliquees = self.correcteur.corriger_code(
+            code=code,
+            langage=langage,
+            fichier=nom_fichier,
+            tentative=self.tentative_num,
+            projet=self.projet_courant
+        )
+        
+       
+        code_corrige = self.memoire.appliquer_corrections_connues(code_corrige, langage, nom_fichier)
+        
+        return code_corrige, corrections_appliquees
+    
+    def _analyser_code_pour_apprentissage(self, code, langage, nom_fichier):
+        """Analyse le code pour détecter des patterns à apprendre"""
+        if not code or self.tentative_num >= 4: 
+            return
+        
+       
+        erreurs_detectees = self._detecter_patterns_erreurs(code, langage, nom_fichier)
+        
+        for erreur in erreurs_detectees:
+           
+            erreur["langage"] = langage
+            erreur["fichier"] = nom_fichier
+            erreur["tentative"] = self.tentative_num
+            erreur["projet"] = self.projet_courant
+            
+          
+            erreur_id = self.memoire.enregistrer_erreur(erreur)
+            
+           
+            self.erreurs_apprises.append({
+                "id": erreur_id,
+                "type": erreur.get("type"),
+                "message": erreur.get("message", "")[:50],
+                "langage": langage
+            })
+    
+    def _detecter_patterns_erreurs(self, code, langage, nom_fichier):
+        """Détecte des patterns d'erreurs courants dans le code"""
+        erreurs = []
+        lignes = code.split('\n')
+        
+        for i, ligne in enumerate(lignes, 1):
+           
+            if langage == "go":
+                erreur = self._detecter_erreur_go(ligne, i, nom_fichier)
+                if erreur:
+                    erreurs.append(erreur)
+            
+            elif langage == "python":
+                erreur = self._detecter_erreur_python(ligne, i, nom_fichier)
+                if erreur:
+                    erreurs.append(erreur)
+            
+            elif langage in ["javascript", "typescript"]:
+                erreur = self._detecter_erreur_javascript(ligne, i, nom_fichier)
+                if erreur:
+                    erreurs.append(erreur)
+        
+        return erreurs
+    
+    def _detecter_erreur_go(self, ligne, num_ligne, nom_fichier):
+        """Détecte les erreurs courantes en Go"""
+        ligne_lower = ligne.lower()
+        
+        if 'undefinedvar' in ligne_lower or 'unusedvar' in ligne_lower:
+            return {
+                "type": "undefined_variable",
+                "message": f"Variable potentiellement non définie ligne {num_ligne}",
+                "ligne": num_ligne,
+                "code_avant": ligne.strip(),
+                "code_apres": f"// {ligne.strip()}  // Variable à vérifier",
+                "severite": "warning"
+            }
+        
+        if 'fmt.println("erreur' in ligne_lower and '" #' in ligne:
+            return {
+                "type": "syntax_error",
+                "message": f"Parenthèse potentiellement manquante ligne {num_ligne}",
+                "ligne": num_ligne,
+                "code_avant": ligne.strip(),
+                "code_apres": ligne.strip().replace('" #', '")  #'),
+                "severite": "error"
+            }
+        
+        return None
+    
+    def _detecter_erreur_python(self, ligne, num_ligne, nom_fichier):
+        """Détecte les erreurs courantes en Python"""
+        if 'variable_non_definie_' in ligne or 'undefined_var' in ligne:
+            return {
+                "type": "undefined_variable",
+                "message": f"Variable potentiellement non définie ligne {num_ligne}",
+                "ligne": num_ligne,
+                "code_avant": ligne.strip(),
+                "code_apres": f"# {ligne.strip()}  # Variable à vérifier",
+                "severite": "warning"
+            }
+        
+        return None
+    
+    def _detecter_erreur_javascript(self, ligne, num_ligne, nom_fichier):
+        """Détecte les erreurs courantes en JavaScript/TypeScript"""
+        if 'undefinedvariable_' in ligne or 'nondefinedvar' in ligne.lower():
+            return {
+                "type": "undefined_variable",
+                "message": f"Variable potentiellement non définie ligne {num_ligne}",
+                "ligne": num_ligne,
+                "code_avant": ligne.strip(),
+                "code_apres": f"// {ligne.strip()}  // Variable à vérifier",
+                "severite": "warning"
+            }
+        
+        return None
+    
+    def _introduire_bugs_intelligents(self, code, langage, max_bugs=3):
+        """Introduit des bugs délibérés de manière intelligente"""
+        if not self.test_mode or self.tentative_num >= 4:
+            return code, []
+        
+        bugs_introduits = []
+        code_avec_bugs = code
+        
+      
+        bugs_possibles = self._get_bugs_prioritaires(langage)
+        
+       
+        num_bugs = min(max_bugs, len(bugs_possibles))
+        selected_bugs = random.sample(bugs_possibles, num_bugs)
+        
+        for bug_type in selected_bugs:
+            code_avec_bugs, bug_applied = self._appliquer_bug_intelligent(bug_type, code_avec_bugs, langage)
+            if bug_applied:
+                bugs_introduits.append(bug_type)
+              
+                self._enregistrer_bug_pour_apprentissage(bug_type, langage)
+        
+        return code_avec_bugs, bugs_introduits
+    
+    def _get_bugs_prioritaires(self, langage):
+        """Retourne les types de bugs à introduire selon le langage et l'apprentissage"""
+       
+        bugs_base = [
+            'undefined_variable',
+            'syntax_error',
+            'missing_parenthesis'
+        ]
+        
+      
+        if langage == "go":
+            bugs_specifiques = [
+                'type_error_go',
+                'wrong_assignment_go',
+                'missing_import_go',
+                'unused_variable_go'
+            ]
+        elif langage == "python":
+            bugs_specifiques = [
+                'indentation_error',
+                'type_error_python',
+                'name_error',
+                'missing_import_python'
+            ]
+        elif langage in ["javascript", "typescript"]:
+            bugs_specifiques = [
+                'reference_error',
+                'type_error_js',
+                'undefined_variable_js',
+                'missing_semicolon'
+            ]
+        else:
+            bugs_specifiques = []
+        
+       
+        tous_bugs = bugs_base + bugs_specifiques
+        
+        
+        stats = self.memoire.get_statistiques()
+        if stats.get('total_corrections', 0) > 0:
+           
+            return random.sample(tous_bugs, min(4, len(tous_bugs)))
+        else:
+        
+            return bugs_base[:3]
+    
+    def _appliquer_bug_intelligent(self, bug_type, code, langage):
+        """Applique un bug spécifique au code de manière intelligente"""
+        if not code or len(code.strip()) < 10:
+            return code, False
+        
+        lines = code.split('\n')
+        bug_applied = False
+        
+        try:
+            if bug_type == 'undefined_variable':
+              
+                if len(lines) > 3:
+                    line_idx = random.randint(1, len(lines)-2)
+                    if langage == "go":
+                        lines.insert(line_idx, f"  undefinedVar{self.tentative_num} := \"test_bug\"")
+                    elif langage == "python":
+                        lines.insert(line_idx, f"  undefined_var_{self.tentative_num} = None")
+                    elif langage in ["javascript", "typescript"]:
+                        lines.insert(line_idx, f"  const undefinedVar{self.tentative_num} = undefined;")
+                    bug_applied = True
+            
+            elif bug_type == 'type_error_go':
+             
+                if len(lines) > 3:
+                    line_idx = random.randint(1, len(lines)-2)
+                    lines.insert(line_idx, "  var x int = \"texte\"  // Erreur de type (bug)")
+                    bug_applied = True
+            
+            elif bug_type == 'wrong_assignment_go':
+                
+                if len(lines) > 3:
+                    line_idx = random.randint(1, len(lines)-2)
+                    lines.insert(line_idx, "  x =: 5  // Mauvais opérateur (bug)")
+                    bug_applied = True
+            
+            elif bug_type == 'missing_import_go':
+              
+                if "import (" in code:
+                    for i, line in enumerate(lines):
+                        if "import (" in line:
+                            insert_pos = i + 1
+                            lines.insert(insert_pos, f'    "inexistant/package{self.tentative_num}"  // Import bug')
+                            break
+                bug_applied = True
+            
+            elif bug_type == 'syntax_error':
+               
+                if len(lines) > 3:
+                    line_idx = random.randint(1, len(lines)-2)
+                    if langage == "go":
+                        lines.insert(line_idx, f"  fmt.Println(\"Erreur tentative {self.tentative_num}\"  // Parenthèse manquante (bug)")
+                    elif langage == "python":
+                        lines.insert(line_idx, f"  print('Erreur tentative {self.tentative_num}'  # Guillemet manquant (bug)")
+                    elif langage in ["javascript", "typescript"]:
+                        lines.insert(line_idx, f"  console.log('Erreur tentative {self.tentative_num}'  // Parenthèse manquante (bug)")
+                    bug_applied = True
+            
+            elif bug_type == 'missing_parenthesis':
+                
+                if len(lines) > 3:
+                    line_idx = random.randint(1, len(lines)-2)
+                    line = lines[line_idx]
+                    if '(' in line and ')' in line:
+                     
+                        lines[line_idx] = line.rstrip(')') + "  // Parenthèse manquante (bug)"
+                        bug_applied = True
+            
+            return '\n'.join(lines), bug_applied
+            
+        except Exception:
+            return code, False
+    
+    def _enregistrer_bug_pour_apprentissage(self, bug_type, langage):
+        """Enregistre un bug introduit pour l'apprentissage"""
+        bug_info = {
+            "type": bug_type,
+            "langage": langage,
+            "tentative": self.tentative_num,
+            "projet": self.projet_courant,
+            "timestamp": time.time(),
+            "message": f"Bug délibéré introduit: {bug_type}",
+            "corrige": False
+        }
+        
+        self.memoire.enregistrer_erreur(bug_info)
+    
+    def _creer_prompt_avec_apprentissage(self, demande, fichier_info, analyse, langage):
+        """Crée un prompt avec informations d'apprentissage"""
         nom_fichier = fichier_info["nom"]
-        besoin_interface = analyse.get('besoin_interface', False)
-        composants_ui = analyse.get('composants_ui_attendus', [])
+        type_app = analyse.get('type_application', 'web')
         fonctionnalites = analyse.get('fonctionnalites_cles', [])
         
+        
+        erreurs_apprises = self._get_erreurs_apprises_pour_langage(langage)
+        
+      
         prompt = f"""
-        🎯 GÉNÉRATION DE CODE - FICHIER : {nom_fichier}
+Génère le code complet pour ce fichier: {nom_fichier}
+
+LANGAGE: {langage.upper()}
+TYPE D'APPLICATION: {type_app}
+FONCTIONNALITÉS: {', '.join(fonctionnalites)}
+DEMANDE ORIGINALE: {demande}
+
+ERREURS COURANTES À ÉVITER (basé sur apprentissage):
+"""
         
-        📝 DEMANDE ORIGINALE :
-        "{demande}"
-        
-        📊 ANALYSE TECHNIQUE COMPLÈTE :
-        - Type d'application: {analyse.get('type_application')}
-        - Besoin interface: {besoin_interface}
-        - Type interface: {analyse.get('type_interface')}
-        - Composants UI attendus: {composants_ui}
-        - Fonctionnalités clés: {fonctionnalites}
-        
-        📁 CONTEXTE :
-        - Fichier: {nom_fichier}
-        - Description fichier: {fichier_info.get('description', 'Non spécifiée')}
-        - Projet: {chemin_projet}
-        """
-        
-        # Instructions spécifiques selon le type de fichier
-        if nom_fichier.endswith('.py'):
-            prompt += self._instructions_backend(demande, analyse, fonctionnalites)
-        
-        elif nom_fichier.endswith(('.html', '.htm')) or 'templates/' in nom_fichier:
-            prompt += self._instructions_frontend_html(demande, analyse, composants_ui, fonctionnalites)
-        
-        elif nom_fichier.endswith('.css'):
-            prompt += self._instructions_css(demande, analyse, composants_ui)
-        
-        elif nom_fichier.endswith('.js') or nom_fichier.endswith('.javascript'):
-            prompt += self._instructions_javascript(demande, analyse, fonctionnalites)
-        
-        elif nom_fichier == "requirements.txt":
-            prompt += self._instructions_requirements(analyse)
-        
+       
+        if erreurs_apprises:
+            for i, erreur in enumerate(erreurs_apprises[:3], 1):
+                prompt += f"{i}. {erreur}\n"
         else:
-            prompt += self._instructions_generiques(demande, analyse)
+            prompt += "Aucune erreur spécifique apprise pour ce langage.\n"
         
-        # Instructions générales
-        prompt += """
+        prompt += f"""
+INSTRUCTIONS SPÉCIFIQUES POUR {langage.upper()}:
+"""
         
-        ⚡ INSTRUCTIONS GÉNÉRALES IMPORTANTES :
-        1. Code COMPLET et IMMÉDIATEMENT FONCTIONNEL
-        2. PAS de placeholders comme "[à compléter]", "[votre code ici]", "TODO"
-        3. Toute la logique métier doit être implémentée
-        4. Gestion des erreurs de base incluse
-        5. Commentaires explicatifs en français
-        6. Bonnes pratiques du langage respectées
+       
+        if langage == "go":
+            prompt += """1. Utiliser la syntaxe Go correcte avec point-virgule optionnel
+2. Respecter les conventions de nommage (camelCase)
+3. Gestion d'erreurs avec retour multiple
+4. Imports organisés en sections
+5. Éviter les variables non utilisées (go vet)"""
+        elif langage == "python":
+            prompt += """1. Respecter PEP 8 (indentation 4 espaces)
+2. Utiliser les docstrings
+3. Gestion d'exceptions avec try/except
+4. Éviter les variables globales
+5. Type hints si Python 3.6+"""
+        elif langage in ["javascript", "typescript"]:
+            prompt += """1. Utiliser const/let au lieu de var
+2. Points-virgules cohérents
+3. Fonctions fléchées quand approprié
+4. Gestion des promesses async/await
+5. Éviter les variables non définies"""
         
-        🎨 POUR LES INTERFACES :
-        - Design MODERNE et RESPONSIVE (mobile-first)
-        - Utiliser Bootstrap 5 + Font Awesome
-        - UX intuitive et agréable
-        
-        📦 FORMAT DE RÉPONSE :
-        Retourne UNIQUEMENT le code complet, sans texte supplémentaire.
-        Pas de "Voici le code :", pas d'explications.
-        """
+        prompt += f"""
+
+CRITÈRES DE QUALITÉ:
+1. Code complet et fonctionnel
+2. Respecter les bonnes pratiques du langage
+3. Gestion d'erreurs appropriée incluse
+4. Code prêt à être utilisé/compilé/exécuté immédiatement
+5. Éviter les erreurs courantes listées ci-dessus
+
+Retourne uniquement le code, sans explications.
+"""
         
         return prompt
     
-    def _instructions_backend(self, demande, analyse, fonctionnalites):
-        """Instructions pour les fichiers backend Python"""
-        type_app = analyse.get('type_application', 'web')
+    def _get_erreurs_apprises_pour_langage(self, langage):
+        """Retourne les erreurs apprises pour un langage spécifique"""
+        erreurs = []
         
-        instructions = f"""
+     
+        stats = self.memoire.get_statistiques()
+        total_corrections = stats.get('total_corrections', 0)
         
-        🐍 BACKEND PYTHON - {type_app.upper()}
+        if total_corrections > 0:
+            if langage == "go":
+                erreurs = [
+                    "Variables non définies (undefinedVarX)",
+                    "Erreurs de type (string dans int)",
+                    "Parenthèses manquantes dans fmt.Println",
+                    "Imports inexistants",
+                    "Mauvais opérateur d'affectation (=: au lieu de :=)"
+                ]
+            elif langage == "python":
+                erreurs = [
+                    "Variables non définies",
+                    "Indentation incorrecte",
+                    "Imports manquants",
+                    "Guillemets non fermés",
+                    "Mauvais opérateur (= au lieu de ==)"
+                ]
         
-        IMPLÉMENTER TOUTES CES FONCTIONNALITÉS :
-        {json.dumps(fonctionnalites, indent=2, ensure_ascii=False)}
+        return erreurs[:3] 
+    
+    def _detecter_langage_fichier(self, nom_fichier, analyse):
+        """Détecte le langage d'un fichier simplement"""
+        extension = nom_fichier.split('.')[-1].lower() if '.' in nom_fichier else ''
+       
+        if extension == 'go':
+            return 'go'
+        elif extension in ['js', 'jsx']:
+            return 'javascript'
+        elif extension in ['ts', 'tsx']:
+            return 'typescript'
+        elif extension == 'rs':
+            return 'rust'
+        elif extension == 'py':
+            return 'python'
+        elif extension == 'java':
+            return 'java'
+        elif extension in ['cpp', 'cc', 'cxx', 'h', 'hpp', 'hh', 'hxx']:
+            return 'c++'
+        elif extension == 'c':
+            return 'c'
+        elif extension == 'cs':
+            return 'c#'
+        elif extension == 'php':
+            return 'php'
+        elif extension == 'rb':
+            return 'ruby'
+        elif extension == 'swift':
+            return 'swift'
+        elif extension == 'kt' or extension == 'kts':
+            return 'kotlin'
+        elif extension == 'scala':
+            return 'scala'
+        elif extension == 'r':
+            return 'r'
+        elif extension == 'jl':
+            return 'julia'
+        elif extension == 'dart':
+            return 'dart'
+        elif extension == 'lua':
+            return 'lua'
+        elif extension == 'pl':
+            return 'prolog'
+        elif extension == 'hs':
+            return 'haskell'
+        elif extension == 'erl':
+            return 'erlang'
+        elif extension == 'ex' or extension == 'exs':
+            return 'elixir'
+        elif extension == 'clj' or extension == 'cljs':
+            return 'clojure'
+        elif extension == 'fs' or extension == 'fsx':
+            return 'f#'
+        elif extension == 'm' or extension == 'mm':
+            return 'objective-c'
+        elif extension == 'vue':
+            return 'vue'
+        elif extension == 'svelte':
+            return 'svelte'
+        elif extension == 'elm':
+            return 'elm'
+        elif extension == 'zig':
+            return 'zig'
+        elif extension == 'nim':
+            return 'nim'
+        elif extension == 'v':
+            return 'v'
+        elif extension == 'cr':
+            return 'crystal'
+        elif extension == 'groovy':
+            return 'groovy'
         
-        SPÉCIFICATIONS TECHNIQUES :
-        1. Code Python complet et structuré
-        2. """
+       
+        elif extension == 'sh' or extension == 'bash' or nom_fichier.startswith('.bash'):
+            return 'bash'
+        elif extension == 'ps1':
+            return 'powershell'
+        elif extension == 'bat' or extension == 'cmd':
+            return 'batch'
+        elif extension == 'fish':
+            return 'fish'
         
-        if type_app == 'web':
-            instructions += """Utiliser Flask comme framework
-        3. Toutes les routes nécessaires pour l'application
-        4. Gestion des templates Jinja2
-        5. Routes API si nécessaire (JSON responses)
-        6. Gestion des erreurs HTTP
-        7. Structure modulaire (fonctions séparées)
-        """
-        elif type_app == 'jeu':
-            instructions += """Logique de jeu complète
-        3. Gestion de l'état du jeu
-        4. Système de score/niveaux
-        5. Logique des règles
-        6. Interface via Flask ou logique console
-        """
-        elif type_app == 'dashboard':
-            instructions += """Génération de données pour le dashboard
-        3. Calcul des statistiques/métriques
-        4. API pour les données en temps réel
-        5. Structure modulaire pour différentes visualisations
-        """
+      
+        elif extension in ['html', 'htm']:
+            return 'html'
+        elif extension == 'css':
+            return 'css'
+        elif extension == 'scss' or extension == 'sass':
+            return 'scss'
+        elif extension == 'less':
+            return 'less'
+        
+        
+        elif extension == 'sql':
+            return 'sql'
+        elif extension == 'json':
+            return 'json'
+        elif extension == 'xml':
+            return 'xml'
+        elif extension == 'yaml' or extension == 'yml':
+            return 'yaml'
+        elif extension == 'toml':
+            return 'toml'
+        elif extension == 'ini':
+            return 'ini'
+        elif extension == 'env' or nom_fichier == '.env':
+            return 'dotenv'
+        
+        
+        elif extension == 'dockerfile' or nom_fichier == 'Dockerfile':
+            return 'dockerfile'
+        elif extension == 'tf' or extension == 'tfvars':
+            return 'terraform'
+        
+        
+        elif extension == 'md' or extension == 'markdown':
+            return 'markdown'
+        elif extension == 'tex':
+            return 'latex'
+        elif extension == 'rst':
+            return 'restructuredtext'
+        
         else:
-            instructions += """Logique métier complète
-        3. Fonctions bien structurées
-        4. Gestion des entrées/sorties
-        5. Code robuste avec validation
-        """
+            
+            if nom_fichier == 'Makefile' or nom_fichier == 'makefile':
+                return 'makefile'
+            elif nom_fichier == 'CMakeLists.txt':
+                return 'cmake'
+            elif nom_fichier == 'package.json':
+                return 'json'
+            elif nom_fichier == 'Cargo.toml':
+                return 'toml'
+            elif nom_fichier == 'pyproject.toml':
+                return 'toml'
+            elif nom_fichier == 'go.mod':
+                return 'gomod'
+            elif nom_fichier == 'requirements.txt':
+                return 'requirements'
+            elif nom_fichier == 'composer.json':
+                return 'json'
+            elif nom_fichier == 'Gemfile':
+                return 'ruby'
+            elif nom_fichier == 'pom.xml':
+                return 'xml'
+            elif nom_fichier == 'build.gradle' or nom_fichier == 'build.gradle.kts':
+                return 'groovy'
+            
+            return analyse.get('langage_principal', 'python')
+
+    def _nettoyer_code(self, code, langage):
+        """Nettoie le code généré simplement"""
+     
+        if '```' in code:
+            parts = code.split('```')
+            if len(parts) >= 3:
+                
+                code = parts[1].strip()
         
-        instructions += """
-        8. Si données nécessaires → utiliser JSON file ou structure en mémoire
-        9. Code prêt à être exécuté immédiatement
-        10. 'if __name__ == "__main__":' avec lancement de l'app
-        """
-        
-        return instructions
-    
-    def _instructions_frontend_html(self, demande, analyse, composants_ui, fonctionnalites):
-        """Instructions pour les templates HTML"""
-        instructions = f"""
-        
-        🌐 TEMPLATE HTML/JINJA2 - INTERFACE {analyse.get('type_interface').upper()}
-        
-        COMPOSANTS UI DEMANDÉS :
-        {json.dumps(composants_ui, indent=2, ensure_ascii=False)}
-        
-        FONCTIONNALITÉS À SUPPORTER :
-        {json.dumps(fonctionnalites, indent=2, ensure_ascii=False)}
-        
-        SPÉCIFICATIONS DU TEMPLATE :
-        1. Template Jinja2 COMPLET pour Flask
-        2. Utiliser Bootstrap 5 (CDN) pour le style
-        3. Inclure Font Awesome (CDN) pour les icônes
-        4. Design RESPONSIVE (mobile-first)
-        5. Structure : doctype, html, head, body
-        6. Header avec titre de l'application
-        7. Main content avec tous les composants nécessaires
-        8. JavaScript en bas du body pour performance
-        """
-        
-        # Instructions spécifiques par composant
-        if 'cartes' in composants_ui:
-            instructions += """
-        
-        🃏 POUR LES CARTES :
-        - Utiliser <div class="card"> de Bootstrap
-        - Grille responsive avec row/col
-        - Effets hover : card:hover { transform: translateY(-5px); }
-        - Images/icons dans les cartes si pertinent
-        - Boutons d'action dans chaque carte
-        """
-        
-        if 'formulaires' in composants_ui:
-            instructions += """
-        
-        📝 POUR LES FORMULAIRES :
-        - Formulaires Bootstrap stylés
-        - Validation HTML5 (required, pattern, etc.)
-        - Labels clairs et placeholders
-        - Boutons de soumission stylés
-        - Messages d'erreur/succès
-        """
-        
-        if 'tableaux' in composants_ui:
-            instructions += """
-        
-        📊 POUR LES TABLEAUX :
-        - Tableaux Bootstrap (table table-striped)
-        - Responsive avec table-responsive
-        - En-têtes clairs
-        - Données dynamiques via Jinja2
-        """
-        
-        if 'graphiques' in composants_ui:
-            instructions += """
-        
-        📈 POUR LES GRAPHIQUES :
-        - Conteneur pour Chart.js ou similar
-        - Canvas HTML pour les graphiques
-        - Légendes et axes clairs
-        """
-        
-        if 'dashboard' in composants_ui:
-            instructions += """
-        
-        🎛️ POUR LES DASHBOARDS :
-        - Layout en grille avec sections
-        - Cartes de métriques (KPI)
-        - Graphiques et visualisations
-        - Navigation entre vues
-        """
-        
-        instructions += """
-        
-        9. CSS personnalisé dans <style> ou fichier séparé
-        10. JavaScript pour l'interactivité
-        11. Jinja2 syntax pour les données dynamiques
-        """
-        
-        return instructions
-    
-    def _instructions_css(self, demande, analyse, composants_ui):
-        """Instructions pour les fichiers CSS"""
-        instructions = f"""
-        
-        🎨 CSS PERSONNALISÉ - COMPLÉMENT BOOTSTRAP
-        
-        COMPOSANTS À STYLISER :
-        {json.dumps(composants_ui, indent=2, ensure_ascii=False)}
-        
-        SPÉCIFICATIONS CSS :
-        1. CSS moderne (variables CSS, flexbox, grid)
-        2. Complète Bootstrap, ne le remplace pas
-        3. Design responsive (mobile-first)
-        4. Variables CSS pour les couleurs/thème
-        5. Animations subtiles pour l'interactivité
-        6. Focus sur l'UX/UI
-        7. Organisation logique (reset, variables, layout, components, utilities)
-        """
-        
-        # Styles spécifiques par composant
-        if 'cartes' in composants_ui:
-            instructions += """
-        
-        /* Styles pour les cartes */
-        .custom-card {
-            transition: all 0.3s ease;
-            border: none;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        .custom-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-        }
-        """
-        
-        if 'dashboard' in composants_ui:
-            instructions += """
-        
-        /* Styles pour dashboard */
-        .metric-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 10px;
-            padding: 20px;
-        }
-        """
-        
-        instructions += """
-        
-        8. Media queries pour le responsive
-        9. Commentaires pour chaque section
-        """
-        
-        return instructions
-    
-    def _instructions_javascript(self, demande, analyse, fonctionnalites):
-        """Instructions pour les fichiers JavaScript"""
-        instructions = f"""
-        
-        ⚡ JAVASCRIPT - INTERACTIVITÉ
-        
-        FONCTIONNALITÉS À IMPLÉMENTER :
-        {json.dumps(fonctionnalites, indent=2, ensure_ascii=False)}
-        
-        SPÉCIFICATIONS JS :
-        1. JavaScript moderne (ES6+)
-        2. Code modulaire et organisé
-        3. Gestion des événements utilisateur
-        4. Communication avec backend (Fetch API)
-        5. Validation des formulaires
-        6. Mise à jour dynamique du DOM
-        7. Gestion des erreurs (try/catch)
-        """
-        
-        if 'graphiques' in analyse.get('composants_ui_attendus', []):
-            instructions += """
-        
-        // Pour les graphiques (exemple avec Chart.js)
-        const initCharts = () => {
-            // Initialisation des graphiques
-        };
-        """
-        
-        instructions += """
-        
-        8. Documentation des fonctions
-        9. Performant
-        """
-        
-        return instructions
-    
-    def _instructions_requirements(self, analyse):
-        """Instructions pour requirements.txt"""
-        dependances = analyse.get('dependances', ['Flask'])
-        
-        instructions = f"""
-        
-        📦 REQUIREMENTS.TXT - DÉPENDANCES PYTHON
-        
-        DÉPENDANCES DÉTECTÉES :
-        {json.dumps(dependances, indent=2, ensure_ascii=False)}
-        
-        FORMAT :
-        Flask==2.3.3
-        python-dotenv==1.0.0
-        """
-        
-        return instructions
-    
-    def _instructions_generiques(self, demande, analyse):
-        """Instructions pour les autres types de fichiers"""
-        return f"""
-        
-        📄 FICHIER GÉNÉRIQUE
-        
-        CONTENU APPROPRIÉ pour ce type de fichier.
-        Informations utiles pour le projet.
-        Format approprié au type de fichier.
-        """
-    
-    def _nettoyer_code_genere(self, code, nom_fichier):
-        """Nettoie le code généré par l'API"""
-        # Enlever les blocs de code markdown
-        if "```python" in code:
-            code = code.split("```python")[1].split("```")[0].strip()
-        elif "```html" in code:
-            code = code.split("```html")[1].split("```")[0].strip()
-        elif "```css" in code:
-            code = code.split("```css")[1].split("```")[0].strip()
-        elif "```javascript" in code:
-            code = code.split("```javascript")[1].split("```")[0].strip()
-        elif "```js" in code:
-            code = code.split("```js")[1].split("```")[0].strip()
-        elif "```" in code:
-            code = code.split("```")[1].split("```")[0].strip()
-        
-        # Enlever les phrases d'introduction
-        phrases_intro = [
+      
+        phrases = [
             "Voici le code pour",
             "Here is the code for",
             "Code généré :",
             "Generated code:",
+            f"Voici le fichier {langage}:",
+            f"Here is the {langage} file:"
         ]
         
-        for phrase in phrases_intro:
+        for phrase in phrases:
             if code.startswith(phrase):
                 code = code[len(phrase):].strip()
         
-        # Normaliser les sauts de ligne
+     
         code = code.replace('\r\n', '\n').replace('\r', '\n')
         
-        # S'assurer qu'il y a un saut de ligne à la fin
         if code and not code.endswith('\n'):
             code += '\n'
         
         return code
-    
-    def _code_de_secours(self, demande, nom_fichier, analyse):
-        """Code de secours si la génération échoue"""
-        print(f"      ⚠️  Utilisation du code de secours pour {nom_fichier}")
+
+    def _code_de_secours_simple(self, nom_fichier, demande, analyse, langage):
+        """Code de secours ultra simple"""
+        print(f"     Code de secours pour {nom_fichier}")
         
-        if nom_fichier.endswith(".py"):
-            return f'''# {nom_fichier} - Généré par Robot Développeur
+        
+        type_app = analyse.get('type_application', 'app')
+        fonctionnalites = analyse.get('fonctionnalites_cles', ['Application fonctionnelle'])
+        
+       
+        if langage == 'go':
+            return f'''// {nom_fichier}
+// Application Go générée automatiquement
+// Demande: {demande}
+
+package main
+
+import "fmt"
+
+func main() {{
+    fmt.Println("Application Go générée automatiquement")
+    fmt.Printf("Type: %s\\n", "{type_app}")
+    fmt.Println("Fonctionnalités:")
+    for _, f := range {json.dumps(fonctionnalites)} {{
+        fmt.Printf("  - %s\\n", f)
+    }}
+}}
+'''
+        
+        elif langage == 'python':
+            return f'''# {nom_fichier}
+# Application Python générée automatiquement
 # Demande: {demande}
-# Type d'application: {analyse.get('type_application', 'inconnu')}
 
-from flask import Flask, render_template, jsonify, request
-import json
-import os
-
-app = Flask(__name__)
-
-@app.route('/')
-def index():
-    """Page principale"""
-    return render_template('index.html', 
-                         app_name="Application générée",
-                         features={analyse.get('fonctionnalites_cles', [])})
-
-@app.route('/api/data')
-def api_data():
-    """API de données"""
-    return jsonify({{
-        "status": "success",
-        "message": "Application fonctionnelle",
-        "features": {analyse.get('fonctionnalites_cles', [])}
-    }})
+def main():
+    print("Application Python générée automatiquement")
+    print(f"Type: {{type_app}}")
+    print("Fonctionnalités:")
+    for f in {json.dumps(fonctionnalites)}:
+        print(f"  - {{f}}")
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    main()
 '''
         
-        elif nom_fichier.endswith(('.html', '.htm')):
+        elif langage == 'javascript':
+            return f'''// {nom_fichier}
+// Application JavaScript générée automatiquement
+// Demande: {demande}
+
+console.log("Application JavaScript générée automatiquement");
+console.log(`Type: {type_app}`);
+console.log("Fonctionnalités:");
+{json.dumps(fonctionnalites)}.forEach(f => {{
+    console.log(`  - ${{f}}`);
+}});
+'''
+        
+        elif langage == 'typescript':
+            return f'''// {nom_fichier}
+// Application TypeScript générée automatiquement
+// Demande: {demande}
+
+console.log("Application TypeScript générée automatiquement");
+console.log(`Type: {type_app}`);
+console.log("Fonctionnalités:");
+{json.dumps(fonctionnalites)}.forEach((f: string) => {{
+    console.log(`  - ${{f}}`);
+}});
+'''
+        
+        elif langage == 'rust':
+            return f'''// {nom_fichier}
+// Application Rust générée automatiquement
+// Demande: {demande}
+
+fn main() {{
+    println!("Application Rust générée automatiquement");
+    println!("Type: {{}}", "{type_app}");
+    println!("Fonctionnalités:");
+    for f in {json.dumps(fonctionnalites)} {{
+        println!("  - {{}}", f);
+    }}
+}}
+'''
+        
+        elif langage == 'java':
+            features_str = ""
+            for feature in fonctionnalites:
+                features_str += f'        System.out.println("  - {feature}");\n'
+            
+            return f'''// {nom_fichier}
+// Application Java générée automatiquement
+// Demande: {demande}
+
+public class Main {{
+    public static void main(String[] args) {{
+        System.out.println("Application Java générée automatiquement");
+        System.out.println("Type: {type_app}");
+        System.out.println("Fonctionnalités:");
+{features_str}
+    }}
+}}
+'''
+        
+        elif langage == 'c++':
+            return f'''// {nom_fichier}
+// Application C++ générée automatiquement
+// Demande: {demande}
+
+#include <iostream>
+
+int main() {{
+    std::cout << "Application C++ générée automatiquement" << std::endl;
+    std::cout << "Type: {type_app}" << std::endl;
+    std::cout << "Fonctionnalités:" << std::endl;
+    {json.dumps(fonctionnalites, ensure_ascii=False)}
+    
+    return 0;
+}}
+'''
+        
+        elif langage == 'html':
+            features_html = ""
+            for feature in fonctionnalites:
+                features_html += f'        <li>{feature}</li>\n'
+            
             return f'''<!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Application générée - {demande[:50]}</title>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-    <style>
-        body {{
-            background: #f8f9fa;
-            padding: 20px;
-        }}
-        .app-container {{
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-            padding: 30px;
-        }}
-    </style>
+    <title>Application générée</title>
 </head>
 <body>
-    <div class="app-container">
-        <h1><i class="fas fa-robot"></i> Application Générée</h1>
-        <p>Demande: {demande}</p>
-        
-        <div class="alert alert-success">
-            <h4>Fonctionnalités:</h4>
-            <ul>
-'''
-            for feature in analyse.get('fonctionnalites_cles', ['Application fonctionnelle']):
-                return_code += f'                <li>{feature}</li>\n'
-            
-            return_code += '''            </ul>
-        </div>
-        
-        <div class="alert alert-info">
-            Cette application a été générée automatiquement par le Robot Développeur
-        </div>
-    </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <h1>Application générée automatiquement</h1>
+    <p>Demande: {demande}</p>
+    <p>Type: {type_app}</p>
+    <h2>Fonctionnalités:</h2>
+    <ul>
+{features_html}    </ul>
 </body>
 </html>'''
-            return return_code
         
-        elif nom_fichier.endswith('.css'):
-            return '''/* CSS généré par Robot Développeur */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-}
+        elif nom_fichier == 'go.mod':
+            return f'''module {analyse.get('nom_projet', 'myapp')}
 
-.card {
-    margin-bottom: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
+go 1.21
 
-.btn {
-    border-radius: 5px;
-}
+require (
+    github.com/gin-gonic/gin v1.9.1
+)
 '''
         
-        elif nom_fichier == "requirements.txt":
+        elif nom_fichier == 'package.json':
+            return f'''{{
+  "name": "{analyse.get('nom_projet', 'myapp')}",
+  "version": "1.0.0",
+  "description": "{demande[:100]}",
+  "main": "index.js",
+  "scripts": {{
+    "start": "node index.js"
+  }},
+  "dependencies": {{
+    "express": "^4.18.2"
+  }}
+}}
+'''
+        
+        elif nom_fichier == 'requirements.txt':
             deps = analyse.get('dependances', ['Flask'])
-            deps_text = "\n".join([f"{dep}" for dep in deps])
-            return f'''# Dépendances générées automatiquement
-{deps_text}
-python-dotenv
+            return '\n'.join(deps) + '\n'
+        
+        elif nom_fichier == 'README.md':
+            return f'''# {analyse.get('nom_projet', 'Application générée')}
+
+## Description
+{demande}
+
+## Type
+{type_app}
+
+## Langage
+{langage.upper()}
+
+## Fonctionnalités
+{chr(10).join(f'- {f}' for f in fonctionnalites)}
+
+## Installation
+Voir les instructions spécifiques au langage.
+
+Généré automatiquement par AutoCoder.
+'''
+        
+        elif nom_fichier == '.gitignore':
+            if langage == 'go':
+                return '''# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Dependency directories (remove the comment below to include it)
+# vendor/
+'''
+            elif langage == 'python':
+                return '''# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Virtual environments
+venv/
+env/
+'''
+            elif langage == 'javascript' or langage == 'typescript':
+                return '''# Dependencies
+node_modules/
+npm-debug.log*
+
+# Build
+dist/
+build/
+'''
+            else:
+                return f'''# Fichiers à ignorer pour {langage}
+*.log
+node_modules/
+.env
 '''
         
         else:
-            return f'''# Fichier {nom_fichier}
-# Généré automatiquement
-# Demande: {demande}
+           
+            return f'''// {nom_fichier}
+// Généré automatiquement par AutoCoder
+// Langage: {langage}
+// Demande: {demande}
+// Type: {type_app}
+
+// Application générée automatiquement
+// Fonctionnalités: {', '.join(fonctionnalites)}
+
+// Code de base - à compléter selon les besoins
 '''
 
-# Test rapide
+    def get_statistiques_apprentissage(self):
+        """Retourne les statistiques d'apprentissage"""
+        stats = self.memoire.get_statistiques()
+        return {
+            "corrections_apprises": stats.get('total_corrections', 0),
+            "erreurs_detectees": len(self.erreurs_apprises),
+            "langage_courant": self.langage_courant
+        }
+
+
+
 if __name__ == "__main__":
-    print("🧪 Test du rédacteur de code amélioré...")
+    print(" Test du rédacteur avec apprentissage...")
     
     from dotenv import load_dotenv
     load_dotenv()
     
     redacteur = RedacteurCode()
     
-    # Test avec une analyse simulée
-    analyse_test = {
-        "type_application": "web",
-        "besoin_interface": True,
-        "type_interface": "web_gui",
-        "composants_ui_attendus": ["cartes", "formulaires", "graphiques"],
-        "fonctionnalites_cles": ["Ajouter des données", "Visualiser des graphiques", "Filtrer les résultats"],
-        "description_technique": "Application de visualisation de données avec dashboard interactif",
-        "dependances": ["Flask", "pandas", "matplotlib"]
+    
+    analyse_go = {
+        "langage_principal": "go",
+        "type_application": "api",
+        "fonctionnalites_cles": ["API REST", "JWT auth", "PostgreSQL"],
+        "dependances": [],
+        "nom_projet": "test_api"
     }
     
-    fichier_info = {
-        "nom": "app.py",
-        "type": "code",
-        "description": "Fichier principal Flask"
-    }
+    fichier_info = {"nom": "main.go", "description": "Point d'entrée"}
+    demande = "API REST en Go avec Gin"
     
-    demande = "dashboard de données avec cartes de métriques et graphiques interactifs"
+   
+    redacteur.set_contexte_projet("test_api", "go")
+    redacteur.set_test_mode(True, 1)
     
-    print(f"\nTest pour: {demande}")
-    code = redacteur.generer_code_adapte(demande, fichier_info, analyse_test, "/test/projet")
+    print(f"\nTest Go: {demande}")
+    code = redacteur.generer_code_adapte(demande, fichier_info, analyse_go, "/test", True)
     
-    print(f"\n📄 Code généré (premières 10 lignes):")
-    print("=" * 60)
-    for i, line in enumerate(code.split('\n')[:15]):
+    print(f"\nCode généré (premières 10 lignes):")
+    for i, line in enumerate(code.split('\n')[:10]):
         print(f"{i+1:3}: {line}")
-    print("=" * 60)
+    
+    # Afficher les statistiques d'apprentissage
+    stats = redacteur.get_statistiques_apprentissage()
+    print(f"\n Statistiques apprentissage: {stats}")

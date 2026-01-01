@@ -1,0 +1,1 @@
+Génère une application Flask complète pour une liste de tâches (To-Do List). Je veux une architecture MVC : un fichier app.py pour les routes, un dossier templates avec index.html, et l'utilisation de SQLite pour stocker les tâches. Ajoute un fichier requirements.txt

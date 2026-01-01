@@ -1,0 +1,140 @@
+<!-- templates/dashboard.html -->
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Médical</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .card {
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    <header class="d-flex justify-content-between align-items-center p-3 mb-3 bg-dark text-white">
+        <h1>Dashboard Médical</h1>
+        <button class="btn btn-success">Nouveau Patient</button>
+    </header>
+    <main class="container mt-3">
+        <section class="row">
+            <div class="col-md-4">
+                <div class="card bg-primary">
+                    <div class="card-body">
+                        <h5 class="card-title">Fiches Patients</h5>
+                        <p class="card-text">Voir les fiches patients détaillées</p>
+                        <button class="btn btn-light">Voir</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-success">
+                    <div class="card-body">
+                        <h5 class="card-title">Historique Médical</h5>
+                        <p class="card-text">Voir l'historique médical des patients</p>
+                        <button class="btn btn-light">Voir</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-warning">
+                    <div class="card-body">
+                        <h5 class="card-title">Ordonnances Numériques</h5>
+                        <p class="card-text">Voir les ordonnances numériques</p>
+                        <button class="btn btn-light">Voir</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="row mt-3">
+            <div class="col-md-6">
+                <div class="card bg-info">
+                    <div class="card-body">
+                        <h5 class="card-title">Prise de Rendez-vous</h5>
+                        <p class="card-text">Prise de rendez-vous avec les patients</p>
+                        <button class="btn btn-light">Prise de rendez-vous</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card bg-danger">
+                    <div class="card-body">
+                        <h5 class="card-title">Alertes Médicaments</h5>
+                        <p class="card-text">Voir les alertes médicaments</p>
+                        <button class="btn btn-light">Voir</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="row mt-3">
+            <div class="col-md-6">
+                <div class="card bg-secondary">
+                    <div class="card-body">
+                        <h5 class="card-title">Dossier Médical Partagé</h5>
+                        <p class="card-text">Voir le dossier médical partagé</p>
+                        <button class="btn btn-light">Voir</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <h5 class="card-title">Graphiques de Suivi Santé</h5>
+                        <p class="card-text">Voir les graphiques de suivi santé</p>
+                        <button class="btn btn-light">Voir</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script>
+        // Initialisation du graphique
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai'],
+                datasets: [{
+                    label: 'Suivi Santé',
+                    data: [10, 20, 30, 40, 50],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

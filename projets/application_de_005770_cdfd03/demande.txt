@@ -1,0 +1,1 @@
+Application de gestion de projet avec React frontend, Node.js/Express backend, MongoDB, authentification JWT, upload de fichiers, notifications en temps réel avec Socket.io, et déploiement Docker

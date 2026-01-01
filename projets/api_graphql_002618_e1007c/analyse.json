@@ -1,0 +1,48 @@
+{
+  "type_application": "api",
+  "type_projet": "fullstack",
+  "besoin_interface": true,
+  "type_interface": "web_gui",
+  "complexite_interface": "moyenne",
+  "composants_ui_attendus": [
+    "cartes",
+    "formulaires",
+    "tableaux",
+    "graphiques"
+  ],
+  "technologies_frontend": [
+    "react",
+    "javascript"
+  ],
+  "technologies_backend": [
+    "gqlgen",
+    "gin"
+  ],
+  "base_de_donnees": [
+    "postgresql"
+  ],
+  "authentification": [
+    "jwt"
+  ],
+  "langage_backend": "javascript",
+  "langage_principal": "typescript",
+  "framework_ui": "vanilla",
+  "description_technique": "API GraphQL en Go avec Gqlgen, base de données PostgreSQL, authentification JWT, subscriptions WebSocket, et déploiement sur Kubernetes",
+  "fonctionnalites_cles": [
+    "API GraphQL",
+    "authentification JWT",
+    "subscriptions WebSocket"
+  ],
+  "dependances": [
+    "bcryptjs",
+    "gin",
+    "Gqlgen",
+    "PostgreSQL",
+    "jsonwebtoken",
+    "typescript",
+    "@types/node"
+  ],
+  "deploiement": [
+    "kubernetes"
+  ]
+}

@@ -1,0 +1,1 @@
+Application full stack : frontend React, backend Go, base de données PostgreSQL, cache Redis

@@ -1,0 +1,1 @@
+{"nom_fichier": "requirements.txt", "code": "bash\n# requirements.txt\n\nFlask==2.0.3\npandas==1.4.2\nmatplotlib==3.5.1\nscikit-learn==1.0.2\nnumpy==1.22.3\nrequests==2.27.1\n", "langage": "requirements", "bugs_introduits": ["syntax_error", "undefined_variable"], "corrections_appliquees": [], "timestamp": 1767103482.0776563, "tentative": 1}

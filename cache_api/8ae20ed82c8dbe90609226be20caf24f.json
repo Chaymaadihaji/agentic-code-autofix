@@ -1,0 +1,1 @@
+{"nom_fichier": "README.md", "code": "bash\ngit clone https://github.com/tony-cha/README.md.git\ncd README.md\nnpm install\n", "langage": "markdown", "bugs_introduits": ["undefined_variable", "syntax_error"], "corrections_appliquees": [], "timestamp": 1767306534.6370966, "tentative": 3}

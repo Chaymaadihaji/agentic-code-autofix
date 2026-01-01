@@ -1,0 +1,41 @@
+bash
+# .gitignore
+
+# Nœuds
+node_modules/
+npm-debug.log
+
+# Fichiers de configuration Node.js
+.env
+.env.local
+.env.development
+.env.production
+
+# Fichiers de configuration Express
+config/
+database.json
+
+# Fichiers de configuration MongoDB
+/mongodb/
+
+# Fichiers de configuration Vercel
+/.vercel
+
+# Fichiers de configuration Heroku
+/heroku/
+
+# Fichiers binaires
+*.exe
+
+# Fichiers de build
+/build/
+/dist/
+
+# Fichiers de test Cypress
+cypress/
+cypress/screenshots/
+cypress/videos/
+
+# Autres fichiers
+/README.md
+/.env.example

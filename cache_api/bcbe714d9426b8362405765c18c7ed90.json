@@ -1,0 +1,1 @@
+{"nom_fichier": "requirements.txt", "code": "fastapi==0.95.0\nmotor==2.6.4\npymongo==3.12.3\npython-jose[cryptography]==3.3.0\nuvicorn==0.17.6\nsqlalchemy==1.4.28\nswagger-ui-dist==2.2.10\n", "langage": "requirements", "bugs_introduits": ["syntax_error", "undefined_variable"], "corrections_appliquees": [], "timestamp": 1767108371.6565495, "tentative": 3}

@@ -1,0 +1,1 @@
+{"nom_fichier": "README.md", "code": "json\n{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\"\n}\n", "langage": "markdown", "bugs_introduits": ["undefined_variable", "syntax_error"], "corrections_appliquees": [], "timestamp": 1767108378.2966154, "tentative": 3}

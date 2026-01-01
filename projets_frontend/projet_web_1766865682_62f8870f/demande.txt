@@ -1,0 +1,1 @@
+Je veux un système de réservation avec : PostgreSQL pour données, Redis pour cache, Elasticsearch pour recherche. API en Go, frontend simple HTML

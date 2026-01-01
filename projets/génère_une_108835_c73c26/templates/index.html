@@ -1,0 +1,29 @@
+html
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>To-Do List</h1>
+    <button onclick="location.reload()">Réinitialiser</button>
+    <form action="/tasks" method="post">
+        <input type="text" name="task" placeholder="Ajoutez une tâche" required>
+        <button type="submit">Ajouter</button>
+    </form>
+    <h2>Tâches : {{ len(tasks) }}</h2>
+    <ul>
+        {% for task in tasks %}
+            <li>{{ task['name'] }}
+                <span class="delete-btn" onclick="deleteTask('{{ task['id'] }}')">Supprimer</span>
+                <span class="completed-btn" onclick="completeTask('{{ task['id'] }}')">Complété</span>
+            </li>
+        {% endfor %}
+    </ul>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

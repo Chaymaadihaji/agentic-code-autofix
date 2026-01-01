@@ -1,0 +1,43 @@
+{
+  "type_application": "api",
+  "type_projet": "backend",
+  "besoin_interface": false,
+  "type_interface": "aucune",
+  "complexite_interface": "complexe",
+  "composants_ui_attendus": [],
+  "technologies_frontend": [],
+  "technologies_backend": [
+    "spring",
+    "spring-boot"
+  ],
+  "base_de_donnees": [
+    "postgresql"
+  ],
+  "authentification": [
+    "jwt"
+  ],
+  "langage_backend": "java",
+  "langage_principal": "java",
+  "framework_ui": "spring-boot",
+  "description_technique": "API Spring Boot basée sur: API Spring Boot en Java avec Spring Security JWT, PostgreSQL, Swagger, tests unitaires JUnit 5, et d...",
+  "fonctionnalites_cles": [
+    "API REST",
+    "Sécurité",
+    "Performance"
+  ],
+  "dependances": [
+    "spring-boot-starter-web",
+    "spring-boot-starter-data-jpa",
+    "spring-boot-starter-test",
+    "spring-boot-devtools",
+    "postgresql",
+    "jjwt-api",
+    "jjwt-impl",
+    "jjwt-jackson",
+    "springdoc-openapi-starter-webmvc-ui"
+  ],
+  "deploiement": [
+    "docker",
+    "kubernetes"
+  ]
+}

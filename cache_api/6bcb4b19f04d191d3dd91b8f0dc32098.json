@@ -1,0 +1,1 @@
+{"nom_fichier": "requirements.txt", "code": "flask==2.0.3\nSQLAlchemy==1.4.34\nsqlite3==3.36.0\nWerkzeug==2.1.2\njinja2==3.0.1\n", "langage": "requirements", "bugs_introduits": [], "corrections_appliquees": [], "timestamp": 1767109029.645441, "tentative": 4}

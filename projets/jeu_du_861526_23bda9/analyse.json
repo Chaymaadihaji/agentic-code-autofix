@@ -1,0 +1,16 @@
+{
+  "type_application": "jeu",
+  "besoin_interface": true,
+  "type_interface": "web_gui",
+  "complexite_interface": "moyenne",
+  "composants_ui_attendus": [
+    "jeu"
+  ],
+  "langage_backend": "python",
+  "framework_ui": "flask_html",
+  "description_technique": "Application basée sur la demande : Jeu du pendu en Python avec interface...",
+  "fonctionnalites_cles": [
+    "fonctionnalite_principale"
+  ],
+  "dependances": []
+}

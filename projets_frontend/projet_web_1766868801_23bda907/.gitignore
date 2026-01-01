@@ -1,0 +1,30 @@
+python
+# .gitignore
+
+# Fichier de jeu du pendu
+*.pyc
+__pycache__
+*.log
+
+# Fichiers temporaires
+*.tmp
+
+# Fichiers de configuration
+config.json
+settings.txt
+
+# Fichiers de données
+donnees.db
+
+# Fichiers de build
+build/
+dist/
+target/
+
+# Fichiers de déploiement
+deploy/
+
+# Fichiers de debug
+.vscode/
+*.vscode.json
+debug.log

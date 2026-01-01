@@ -1,0 +1,53 @@
+{
+  "type_application": "api",
+  "type_projet": "backend",
+  "besoin_interface": false,
+  "type_interface": "aucune",
+  "complexite_interface": "complexe",
+  "composants_ui_attendus": [],
+  "technologies_frontend": [],
+  "technologies_backend": [
+    "gin",
+    "gqlgen",
+    "websocket"
+  ],
+  "base_de_donnees": [
+    "postgresql"
+  ],
+  "authentification": [
+    "jwt"
+  ],
+  "langage_backend": "go",
+  "langage_principal": "go",
+  "framework_ui": "gqlgen",
+  "description_technique": "API Go basée sur: API GraphQL en Go avec Gqlgen, base de données PostgreSQL, authentification JWT, subscriptions WebSo...",
+  "fonctionnalites_cles": [
+    "API GraphQL",
+    "Base de données PostgreSQL",
+    "Authentification JWT",
+    "Subscriptions WebSocket",
+    "Déploiement Kubernetes",
+    "Subscriptions en temps réel"
+  ],
+  "dependances": [
+    "github.com/gin-gonic/gin",
+    "github.com/99designs/gqlgen",
+    "github.com/vektah/gqlparser/v2",
+    "github.com/gorilla/websocket",
+    "nhooyr.io/websocket",
+    "github.com/jackc/pgx/v5",
+    "github.com/go-pg/pg/v10",
+    "github.com/jinzhu/gorm",
+    "github.com/golang-jwt/jwt/v5",
+    "github.com/auth0/go-jwt-middleware",
+    "github.com/rs/cors",
+    "github.com/joho/godotenv",
+    "k8s.io/client-go",
+    "k8s.io/apimachinery",
+    "github.com/sirupsen/logrus",
+    "github.com/go-playground/validator/v10"
+  ],
+  "deploiement": [
+    "kubernetes"
+  ]
+}

@@ -1,0 +1,40 @@
+# Ignorer les fichiers de configuration de Streamlit
+*.config.json
+
+# Ignorer les fichiers de build
+__pycache__/
+build/
+dist/
+*.egg-info/
+*.whl
+
+# Ignorer les fichiers temporaires
+*.tmp
+*.log
+
+# Ignorer les fichiers de version
+*.pyc
+*.pyo
+
+# Ignorer les fichiers créés par les outils de build
+*.pyd
+*.so
+
+# Ignorer les fichiers de debug
+*.pydebug
+
+# Ignorer les fichiers de test
+*_test.py
+*_test.pyc
+*_test.pyo
+
+# Ignorer les fichiers créés par les outils de compilation
+*.o
+*.obj
+
+# Ignorer les fichiers de bibliothèque
+lib/
+
+# Ignorer les fichiers de documentation
+docs/
+README.md

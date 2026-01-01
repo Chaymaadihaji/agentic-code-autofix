@@ -1,0 +1,64 @@
+json
+{
+  "name": "gestion projet",
+  "version": "1.0.0",
+  "description": "Application de gestion de projet",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "start:client": "cd client && yarn start",
+    "start:server": "nodemon index.js",
+    "build": "cd client && yarn build",
+    "test": "jest",
+    "lint": "eslint .",
+    "lint-fix": "eslint . --fix",
+    "start-dev": "concurrently \"npm run start:client\" \"npm run start:server\"",
+    "docker:start": "docker-compose up",
+    "docker:build": "docker-compose build"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.6",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.2.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.7",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.7",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.3",
+    "socket.io": "^4.4.0",
+    "socket.io-client": "^4.4.0"
+  },
+  "devDependencies": {
+    "concurrently": "^7.0.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^7.28.0",
+    "jest": "^27.0.6",
+    "nodemon": "^2.0.7",
+    "react-app-rewired": "^2.1.9",
+    "react-draggable": "^5.4.1",
+    "yarn": "^1.22.10"
+  },
+  "keywords": ["gestion de projet", "node", "express", "react", "mongo", "socket.io"],
+  "author": "Vous",
+  "license": "MIT",
+  "homepage": "https://gestion-projet.com",
+  "bugs": {
+    "url": "https://github.com/author/gestion-projet/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/author/gestion-projet.git"
+  },
+  "engines": {
+    "node": "14.x",
+    "npm": "7.x"
+  }
+}

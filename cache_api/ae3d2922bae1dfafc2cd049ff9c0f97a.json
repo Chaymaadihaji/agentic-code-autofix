@@ -1,0 +1,1 @@
+{"nom_fichier": "requirements.txt", "code": "Flask==2.0.3\nFlask-SQLAlchemy==2.5.1\nFlask-WTF==1.0.1\nJinja2==3.0.3\nMarkupSafe==2.1.1\nSQLAlchemy==1.4.36\nWTForms==3.0.0\n Werkzeug==2.0.3\n", "langage": "requirements", "bugs_introduits": ["syntax_error", "undefined_variable"], "corrections_appliquees": [], "timestamp": 1767108890.6904914, "tentative": 2}

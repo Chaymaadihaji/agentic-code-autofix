@@ -1,0 +1,29 @@
+target/
+*.class
+*.jar
+*.war
+*.zip
+*.pom
+pom.xml
+settings.xml
+*.iml
+.idea/
+.gradle/
+npm/
+node_modules/
+
+# Spring Boot Config
+application.yml
+application.properties
+bootstrap.yml
+bootstrap.properties
+
+# Spring Security
+secret.key
+
+# Swagger
+swagger.yaml
+swagger.json
+
+# JWT
+jwt.secret.key

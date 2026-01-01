@@ -1,0 +1,27 @@
+python
+# Récupération et installation des packages requises
+import sys
+import subprocess
+import requests
+
+def get_requirements(requirements_file):
+    try:
+        response = requests.get(requirements_file)
+        requirements = response.text
+        return requirements.split('\n')
+    except Exception as e:
+        print(f"Erreur lors de la récupération des packages : {e}")
+        sys.exit(1)
+
+def install_packages(requirements):
+    try:
+        with open('requirements.txt', 'w') as file:
+            file.writelines(requirements)
+        subprocess.check_call([sys.executable, '-m', 'pip', 'install', '-r', 'requirements.txt'])
+    except Exception as e:
+        print(f"Erreur lors de l'installation des packages : {e}")
+        sys.exit(1)
+
+requirements_file = 'https://example.com/requirements.txt'  # Remplacez par votre fichier de requérages
+requérants = get_requirements(requirements_file)
+install_packages(requérants)

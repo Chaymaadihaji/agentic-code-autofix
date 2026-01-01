@@ -1,0 +1,1 @@
+{"nom_fichier": ".gitignore", "code": "typescript\n// .gitignore\n# Ignorer les fichiers/dossiers suivants\nnode_modules/\n/dist/\n*.js\n*.map\n*.json\n/public/\n.gitignore\npackage-lock.json\n", "langage": "typescript", "bugs_introduits": [], "corrections_appliquees": [], "timestamp": 1767306549.0548012, "tentative": 3}

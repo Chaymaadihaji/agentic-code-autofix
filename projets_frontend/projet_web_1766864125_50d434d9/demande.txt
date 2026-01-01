@@ -1,0 +1,9 @@
+"Créer une application de gestion de bibliothèque avec :
+- Interface web Flask ou Streamlit
+- Base de données SQLite avec SQLAlchemy  
+- CRUD complet pour les livres, membres, emprunts
+- Système d'authentification JWT
+- Génération de rapports PDF
+- API REST pour mobile
+- Tests unitaires
+- Dockerfile pour conteneurisation"

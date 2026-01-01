@@ -1,0 +1,1 @@
+{"nom_fichier": "requirements.txt", "code": "Flask==2.3.3\npython-dotenv==1.0.0\nsqlalchemy==2.0.3\nflask-sqlalchemy==2.6.3\nflask-login==0.5.0\nflask-wtf==1.0.4\nwtforms==3.0.0\npandas==1.5.3\nnumpy==1.23.5\nmatplotlib==3.7.1\nseaborn==0.12.2\nbs4==0.0.1\nrequests==2.28.2\n", "timestamp": 1766766407.4153686}

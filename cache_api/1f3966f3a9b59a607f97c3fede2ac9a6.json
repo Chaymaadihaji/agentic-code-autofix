@@ -1,0 +1,1 @@
+{"nom_fichier": "go.mod", "code": "bash\ngo mod tidy\n  const undefinedVar = undefinedVariable; // Undefined bug\ngo mod verify\n", "bugs_introduits": ["undefined_variable"], "timestamp": 1767006817.1798592}

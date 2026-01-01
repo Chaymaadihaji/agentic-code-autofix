@@ -1,0 +1,17 @@
+Crée un système de gestion de bibliothèque en Python avec les fonctionnalités suivantes :
+
+- Interface web avec Flask
+- Base de données SQLite avec SQLAlchemy ORM
+- Authentification utilisateur (inscription, connexion, déconnexion)
+- CRUD complet pour les livres (ajouter, modifier, supprimer, rechercher)
+- Système d'emprunt de livres avec dates de retour
+- Notifications par email pour les retards
+- Dashboard administrateur avec statistiques
+- API REST avec Flask-RESTful
+- Tests unitaires avec pytest
+- Documentation avec Sphinx
+- Déploiement avec Docker et Docker Compose
+- Interface responsive avec Bootstrap 5
+- Export des données en CSV et PDF
+- Recherche avancée avec filtres multiples
+- Système de recommandation de livres basé sur l'historique

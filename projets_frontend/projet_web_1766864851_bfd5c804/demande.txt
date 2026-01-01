@@ -1,0 +1,9 @@
+"Architecture microservices pour un site e-commerce :
+- Service produits (FastAPI + PostgreSQL)
+- Service utilisateurs (Flask + JWT)
+- Service commandes (Django + Redis)
+- Service paiement (Stripe API)
+- Service notification (WebSocket + Celery)
+- API Gateway pour router les requêtes
+- Docker Compose pour l'orchestration
+- Monitoring avec Prometheus"

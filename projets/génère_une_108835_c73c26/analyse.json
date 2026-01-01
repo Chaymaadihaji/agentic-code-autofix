@@ -1,0 +1,27 @@
+{
+  "type_application": "web",
+  "type_projet": "web",
+  "besoin_interface": true,
+  "type_interface": "web_gui",
+  "complexite_interface": "moyenne",
+  "composants_ui_attendus": [
+    "tableaux"
+  ],
+  "technologies_frontend": [],
+  "technologies_backend": [
+    "flask"
+  ],
+  "base_de_donnees": [],
+  "authentification": [],
+  "langage_backend": "python",
+  "langage_principal": "python",
+  "framework_ui": "flask_html",
+  "description_technique": "Application Python basée sur: Génère une application Flask complète pour une liste de tâches (To-Do List). Je veux une architectur...",
+  "fonctionnalites_cles": [
+    "fonctionnalite_principale"
+  ],
+  "dependances": [
+    "Flask"
+  ],
+  "deploiement": []
+}

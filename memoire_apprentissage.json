@@ -1,0 +1,2293 @@
+{
+  "version": "1.0",
+  "date_creation": "2025-12-29T12:41:03.311527",
+  "statistiques": {
+    "total_corrections": 265
+  },
+  "corrections": [
+    {
+      "type": "wrong_operator",
+      "message": "main.go: Ligne 55 - Mauvais opérateur d'affectation",
+      "langage": "go",
+      "tentative": 1,
+      "projet": "api_graphql_008467_da6ff2",
+      "timestamp": "2025-12-29T12:41:43.995617",
+      "corrige": false
+    },
+    {
+      "type": "type_error",
+      "message": "main.go: Ligne 65 - Erreur de type détectée (string dans int)",
+      "langage": "go",
+      "tentative": 1,
+      "projet": "api_graphql_008467_da6ff2",
+      "timestamp": "2025-12-29T12:41:43.996614",
+      "corrige": false
+    },
+    {
+      "type": "missing_import",
+      "message": "handlers.go: Ligne 6 - Import manquant détecté",
+      "langage": "go",
+      "tentative": 1,
+      "projet": "api_graphql_008467_da6ff2",
+      "timestamp": "2025-12-29T12:41:43.997612",
+      "corrige": false
+    },
+    {
+      "type": "wrong_operator",
+      "message": "handlers.go: Ligne 41 - Mauvais opérateur d'affectation",
+      "langage": "go",
+      "tentative": 1,
+      "projet": "api_graphql_008467_da6ff2",
+      "timestamp": "2025-12-29T12:41:43.999607",
+      "corrige": false
+    },
+    {
+      "type": "type_error",
+      "message": "models.go: Ligne 43 - Erreur de type détectée (string dans int)",
+      "langage": "go",
+      "tentative": 1,
+      "projet": "api_graphql_008467_da6ff2",
+      "timestamp": "2025-12-29T12:41:44.000604",
+      "corrige": false
+    },
+    {
+      "type": "wrong_operator",
+      "message": "models.go: Ligne 52 - Mauvais opérateur d'affectation",
+      "langage": "go",
+      "tentative": 1,
+      "projet": "api_graphql_008467_da6ff2",
+      "timestamp": "2025-12-29T12:41:44.003595",
+      "corrige": false
+    },
+    {
+      "type": "wrong_operator",
+      "message": "main.go: Ligne 55 - Mauvais opérateur d'affectation",
+      "langage": "go",
+      "tentative": 1,
+      "projet": "api_graphql_008467_da6ff2",
+      "timestamp": "2025-12-29T12:41:44.014567"
+    },
+    {
+      "type": "type_error",
+      "message": "main.go: Ligne 65 - Erreur de type détectée (string dans int)",
+      "langage": "go",
+      "tentative": 1,
+      "projet": "api_graphql_008467_da6ff2",
+      "timestamp": "2025-12-29T12:41:44.019554"
+    },
+    {
+      "type": "missing_import",
+      "message": "handlers.go: Ligne 6 - Import manquant détecté",
+      "langage": "go",
+      "tentative": 1,
+      "projet": "api_graphql_008467_da6ff2",
+      "timestamp": "2025-12-29T12:41:44.022546"
+    },
+    {
+      "type": "missing_import",
+      "message": "main.go: Ligne 7 - Import manquant détecté",
+      "langage": "go",
+      "tentative": 2,
+      "projet": "api_graphql_008467_da6ff2",
+      "timestamp": "2025-12-29T12:42:47.417915",
+      "corrige": false
+    },
+    {
+      "type": "wrong_operator",
+      "message": "main.go: Ligne 46 - Mauvais opérateur d'affectation",
+      "langage": "go",
+      "tentative": 2,
+      "projet": "api_graphql_008467_da6ff2",
+      "timestamp": "2025-12-29T12:42:47.420449",
+      "corrige": false
+    },
+    {
+      "type": "type_error",
+      "message": "main.go: Ligne 48 - Erreur de type détectée (string dans int)",
+      "langage": "go",
+      "tentative": 2,
+      "projet": "api_graphql_008467_da6ff2",
+      "timestamp": "2025-12-29T12:42:47.423507",
+      "corrige": false
+    },
+    {
+      "type": "missing_import",
+      "message": "main.go: Ligne 6 - Import manquant détecté",
+      "langage": "go",
+      "tentative": 2,
+      "projet": "api_graphql_008467_da6ff2",
+      "timestamp": "2025-12-29T12:42:47.425484",
+      "corrige": false
+    },
+    {
+      "type": "type_error",
+      "message": "handlers.go: Ligne 137 - Erreur de type détectée (string dans int)",
+      "langage": "go",
+      "tentative": 2,
+      "projet": "api_graphql_008467_da6ff2",
+      "timestamp": "2025-12-29T12:42:47.426480",
+      "corrige": false
+    },
+    {
+      "type": "wrong_operator",
+      "message": "models.go: Ligne 85 - Mauvais opérateur d'affectation",
+      "langage": "go",
+      "tentative": 2,
+      "projet": "api_graphql_008467_da6ff2",
+      "timestamp": "2025-12-29T12:42:47.428475",
+      "corrige": false
+    },
+    {
+      "type": "type_error",
+      "message": "models.go: Ligne 287 - Erreur de type détectée (string dans int)",
+      "langage": "go",
+      "tentative": 2,
+      "projet": "api_graphql_008467_da6ff2",
+      "timestamp": "2025-12-29T12:42:47.438966",
+      "corrige": false
+    },
+    {
+      "type": "missing_import",
+      "message": "main.go: Ligne 7 - Import manquant détecté",
+      "langage": "go",
+      "tentative": 2,
+      "projet": "api_graphql_008467_da6ff2",
+      "timestamp": "2025-12-29T12:42:47.533708"
+    },
+    {
+      "type": "wrong_operator",
+      "message": "main.go: Ligne 46 - Mauvais opérateur d'affectation",
+      "langage": "go",
+      "tentative": 2,
+      "projet": "api_graphql_008467_da6ff2",
+      "timestamp": "2025-12-29T12:42:47.629000"
+    },
+    {
+      "type": "type_error",
+      "message": "main.go: Ligne 48 - Erreur de type détectée (string dans int)",
+      "langage": "go",
+      "tentative": 2,
+      "projet": "api_graphql_008467_da6ff2",
+      "timestamp": "2025-12-29T12:42:47.754880"
+    },
+    {
+      "type": "wrong_operator",
+      "message": "main.go: Ligne 15 - Mauvais opérateur d'affectation",
+      "langage": "go",
+      "tentative": 3,
+      "projet": "api_graphql_008467_da6ff2",
+      "timestamp": "2025-12-29T12:43:49.739401",
+      "corrige": false
+    },
+    {
+      "type": "wrong_operator",
+      "message": "handlers.go: Ligne 25 - Mauvais opérateur d'affectation",
+      "langage": "go",
+      "tentative": 3,
+      "projet": "api_graphql_008467_da6ff2",
+      "timestamp": "2025-12-29T12:43:49.740902",
+      "corrige": false
+    },
+    {
+      "type": "wrong_operator",
+      "message": "models.go: Ligne 293 - Mauvais opérateur d'affectation",
+      "langage": "go",
+      "tentative": 3,
+      "projet": "api_graphql_008467_da6ff2",
+      "timestamp": "2025-12-29T12:43:49.742906",
+      "corrige": false
+    },
+    {
+      "type": "wrong_operator",
+      "message": "main.go: Ligne 15 - Mauvais opérateur d'affectation",
+      "langage": "go",
+      "tentative": 3,
+      "projet": "api_graphql_008467_da6ff2",
+      "timestamp": "2025-12-29T12:43:49.746233"
+    },
+    {
+      "type": "wrong_operator",
+      "message": "handlers.go: Ligne 25 - Mauvais opérateur d'affectation",
+      "langage": "go",
+      "tentative": 3,
+      "projet": "api_graphql_008467_da6ff2",
+      "timestamp": "2025-12-29T12:43:49.753737"
+    },
+    {
+      "type": "wrong_operator",
+      "message": "models.go: Ligne 293 - Mauvais opérateur d'affectation",
+      "langage": "go",
+      "tentative": 3,
+      "projet": "api_graphql_008467_da6ff2",
+      "timestamp": "2025-12-29T12:43:49.756728"
+    },
+    {
+      "type": "type_error",
+      "message": "main.go: Ligne 4 - Erreur de type détectée (string dans int)",
+      "langage": "go",
+      "tentative": 1,
+      "projet": "api_graphql_008844_da6ff2",
+      "timestamp": "2025-12-29T12:48:01.671131",
+      "corrige": false
+    },
+    {
+      "type": "type_error",
+      "message": "main.go: Ligne 7 - Erreur de type détectée (string dans int)",
+      "langage": "go",
+      "tentative": 1,
+      "projet": "api_graphql_008844_da6ff2",
+      "timestamp": "2025-12-29T12:48:01.671280",
+      "corrige": false
+    },
+    {
+      "type": "wrong_operator",
+      "message": "main.go: Ligne 104 - Mauvais opérateur d'affectation",
+      "langage": "go",
+      "tentative": 1,
+      "projet": "api_graphql_008844_da6ff2",
+      "timestamp": "2025-12-29T12:48:01.673275",
+      "corrige": false
+    },
+    {
+      "type": "missing_import",
+      "message": "main.go: Ligne 5 - Import manquant détecté",
+      "langage": "go",
+      "tentative": 1,
+      "projet": "api_graphql_008844_da6ff2",
+      "timestamp": "2025-12-29T12:48:01.674272",
+      "corrige": false
+    },
+    {
+      "type": "missing_import",
+      "message": "main.go: Ligne 6 - Import manquant détecté",
+      "langage": "go",
+      "tentative": 1,
+      "projet": "api_graphql_008844_da6ff2",
+      "timestamp": "2025-12-29T12:48:01.675337",
+      "corrige": false
+    },
+    {
+      "type": "type_error",
+      "message": "handlers.go: Ligne 20 - Erreur de type détectée (string dans int)",
+      "langage": "go",
+      "tentative": 1,
+      "projet": "api_graphql_008844_da6ff2",
+      "timestamp": "2025-12-29T12:48:01.675901",
+      "corrige": false
+    },
+    {
+      "type": "missing_import",
+      "message": "models.go: Ligne 7 - Import manquant détecté",
+      "langage": "go",
+      "tentative": 1,
+      "projet": "api_graphql_008844_da6ff2",
+      "timestamp": "2025-12-29T12:48:01.677899",
+      "corrige": false
+    },
+    {
+      "type": "missing_import",
+      "message": "models.go: Ligne 8 - Import manquant détecté",
+      "langage": "go",
+      "tentative": 1,
+      "projet": "api_graphql_008844_da6ff2",
+      "timestamp": "2025-12-29T12:48:01.678171",
+      "corrige": false
+    },
+    {
+      "type": "type_error",
+      "message": "main.go: Ligne 4 - Erreur de type détectée (string dans int)",
+      "langage": "go",
+      "tentative": 1,
+      "projet": "api_graphql_008844_da6ff2",
+      "timestamp": "2025-12-29T12:48:01.680171"
+    },
+    {
+      "type": "type_error",
+      "message": "main.go: Ligne 7 - Erreur de type détectée (string dans int)",
+      "langage": "go",
+      "tentative": 1,
+      "projet": "api_graphql_008844_da6ff2",
+      "timestamp": "2025-12-29T12:48:01.681167"
+    },
+    {
+      "type": "wrong_operator",
+      "message": "main.go: Ligne 104 - Mauvais opérateur d'affectation",
+      "langage": "go",
+      "tentative": 1,
+      "projet": "api_graphql_008844_da6ff2",
+      "timestamp": "2025-12-29T12:48:01.683161"
+    },
+    {
+      "type": "missing_import",
+      "message": "main.go: Ligne 7 - Import manquant détecté",
+      "langage": "go",
+      "tentative": 2,
+      "projet": "api_graphql_008844_da6ff2",
+      "timestamp": "2025-12-29T12:49:04.208090",
+      "corrige": false
+    },
+    {
+      "type": "type_error",
+      "message": "main.go: Ligne 11 - Erreur de type détectée (string dans int)",
+      "langage": "go",
+      "tentative": 2,
+      "projet": "api_graphql_008844_da6ff2",
+      "timestamp": "2025-12-29T12:49:04.208090",
+      "corrige": false
+    },
+    {
+      "type": "type_error",
+      "message": "main.go: Ligne 14 - Erreur de type détectée (string dans int)",
+      "langage": "go",
+      "tentative": 2,
+      "projet": "api_graphql_008844_da6ff2",
+      "timestamp": "2025-12-29T12:49:04.208090",
+      "corrige": false
+    },
+    {
+      "type": "type_error",
+      "message": "main.go: Ligne 65 - Erreur de type détectée (string dans int)",
+      "langage": "go",
+      "tentative": 2,
+      "projet": "api_graphql_008844_da6ff2",
+      "timestamp": "2025-12-29T12:49:04.223931",
+      "corrige": false
+    },
+    {
+      "type": "wrong_operator",
+      "message": "main.go: Ligne 77 - Mauvais opérateur d'affectation",
+      "langage": "go",
+      "tentative": 2,
+      "projet": "api_graphql_008844_da6ff2",
+      "timestamp": "2025-12-29T12:49:04.223931",
+      "corrige": false
+    },
+    {
+      "type": "type_error",
+      "message": "handlers.go: Ligne 119 - Erreur de type détectée (string dans int)",
+      "langage": "go",
+      "tentative": 2,
+      "projet": "api_graphql_008844_da6ff2",
+      "timestamp": "2025-12-29T12:49:04.223931",
+      "corrige": false
+    },
+    {
+      "type": "missing_import",
+      "message": "models.go: Ligne 8 - Import manquant détecté",
+      "langage": "go",
+      "tentative": 2,
+      "projet": "api_graphql_008844_da6ff2",
+      "timestamp": "2025-12-29T12:49:04.223931",
+      "corrige": false
+    },
+    {
+      "type": "missing_import",
+      "message": "main.go: Ligne 7 - Import manquant détecté",
+      "langage": "go",
+      "tentative": 2,
+      "projet": "api_graphql_008844_da6ff2",
+      "timestamp": "2025-12-29T12:49:04.223931"
+    },
+    {
+      "type": "type_error",
+      "message": "main.go: Ligne 11 - Erreur de type détectée (string dans int)",
+      "langage": "go",
+      "tentative": 2,
+      "projet": "api_graphql_008844_da6ff2",
+      "timestamp": "2025-12-29T12:49:04.223931"
+    },
+    {
+      "type": "type_error",
+      "message": "main.go: Ligne 14 - Erreur de type détectée (string dans int)",
+      "langage": "go",
+      "tentative": 2,
+      "projet": "api_graphql_008844_da6ff2",
+      "timestamp": "2025-12-29T12:49:04.223931"
+    },
+    {
+      "type": "wrong_operator",
+      "message": "main.go: Ligne 3 - Mauvais opérateur d'affectation",
+      "langage": "go",
+      "tentative": 3,
+      "projet": "api_graphql_008844_da6ff2",
+      "timestamp": "2025-12-29T12:50:11.277888",
+      "corrige": false
+    },
+    {
+      "type": "type_error",
+      "message": "main.go: Ligne 29 - Erreur de type détectée (string dans int)",
+      "langage": "go",
+      "tentative": 3,
+      "projet": "api_graphql_008844_da6ff2",
+      "timestamp": "2025-12-29T12:50:11.279897",
+      "corrige": false
+    },
+    {
+      "type": "type_error",
+      "message": "handlers.go: Ligne 170 - Erreur de type détectée (string dans int)",
+      "langage": "go",
+      "tentative": 3,
+      "projet": "api_graphql_008844_da6ff2",
+      "timestamp": "2025-12-29T12:50:11.281897",
+      "corrige": false
+    },
+    {
+      "type": "missing_import",
+      "message": "models.go: Ligne 7 - Import manquant détecté",
+      "langage": "go",
+      "tentative": 3,
+      "projet": "api_graphql_008844_da6ff2",
+      "timestamp": "2025-12-29T12:50:11.283216",
+      "corrige": false
+    },
+    {
+      "type": "wrong_operator",
+      "message": "main.go: Ligne 3 - Mauvais opérateur d'affectation",
+      "langage": "go",
+      "tentative": 3,
+      "projet": "api_graphql_008844_da6ff2",
+      "timestamp": "2025-12-29T12:50:11.284296"
+    },
+    {
+      "type": "type_error",
+      "message": "main.go: Ligne 29 - Erreur de type détectée (string dans int)",
+      "langage": "go",
+      "tentative": 3,
+      "projet": "api_graphql_008844_da6ff2",
+      "timestamp": "2025-12-29T12:50:11.287476"
+    },
+    {
+      "type": "type_error",
+      "message": "handlers.go: Ligne 170 - Erreur de type détectée (string dans int)",
+      "langage": "go",
+      "tentative": 3,
+      "projet": "api_graphql_008844_da6ff2",
+      "timestamp": "2025-12-29T12:50:11.288948"
+    },
+    {
+      "type": "undefined_variable",
+      "message": "App.tsx: Ligne 4 - Variable non définie détectée",
+      "langage": "typescript",
+      "tentative": 1,
+      "projet": "application_react_009971_1c5259",
+      "timestamp": "2025-12-29T13:06:25.437872",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "App.tsx: Ligne 36 - Erreur de syntaxe détectée",
+      "langage": "typescript",
+      "tentative": 1,
+      "projet": "application_react_009971_1c5259",
+      "timestamp": "2025-12-29T13:06:25.448858",
+      "corrige": false
+    },
+    {
+      "type": "undefined_variable",
+      "message": "index.tsx: Ligne 5 - Variable non définie détectée",
+      "langage": "typescript",
+      "tentative": 1,
+      "projet": "application_react_009971_1c5259",
+      "timestamp": "2025-12-29T13:06:25.495929",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "index.tsx: Ligne 61 - Erreur de syntaxe détectée",
+      "langage": "typescript",
+      "tentative": 1,
+      "projet": "application_react_009971_1c5259",
+      "timestamp": "2025-12-29T13:06:25.498920",
+      "corrige": false
+    },
+    {
+      "type": "undefined_variable",
+      "message": "App.tsx: Ligne 4 - Variable non définie détectée",
+      "langage": "typescript",
+      "tentative": 1,
+      "projet": "application_react_009971_1c5259",
+      "timestamp": "2025-12-29T13:06:25.502909"
+    },
+    {
+      "type": "syntax_error",
+      "message": "App.tsx: Ligne 36 - Erreur de syntaxe détectée",
+      "langage": "typescript",
+      "tentative": 1,
+      "projet": "application_react_009971_1c5259",
+      "timestamp": "2025-12-29T13:06:25.507644"
+    },
+    {
+      "type": "undefined_variable",
+      "message": "index.tsx: Ligne 5 - Variable non définie détectée",
+      "langage": "typescript",
+      "tentative": 1,
+      "projet": "application_react_009971_1c5259",
+      "timestamp": "2025-12-29T13:06:25.518947"
+    },
+    {
+      "type": "undefined_variable",
+      "message": "App.tsx: Ligne 7 - Variable non définie détectée",
+      "langage": "typescript",
+      "tentative": 2,
+      "projet": "application_react_009971_1c5259",
+      "timestamp": "2025-12-29T13:07:11.995724",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "App.tsx: Ligne 38 - Erreur de syntaxe détectée",
+      "langage": "typescript",
+      "tentative": 2,
+      "projet": "application_react_009971_1c5259",
+      "timestamp": "2025-12-29T13:07:11.998354",
+      "corrige": false
+    },
+    {
+      "type": "type_error",
+      "message": "index.tsx: Ligne 9 - Erreur de type détectée",
+      "langage": "typescript",
+      "tentative": 2,
+      "projet": "application_react_009971_1c5259",
+      "timestamp": "2025-12-29T13:07:12.000595",
+      "corrige": false
+    },
+    {
+      "type": "undefined_variable",
+      "message": "App.tsx: Ligne 7 - Variable non définie détectée",
+      "langage": "typescript",
+      "tentative": 2,
+      "projet": "application_react_009971_1c5259",
+      "timestamp": "2025-12-29T13:07:12.002596"
+    },
+    {
+      "type": "syntax_error",
+      "message": "App.tsx: Ligne 38 - Erreur de syntaxe détectée",
+      "langage": "typescript",
+      "tentative": 2,
+      "projet": "application_react_009971_1c5259",
+      "timestamp": "2025-12-29T13:07:12.005060"
+    },
+    {
+      "type": "type_error",
+      "message": "index.tsx: Ligne 9 - Erreur de type détectée",
+      "langage": "typescript",
+      "tentative": 2,
+      "projet": "application_react_009971_1c5259",
+      "timestamp": "2025-12-29T13:07:12.005060"
+    },
+    {
+      "type": "undefined_variable",
+      "message": "App.tsx: Ligne 5 - Variable non définie détectée",
+      "langage": "typescript",
+      "tentative": 3,
+      "projet": "application_react_009971_1c5259",
+      "timestamp": "2025-12-29T13:07:58.793788",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "App.tsx: Ligne 63 - Erreur de syntaxe détectée",
+      "langage": "typescript",
+      "tentative": 3,
+      "projet": "application_react_009971_1c5259",
+      "timestamp": "2025-12-29T13:07:58.793788",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "index.tsx: Ligne 162 - Erreur de syntaxe détectée",
+      "langage": "typescript",
+      "tentative": 3,
+      "projet": "application_react_009971_1c5259",
+      "timestamp": "2025-12-29T13:07:58.793788",
+      "corrige": false
+    },
+    {
+      "type": "undefined_variable",
+      "message": "App.tsx: Ligne 5 - Variable non définie détectée",
+      "langage": "typescript",
+      "tentative": 3,
+      "projet": "application_react_009971_1c5259",
+      "timestamp": "2025-12-29T13:07:58.793788"
+    },
+    {
+      "type": "syntax_error",
+      "message": "App.tsx: Ligne 63 - Erreur de syntaxe détectée",
+      "langage": "typescript",
+      "tentative": 3,
+      "projet": "application_react_009971_1c5259",
+      "timestamp": "2025-12-29T13:07:58.793788"
+    },
+    {
+      "type": "syntax_error",
+      "message": "index.tsx: Ligne 162 - Erreur de syntaxe détectée",
+      "langage": "typescript",
+      "tentative": 3,
+      "projet": "application_react_009971_1c5259",
+      "timestamp": "2025-12-29T13:07:58.793788"
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 10 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 1,
+      "projet": "script_python_103480_cc3c73",
+      "timestamp": "2025-12-30T15:05:10.377823",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 4 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 1,
+      "projet": "script_python_103480_cc3c73",
+      "timestamp": "2025-12-30T15:05:10.382558",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 8 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 1,
+      "projet": "script_python_103480_cc3c73",
+      "timestamp": "2025-12-30T15:05:10.384198",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 10 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 1,
+      "projet": "script_python_103480_cc3c73",
+      "timestamp": "2025-12-30T15:05:10.386269"
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 4 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 1,
+      "projet": "script_python_103480_cc3c73",
+      "timestamp": "2025-12-30T15:05:10.391486"
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 8 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 1,
+      "projet": "script_python_103480_cc3c73",
+      "timestamp": "2025-12-30T15:05:10.393892"
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 2 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 2,
+      "projet": "script_python_103480_cc3c73",
+      "timestamp": "2025-12-30T15:06:11.642429",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 7 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 2,
+      "projet": "script_python_103480_cc3c73",
+      "timestamp": "2025-12-30T15:06:11.646226",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 4 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 2,
+      "projet": "script_python_103480_cc3c73",
+      "timestamp": "2025-12-30T15:06:11.647639",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 2 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 2,
+      "projet": "script_python_103480_cc3c73",
+      "timestamp": "2025-12-30T15:06:11.651535"
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 7 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 2,
+      "projet": "script_python_103480_cc3c73",
+      "timestamp": "2025-12-30T15:06:11.657671"
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 4 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 2,
+      "projet": "script_python_103480_cc3c73",
+      "timestamp": "2025-12-30T15:06:11.663188"
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 31 - Erreur syntaxique: unindent does not match any outer indentation level",
+      "langage": "python",
+      "tentative": 3,
+      "projet": "script_python_103480_cc3c73",
+      "timestamp": "2025-12-30T15:07:13.644535",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 6 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 3,
+      "projet": "script_python_103480_cc3c73",
+      "timestamp": "2025-12-30T15:07:13.648905",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 6 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 3,
+      "projet": "script_python_103480_cc3c73",
+      "timestamp": "2025-12-30T15:07:13.655253",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 31 - Erreur syntaxique: unindent does not match any outer indentation level",
+      "langage": "python",
+      "tentative": 3,
+      "projet": "script_python_103480_cc3c73",
+      "timestamp": "2025-12-30T15:07:13.660138"
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 6 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 3,
+      "projet": "script_python_103480_cc3c73",
+      "timestamp": "2025-12-30T15:07:13.664031"
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 6 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 3,
+      "projet": "script_python_103480_cc3c73",
+      "timestamp": "2025-12-30T15:07:13.669479"
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 57 - Erreur syntaxique: invalid syntax",
+      "langage": "python",
+      "tentative": 4,
+      "projet": "script_python_103480_cc3c73",
+      "timestamp": "2025-12-30T15:08:14.510405",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 57 - Erreur syntaxique: invalid syntax",
+      "langage": "python",
+      "tentative": 4,
+      "projet": "script_python_103480_cc3c73",
+      "timestamp": "2025-12-30T15:08:14.519666"
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 8 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 1,
+      "projet": "script_python_105283_cc3c73",
+      "timestamp": "2025-12-30T15:35:08.736968",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 7 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 1,
+      "projet": "script_python_105283_cc3c73",
+      "timestamp": "2025-12-30T15:35:08.744010",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 5 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 1,
+      "projet": "script_python_105283_cc3c73",
+      "timestamp": "2025-12-30T15:35:08.750822",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 8 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 1,
+      "projet": "script_python_105283_cc3c73",
+      "timestamp": "2025-12-30T15:35:08.762984"
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 7 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 1,
+      "projet": "script_python_105283_cc3c73",
+      "timestamp": "2025-12-30T15:35:08.771434"
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 5 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 1,
+      "projet": "script_python_105283_cc3c73",
+      "timestamp": "2025-12-30T15:35:08.778405"
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 105 - Erreur syntaxique: unindent does not match any outer indentation level",
+      "langage": "python",
+      "tentative": 2,
+      "projet": "script_python_105283_cc3c73",
+      "timestamp": "2025-12-30T15:36:11.553708",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 7 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 2,
+      "projet": "script_python_105283_cc3c73",
+      "timestamp": "2025-12-30T15:36:11.560716",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 5 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 2,
+      "projet": "script_python_105283_cc3c73",
+      "timestamp": "2025-12-30T15:36:11.564268",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 105 - Erreur syntaxique: unindent does not match any outer indentation level",
+      "langage": "python",
+      "tentative": 2,
+      "projet": "script_python_105283_cc3c73",
+      "timestamp": "2025-12-30T15:36:11.578533"
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 7 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 2,
+      "projet": "script_python_105283_cc3c73",
+      "timestamp": "2025-12-30T15:36:11.588265"
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 5 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 2,
+      "projet": "script_python_105283_cc3c73",
+      "timestamp": "2025-12-30T15:36:11.596556"
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 2 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 3,
+      "projet": "script_python_105283_cc3c73",
+      "timestamp": "2025-12-30T15:37:14.546085",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 8 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 3,
+      "projet": "script_python_105283_cc3c73",
+      "timestamp": "2025-12-30T15:37:14.552481",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 18 - Erreur syntaxique: unindent does not match any outer indentation level",
+      "langage": "python",
+      "tentative": 3,
+      "projet": "script_python_105283_cc3c73",
+      "timestamp": "2025-12-30T15:37:14.557695",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 2 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 3,
+      "projet": "script_python_105283_cc3c73",
+      "timestamp": "2025-12-30T15:37:14.586652"
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 8 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 3,
+      "projet": "script_python_105283_cc3c73",
+      "timestamp": "2025-12-30T15:37:14.598449"
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 18 - Erreur syntaxique: unindent does not match any outer indentation level",
+      "langage": "python",
+      "tentative": 3,
+      "projet": "script_python_105283_cc3c73",
+      "timestamp": "2025-12-30T15:37:14.608460"
+    },
+    {
+      "type": "undefined_variable",
+      "langage": "java",
+      "tentative": 1,
+      "projet": "",
+      "timestamp": "2025-12-30T15:40:50.422494",
+      "message": "Bug délibéré introduit: undefined_variable",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "langage": "java",
+      "tentative": 1,
+      "projet": "",
+      "timestamp": "2025-12-30T15:40:50.444283",
+      "message": "Bug délibéré introduit: syntax_error",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "langage": "java",
+      "tentative": 1,
+      "projet": "",
+      "timestamp": "2025-12-30T15:40:52.599373",
+      "message": "Bug délibéré introduit: syntax_error",
+      "corrige": false
+    },
+    {
+      "type": "undefined_variable",
+      "langage": "java",
+      "tentative": 1,
+      "projet": "",
+      "timestamp": "2025-12-30T15:40:52.606441",
+      "message": "Bug délibéré introduit: undefined_variable",
+      "corrige": false
+    },
+    {
+      "type": "undefined_variable",
+      "langage": "java",
+      "tentative": 1,
+      "projet": "",
+      "timestamp": "2025-12-30T15:40:55.132518",
+      "message": "Bug délibéré introduit: undefined_variable",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "langage": "java",
+      "tentative": 1,
+      "projet": "",
+      "timestamp": "2025-12-30T15:40:55.141299",
+      "message": "Bug délibéré introduit: syntax_error",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "langage": "java",
+      "tentative": 2,
+      "projet": "",
+      "timestamp": "2025-12-30T15:41:03.161348",
+      "message": "Bug délibéré introduit: syntax_error",
+      "corrige": false
+    },
+    {
+      "type": "undefined_variable",
+      "langage": "java",
+      "tentative": 2,
+      "projet": "",
+      "timestamp": "2025-12-30T15:41:03.183554",
+      "message": "Bug délibéré introduit: undefined_variable",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "langage": "markdown",
+      "tentative": 2,
+      "projet": "",
+      "timestamp": "2025-12-30T15:41:10.163828",
+      "message": "Bug délibéré introduit: syntax_error",
+      "corrige": false
+    },
+    {
+      "type": "undefined_variable",
+      "langage": "markdown",
+      "tentative": 2,
+      "projet": "",
+      "timestamp": "2025-12-30T15:41:10.191365",
+      "message": "Bug délibéré introduit: undefined_variable",
+      "corrige": false
+    },
+    {
+      "type": "undefined_variable",
+      "langage": "java",
+      "tentative": 2,
+      "projet": "",
+      "timestamp": "2025-12-30T15:41:16.486308",
+      "message": "Bug délibéré introduit: undefined_variable",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "langage": "java",
+      "tentative": 2,
+      "projet": "",
+      "timestamp": "2025-12-30T15:41:16.505086",
+      "message": "Bug délibéré introduit: syntax_error",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "langage": "java",
+      "tentative": 2,
+      "projet": "",
+      "timestamp": "2025-12-30T15:41:25.819047",
+      "message": "Bug délibéré introduit: syntax_error",
+      "corrige": false
+    },
+    {
+      "type": "undefined_variable",
+      "langage": "java",
+      "tentative": 2,
+      "projet": "",
+      "timestamp": "2025-12-30T15:41:25.837545",
+      "message": "Bug délibéré introduit: undefined_variable",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "langage": "java",
+      "tentative": 3,
+      "projet": "",
+      "timestamp": "2025-12-30T15:41:31.631296",
+      "message": "Bug délibéré introduit: syntax_error",
+      "corrige": false
+    },
+    {
+      "type": "undefined_variable",
+      "langage": "java",
+      "tentative": 3,
+      "projet": "",
+      "timestamp": "2025-12-30T15:41:31.641238",
+      "message": "Bug délibéré introduit: undefined_variable",
+      "corrige": false
+    },
+    {
+      "type": "undefined_variable",
+      "langage": "java",
+      "tentative": 3,
+      "projet": "",
+      "timestamp": "2025-12-30T15:41:45.086732",
+      "message": "Bug délibéré introduit: undefined_variable",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "langage": "java",
+      "tentative": 3,
+      "projet": "",
+      "timestamp": "2025-12-30T15:41:45.104983",
+      "message": "Bug délibéré introduit: syntax_error",
+      "corrige": false
+    },
+    {
+      "type": "undefined_variable",
+      "langage": "java",
+      "tentative": 3,
+      "projet": "",
+      "timestamp": "2025-12-30T15:41:49.971461",
+      "message": "Bug délibéré introduit: undefined_variable",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "langage": "java",
+      "tentative": 3,
+      "projet": "",
+      "timestamp": "2025-12-30T15:41:49.987496",
+      "message": "Bug délibéré introduit: syntax_error",
+      "corrige": false
+    },
+    {
+      "type": "undefined_variable",
+      "langage": "java",
+      "tentative": 1,
+      "projet": "",
+      "timestamp": "2025-12-30T15:44:49.633551",
+      "message": "Bug délibéré introduit: undefined_variable",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "langage": "java",
+      "tentative": 1,
+      "projet": "",
+      "timestamp": "2025-12-30T15:44:49.651018",
+      "message": "Bug délibéré introduit: syntax_error",
+      "corrige": false
+    },
+    {
+      "type": "undefined_variable",
+      "langage": "markdown",
+      "tentative": 1,
+      "projet": "",
+      "timestamp": "2025-12-30T15:44:51.266169",
+      "message": "Bug délibéré introduit: undefined_variable",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "langage": "markdown",
+      "tentative": 1,
+      "projet": "",
+      "timestamp": "2025-12-30T15:44:51.281254",
+      "message": "Bug délibéré introduit: syntax_error",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "langage": "java",
+      "tentative": 1,
+      "projet": "",
+      "timestamp": "2025-12-30T15:44:51.993603",
+      "message": "Bug délibéré introduit: syntax_error",
+      "corrige": false
+    },
+    {
+      "type": "undefined_variable",
+      "langage": "java",
+      "tentative": 1,
+      "projet": "",
+      "timestamp": "2025-12-30T15:44:51.996459",
+      "message": "Bug délibéré introduit: undefined_variable",
+      "corrige": false
+    },
+    {
+      "type": "undefined_variable",
+      "langage": "java",
+      "tentative": 1,
+      "projet": "",
+      "timestamp": "2025-12-30T15:44:52.423182",
+      "message": "Bug délibéré introduit: undefined_variable",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "langage": "java",
+      "tentative": 1,
+      "projet": "",
+      "timestamp": "2025-12-30T15:44:52.423182",
+      "message": "Bug délibéré introduit: syntax_error",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "langage": "java",
+      "tentative": 2,
+      "projet": "",
+      "timestamp": "2025-12-30T15:44:56.625068",
+      "message": "Bug délibéré introduit: syntax_error",
+      "corrige": false
+    },
+    {
+      "type": "undefined_variable",
+      "langage": "java",
+      "tentative": 2,
+      "projet": "",
+      "timestamp": "2025-12-30T15:44:56.633454",
+      "message": "Bug délibéré introduit: undefined_variable",
+      "corrige": false
+    },
+    {
+      "type": "undefined_variable",
+      "langage": "markdown",
+      "tentative": 2,
+      "projet": "",
+      "timestamp": "2025-12-30T15:45:03.195976",
+      "message": "Bug délibéré introduit: undefined_variable",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "langage": "markdown",
+      "tentative": 2,
+      "projet": "",
+      "timestamp": "2025-12-30T15:45:03.214392",
+      "message": "Bug délibéré introduit: syntax_error",
+      "corrige": false
+    },
+    {
+      "type": "undefined_variable",
+      "langage": "java",
+      "tentative": 2,
+      "projet": "",
+      "timestamp": "2025-12-30T15:45:09.194934",
+      "message": "Bug délibéré introduit: undefined_variable",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "langage": "java",
+      "tentative": 2,
+      "projet": "",
+      "timestamp": "2025-12-30T15:45:09.203408",
+      "message": "Bug délibéré introduit: syntax_error",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "langage": "java",
+      "tentative": 2,
+      "projet": "",
+      "timestamp": "2025-12-30T15:45:15.641167",
+      "message": "Bug délibéré introduit: syntax_error",
+      "corrige": false
+    },
+    {
+      "type": "undefined_variable",
+      "langage": "java",
+      "tentative": 2,
+      "projet": "",
+      "timestamp": "2025-12-30T15:45:15.674247",
+      "message": "Bug délibéré introduit: undefined_variable",
+      "corrige": false
+    },
+    {
+      "type": "undefined_variable",
+      "langage": "java",
+      "tentative": 3,
+      "projet": "",
+      "timestamp": "2025-12-30T15:45:23.431720",
+      "message": "Bug délibéré introduit: undefined_variable",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "langage": "java",
+      "tentative": 3,
+      "projet": "",
+      "timestamp": "2025-12-30T15:45:23.450999",
+      "message": "Bug délibéré introduit: syntax_error",
+      "corrige": false
+    },
+    {
+      "type": "missing_parenthesis",
+      "langage": "java",
+      "tentative": 3,
+      "projet": "",
+      "timestamp": "2025-12-30T15:45:23.471215",
+      "message": "Bug délibéré introduit: missing_parenthesis",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "langage": "markdown",
+      "tentative": 3,
+      "projet": "",
+      "timestamp": "2025-12-30T15:45:30.006092",
+      "message": "Bug délibéré introduit: syntax_error",
+      "corrige": false
+    },
+    {
+      "type": "undefined_variable",
+      "langage": "markdown",
+      "tentative": 3,
+      "projet": "",
+      "timestamp": "2025-12-30T15:45:30.012067",
+      "message": "Bug délibéré introduit: undefined_variable",
+      "corrige": false
+    },
+    {
+      "type": "undefined_variable",
+      "langage": "java",
+      "tentative": 3,
+      "projet": "",
+      "timestamp": "2025-12-30T15:45:39.344079",
+      "message": "Bug délibéré introduit: undefined_variable",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "langage": "java",
+      "tentative": 3,
+      "projet": "",
+      "timestamp": "2025-12-30T15:45:39.360984",
+      "message": "Bug délibéré introduit: syntax_error",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "langage": "java",
+      "tentative": 3,
+      "projet": "",
+      "timestamp": "2025-12-30T15:45:46.623852",
+      "message": "Bug délibéré introduit: syntax_error",
+      "corrige": false
+    },
+    {
+      "type": "undefined_variable",
+      "langage": "java",
+      "tentative": 3,
+      "projet": "",
+      "timestamp": "2025-12-30T15:45:46.623852",
+      "message": "Bug délibéré introduit: undefined_variable",
+      "corrige": false
+    },
+    {
+      "type": "undefined_variable",
+      "message": "App.tsx: Ligne 11 - Variable non définie détectée",
+      "langage": "typescript",
+      "tentative": 1,
+      "projet": "application_react_106121_1c5259",
+      "timestamp": "2025-12-30T15:48:56.107541",
+      "corrige": false
+    },
+    {
+      "type": "undefined_variable",
+      "message": "index.tsx: Ligne 11 - Variable non définie détectée",
+      "langage": "typescript",
+      "tentative": 1,
+      "projet": "application_react_106121_1c5259",
+      "timestamp": "2025-12-30T15:48:56.110621",
+      "corrige": false
+    },
+    {
+      "type": "undefined_variable",
+      "message": "App.tsx: Ligne 11 - Variable non définie détectée",
+      "langage": "typescript",
+      "tentative": 1,
+      "projet": "application_react_106121_1c5259",
+      "timestamp": "2025-12-30T15:48:56.118864"
+    },
+    {
+      "type": "undefined_variable",
+      "message": "index.tsx: Ligne 11 - Variable non définie détectée",
+      "langage": "typescript",
+      "tentative": 1,
+      "projet": "application_react_106121_1c5259",
+      "timestamp": "2025-12-30T15:48:56.125900"
+    },
+    {
+      "type": "undefined_variable",
+      "message": "App.tsx: Ligne 2 - Variable non définie détectée",
+      "langage": "typescript",
+      "tentative": 2,
+      "projet": "application_react_106121_1c5259",
+      "timestamp": "2025-12-30T15:49:45.439740",
+      "corrige": false
+    },
+    {
+      "type": "type_error",
+      "message": "index.tsx: Ligne 10 - Erreur de type détectée",
+      "langage": "typescript",
+      "tentative": 2,
+      "projet": "application_react_106121_1c5259",
+      "timestamp": "2025-12-30T15:49:45.443316",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "index.tsx: Ligne 87 - Erreur de syntaxe détectée",
+      "langage": "typescript",
+      "tentative": 2,
+      "projet": "application_react_106121_1c5259",
+      "timestamp": "2025-12-30T15:49:45.455823",
+      "corrige": false
+    },
+    {
+      "type": "undefined_variable",
+      "message": "App.tsx: Ligne 2 - Variable non définie détectée",
+      "langage": "typescript",
+      "tentative": 2,
+      "projet": "application_react_106121_1c5259",
+      "timestamp": "2025-12-30T15:49:45.460388"
+    },
+    {
+      "type": "type_error",
+      "message": "index.tsx: Ligne 10 - Erreur de type détectée",
+      "langage": "typescript",
+      "tentative": 2,
+      "projet": "application_react_106121_1c5259",
+      "timestamp": "2025-12-30T15:49:45.471429"
+    },
+    {
+      "type": "syntax_error",
+      "message": "index.tsx: Ligne 87 - Erreur de syntaxe détectée",
+      "langage": "typescript",
+      "tentative": 2,
+      "projet": "application_react_106121_1c5259",
+      "timestamp": "2025-12-30T15:49:45.480503"
+    },
+    {
+      "type": "undefined_variable",
+      "message": "App.tsx: Ligne 9 - Variable non définie détectée",
+      "langage": "typescript",
+      "tentative": 3,
+      "projet": "application_react_106121_1c5259",
+      "timestamp": "2025-12-30T15:50:33.870462",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "App.tsx: Ligne 11 - Erreur de syntaxe détectée",
+      "langage": "typescript",
+      "tentative": 3,
+      "projet": "application_react_106121_1c5259",
+      "timestamp": "2025-12-30T15:50:33.874239",
+      "corrige": false
+    },
+    {
+      "type": "undefined_variable",
+      "message": "index.tsx: Ligne 11 - Variable non définie détectée",
+      "langage": "typescript",
+      "tentative": 3,
+      "projet": "application_react_106121_1c5259",
+      "timestamp": "2025-12-30T15:50:33.882751",
+      "corrige": false
+    },
+    {
+      "type": "undefined_variable",
+      "message": "App.tsx: Ligne 9 - Variable non définie détectée",
+      "langage": "typescript",
+      "tentative": 3,
+      "projet": "application_react_106121_1c5259",
+      "timestamp": "2025-12-30T15:50:33.892192"
+    },
+    {
+      "type": "syntax_error",
+      "message": "App.tsx: Ligne 11 - Erreur de syntaxe détectée",
+      "langage": "typescript",
+      "tentative": 3,
+      "projet": "application_react_106121_1c5259",
+      "timestamp": "2025-12-30T15:50:33.900281"
+    },
+    {
+      "type": "undefined_variable",
+      "message": "index.tsx: Ligne 11 - Variable non définie détectée",
+      "langage": "typescript",
+      "tentative": 3,
+      "projet": "application_react_106121_1c5259",
+      "timestamp": "2025-12-30T15:50:33.910610"
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 82 - Erreur syntaxique: unindent does not match any outer indentation level",
+      "langage": "python",
+      "tentative": 1,
+      "projet": "api_rest_106519_2fbe73",
+      "timestamp": "2025-12-30T15:56:05.020486",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 4 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 1,
+      "projet": "api_rest_106519_2fbe73",
+      "timestamp": "2025-12-30T15:56:05.026431",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 3 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 1,
+      "projet": "api_rest_106519_2fbe73",
+      "timestamp": "2025-12-30T15:56:05.035376",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 82 - Erreur syntaxique: unindent does not match any outer indentation level",
+      "langage": "python",
+      "tentative": 1,
+      "projet": "api_rest_106519_2fbe73",
+      "timestamp": "2025-12-30T15:56:05.042689"
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 4 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 1,
+      "projet": "api_rest_106519_2fbe73",
+      "timestamp": "2025-12-30T15:56:05.051509"
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 3 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 1,
+      "projet": "api_rest_106519_2fbe73",
+      "timestamp": "2025-12-30T15:56:05.064163"
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 27 - Erreur syntaxique: '(' was never closed",
+      "langage": "python",
+      "tentative": 2,
+      "projet": "api_rest_106519_2fbe73",
+      "timestamp": "2025-12-30T15:57:11.314219",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 106 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 2,
+      "projet": "api_rest_106519_2fbe73",
+      "timestamp": "2025-12-30T15:57:11.324893",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 78 - Erreur syntaxique: unindent does not match any outer indentation level",
+      "langage": "python",
+      "tentative": 2,
+      "projet": "api_rest_106519_2fbe73",
+      "timestamp": "2025-12-30T15:57:11.340909",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 27 - Erreur syntaxique: '(' was never closed",
+      "langage": "python",
+      "tentative": 2,
+      "projet": "api_rest_106519_2fbe73",
+      "timestamp": "2025-12-30T15:57:11.351244"
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 106 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 2,
+      "projet": "api_rest_106519_2fbe73",
+      "timestamp": "2025-12-30T15:57:11.361595"
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 78 - Erreur syntaxique: unindent does not match any outer indentation level",
+      "langage": "python",
+      "tentative": 2,
+      "projet": "api_rest_106519_2fbe73",
+      "timestamp": "2025-12-30T15:57:11.369933"
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 84 - Erreur syntaxique: unindent does not match any outer indentation level",
+      "langage": "python",
+      "tentative": 3,
+      "projet": "api_rest_106519_2fbe73",
+      "timestamp": "2025-12-30T15:58:17.051283",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 8 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 3,
+      "projet": "api_rest_106519_2fbe73",
+      "timestamp": "2025-12-30T15:58:17.062185",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 3 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 3,
+      "projet": "api_rest_106519_2fbe73",
+      "timestamp": "2025-12-30T15:58:17.070014",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 84 - Erreur syntaxique: unindent does not match any outer indentation level",
+      "langage": "python",
+      "tentative": 3,
+      "projet": "api_rest_106519_2fbe73",
+      "timestamp": "2025-12-30T15:58:17.085222"
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 8 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 3,
+      "projet": "api_rest_106519_2fbe73",
+      "timestamp": "2025-12-30T15:58:17.093442"
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 3 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 3,
+      "projet": "api_rest_106519_2fbe73",
+      "timestamp": "2025-12-30T15:58:17.101497"
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 134 - Erreur syntaxique: positional argument follows keyword argument",
+      "langage": "python",
+      "tentative": 4,
+      "projet": "api_rest_106519_2fbe73",
+      "timestamp": "2025-12-30T15:59:19.930934",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 88 - Erreur syntaxique: expected '('",
+      "langage": "python",
+      "tentative": 4,
+      "projet": "api_rest_106519_2fbe73",
+      "timestamp": "2025-12-30T15:59:19.946634",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 134 - Erreur syntaxique: positional argument follows keyword argument",
+      "langage": "python",
+      "tentative": 4,
+      "projet": "api_rest_106519_2fbe73",
+      "timestamp": "2025-12-30T15:59:19.960231"
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 88 - Erreur syntaxique: expected '('",
+      "langage": "python",
+      "tentative": 4,
+      "projet": "api_rest_106519_2fbe73",
+      "timestamp": "2025-12-30T15:59:19.973560"
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 7 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 1,
+      "projet": "api_rest_106977_2fbe73",
+      "timestamp": "2025-12-30T16:03:46.828395",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 1 - Erreur syntaxique: invalid syntax",
+      "langage": "python",
+      "tentative": 1,
+      "projet": "api_rest_106977_2fbe73",
+      "timestamp": "2025-12-30T16:03:46.837449",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 67 - Erreur syntaxique: closing parenthesis '}' does not match opening parenthesis '(' on line 66",
+      "langage": "python",
+      "tentative": 1,
+      "projet": "api_rest_106977_2fbe73",
+      "timestamp": "2025-12-30T16:03:46.843678",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 7 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 1,
+      "projet": "api_rest_106977_2fbe73",
+      "timestamp": "2025-12-30T16:03:46.859247"
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 1 - Erreur syntaxique: invalid syntax",
+      "langage": "python",
+      "tentative": 1,
+      "projet": "api_rest_106977_2fbe73",
+      "timestamp": "2025-12-30T16:03:46.868850"
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 67 - Erreur syntaxique: closing parenthesis '}' does not match opening parenthesis '(' on line 66",
+      "langage": "python",
+      "tentative": 1,
+      "projet": "api_rest_106977_2fbe73",
+      "timestamp": "2025-12-30T16:03:46.883771"
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 8 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 2,
+      "projet": "api_rest_106977_2fbe73",
+      "timestamp": "2025-12-30T16:04:52.993962",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 2 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 2,
+      "projet": "api_rest_106977_2fbe73",
+      "timestamp": "2025-12-30T16:04:53.010076",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 2 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 2,
+      "projet": "api_rest_106977_2fbe73",
+      "timestamp": "2025-12-30T16:04:53.018083",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 8 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 2,
+      "projet": "api_rest_106977_2fbe73",
+      "timestamp": "2025-12-30T16:04:53.042490"
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 2 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 2,
+      "projet": "api_rest_106977_2fbe73",
+      "timestamp": "2025-12-30T16:04:53.058755"
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 2 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 2,
+      "projet": "api_rest_106977_2fbe73",
+      "timestamp": "2025-12-30T16:04:53.077000"
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 10 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 3,
+      "projet": "api_rest_106977_2fbe73",
+      "timestamp": "2025-12-30T16:05:59.628260",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 5 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 3,
+      "projet": "api_rest_106977_2fbe73",
+      "timestamp": "2025-12-30T16:05:59.642321",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 2 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 3,
+      "projet": "api_rest_106977_2fbe73",
+      "timestamp": "2025-12-30T16:05:59.658676",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 10 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 3,
+      "projet": "api_rest_106977_2fbe73",
+      "timestamp": "2025-12-30T16:05:59.674827"
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 5 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 3,
+      "projet": "api_rest_106977_2fbe73",
+      "timestamp": "2025-12-30T16:05:59.693264"
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 2 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 3,
+      "projet": "api_rest_106977_2fbe73",
+      "timestamp": "2025-12-30T16:05:59.700417"
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 97 - Erreur syntaxique: closing parenthesis '}' does not match opening parenthesis '('",
+      "langage": "python",
+      "tentative": 4,
+      "projet": "api_rest_106977_2fbe73",
+      "timestamp": "2025-12-30T16:07:05.687632",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 62 - Erreur syntaxique: unmatched ')'",
+      "langage": "python",
+      "tentative": 4,
+      "projet": "api_rest_106977_2fbe73",
+      "timestamp": "2025-12-30T16:07:05.705778",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 97 - Erreur syntaxique: closing parenthesis '}' does not match opening parenthesis '('",
+      "langage": "python",
+      "tentative": 4,
+      "projet": "api_rest_106977_2fbe73",
+      "timestamp": "2025-12-30T16:07:05.728514"
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 62 - Erreur syntaxique: unmatched ')'",
+      "langage": "python",
+      "tentative": 4,
+      "projet": "api_rest_106977_2fbe73",
+      "timestamp": "2025-12-30T16:07:05.753569"
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 6 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 1,
+      "projet": "api_rest_108255_2fbe73",
+      "timestamp": "2025-12-30T16:24:53.338064",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 10 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 1,
+      "projet": "api_rest_108255_2fbe73",
+      "timestamp": "2025-12-30T16:24:53.347125",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 10 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 1,
+      "projet": "api_rest_108255_2fbe73",
+      "timestamp": "2025-12-30T16:24:53.358355",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 6 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 1,
+      "projet": "api_rest_108255_2fbe73",
+      "timestamp": "2025-12-30T16:24:53.369399"
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 10 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 1,
+      "projet": "api_rest_108255_2fbe73",
+      "timestamp": "2025-12-30T16:24:53.386017"
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 10 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 1,
+      "projet": "api_rest_108255_2fbe73",
+      "timestamp": "2025-12-30T16:24:53.399432"
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 4 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 2,
+      "projet": "api_rest_108255_2fbe73",
+      "timestamp": "2025-12-30T16:25:57.039562",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 7 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 2,
+      "projet": "api_rest_108255_2fbe73",
+      "timestamp": "2025-12-30T16:25:57.046466",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 8 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 2,
+      "projet": "api_rest_108255_2fbe73",
+      "timestamp": "2025-12-30T16:25:57.056594",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 4 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 2,
+      "projet": "api_rest_108255_2fbe73",
+      "timestamp": "2025-12-30T16:25:57.069531"
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 7 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 2,
+      "projet": "api_rest_108255_2fbe73",
+      "timestamp": "2025-12-30T16:25:57.087849"
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 8 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 2,
+      "projet": "api_rest_108255_2fbe73",
+      "timestamp": "2025-12-30T16:25:57.098718"
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 4 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 3,
+      "projet": "api_rest_108255_2fbe73",
+      "timestamp": "2025-12-30T16:27:01.727717",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 112 - Erreur syntaxique: closing parenthesis '}' does not match opening parenthesis '(' on line 109",
+      "langage": "python",
+      "tentative": 3,
+      "projet": "api_rest_108255_2fbe73",
+      "timestamp": "2025-12-30T16:27:01.738442",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 9 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 3,
+      "projet": "api_rest_108255_2fbe73",
+      "timestamp": "2025-12-30T16:27:01.766748",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 4 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 3,
+      "projet": "api_rest_108255_2fbe73",
+      "timestamp": "2025-12-30T16:27:01.785152"
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 112 - Erreur syntaxique: closing parenthesis '}' does not match opening parenthesis '(' on line 109",
+      "langage": "python",
+      "tentative": 3,
+      "projet": "api_rest_108255_2fbe73",
+      "timestamp": "2025-12-30T16:27:01.803875"
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 9 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 3,
+      "projet": "api_rest_108255_2fbe73",
+      "timestamp": "2025-12-30T16:27:01.818385"
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 4 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 1,
+      "projet": "génère_une_108835_c73c26",
+      "timestamp": "2025-12-30T16:34:35.442003",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 6 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 1,
+      "projet": "génère_une_108835_c73c26",
+      "timestamp": "2025-12-30T16:34:35.450719",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 4 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 1,
+      "projet": "génère_une_108835_c73c26",
+      "timestamp": "2025-12-30T16:34:35.462076",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 4 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 1,
+      "projet": "génère_une_108835_c73c26",
+      "timestamp": "2025-12-30T16:34:35.474552"
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 6 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 1,
+      "projet": "génère_une_108835_c73c26",
+      "timestamp": "2025-12-30T16:34:35.485739"
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 4 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 1,
+      "projet": "génère_une_108835_c73c26",
+      "timestamp": "2025-12-30T16:34:35.496748"
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 11 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 2,
+      "projet": "génère_une_108835_c73c26",
+      "timestamp": "2025-12-30T16:35:44.645914",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 5 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 2,
+      "projet": "génère_une_108835_c73c26",
+      "timestamp": "2025-12-30T16:35:44.657161",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 2 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 2,
+      "projet": "génère_une_108835_c73c26",
+      "timestamp": "2025-12-30T16:35:44.672681",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 11 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 2,
+      "projet": "génère_une_108835_c73c26",
+      "timestamp": "2025-12-30T16:35:44.684416"
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 5 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 2,
+      "projet": "génère_une_108835_c73c26",
+      "timestamp": "2025-12-30T16:35:44.703092"
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 2 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 2,
+      "projet": "génère_une_108835_c73c26",
+      "timestamp": "2025-12-30T16:35:44.714352"
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 8 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 3,
+      "projet": "génère_une_108835_c73c26",
+      "timestamp": "2025-12-30T16:36:54.788989",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 5 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 3,
+      "projet": "génère_une_108835_c73c26",
+      "timestamp": "2025-12-30T16:36:54.797216",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 3 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 3,
+      "projet": "génère_une_108835_c73c26",
+      "timestamp": "2025-12-30T16:36:54.816117",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "app.py: Ligne 8 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 3,
+      "projet": "génère_une_108835_c73c26",
+      "timestamp": "2025-12-30T16:36:54.848329"
+    },
+    {
+      "type": "syntax_error",
+      "message": "main.py: Ligne 5 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 3,
+      "projet": "génère_une_108835_c73c26",
+      "timestamp": "2025-12-30T16:36:54.877961"
+    },
+    {
+      "type": "syntax_error",
+      "message": "models.py: Ligne 3 - Erreur syntaxique: unexpected indent",
+      "langage": "python",
+      "tentative": 3,
+      "projet": "génère_une_108835_c73c26",
+      "timestamp": "2025-12-30T16:36:54.905491"
+    },
+    {
+      "type": "undefined_variable",
+      "message": "App.tsx: Ligne 8 - Variable non définie détectée",
+      "langage": "typescript",
+      "tentative": 1,
+      "projet": "application_react_306456_bd0829",
+      "timestamp": "2026-01-01T23:27:50.959706",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "App.tsx: Ligne 23 - Erreur de syntaxe détectée",
+      "langage": "typescript",
+      "tentative": 1,
+      "projet": "application_react_306456_bd0829",
+      "timestamp": "2026-01-01T23:27:50.974399",
+      "corrige": false
+    },
+    {
+      "type": "undefined_variable",
+      "message": "App.tsx: Ligne 8 - Variable non définie détectée",
+      "langage": "typescript",
+      "tentative": 1,
+      "projet": "application_react_306456_bd0829",
+      "timestamp": "2026-01-01T23:27:50.986472"
+    },
+    {
+      "type": "syntax_error",
+      "message": "App.tsx: Ligne 23 - Erreur de syntaxe détectée",
+      "langage": "typescript",
+      "tentative": 1,
+      "projet": "application_react_306456_bd0829",
+      "timestamp": "2026-01-01T23:27:50.994480"
+    },
+    {
+      "type": "syntax_error",
+      "message": "App.tsx: Ligne 62 - Erreur de syntaxe détectée",
+      "langage": "typescript",
+      "tentative": 2,
+      "projet": "application_react_306456_bd0829",
+      "timestamp": "2026-01-01T23:28:42.107004",
+      "corrige": false
+    },
+    {
+      "type": "undefined_variable",
+      "message": "index.tsx: Ligne 2 - Variable non définie détectée",
+      "langage": "typescript",
+      "tentative": 2,
+      "projet": "application_react_306456_bd0829",
+      "timestamp": "2026-01-01T23:28:42.114514",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "index.tsx: Ligne 51 - Erreur de syntaxe détectée",
+      "langage": "typescript",
+      "tentative": 2,
+      "projet": "application_react_306456_bd0829",
+      "timestamp": "2026-01-01T23:28:42.125398",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "App.tsx: Ligne 62 - Erreur de syntaxe détectée",
+      "langage": "typescript",
+      "tentative": 2,
+      "projet": "application_react_306456_bd0829",
+      "timestamp": "2026-01-01T23:28:42.134414"
+    },
+    {
+      "type": "undefined_variable",
+      "message": "index.tsx: Ligne 2 - Variable non définie détectée",
+      "langage": "typescript",
+      "tentative": 2,
+      "projet": "application_react_306456_bd0829",
+      "timestamp": "2026-01-01T23:28:42.144631"
+    },
+    {
+      "type": "syntax_error",
+      "message": "index.tsx: Ligne 51 - Erreur de syntaxe détectée",
+      "langage": "typescript",
+      "tentative": 2,
+      "projet": "application_react_306456_bd0829",
+      "timestamp": "2026-01-01T23:28:42.160589"
+    },
+    {
+      "type": "undefined_variable",
+      "message": "App.tsx: Ligne 3 - Variable non définie détectée",
+      "langage": "typescript",
+      "tentative": 3,
+      "projet": "application_react_306456_bd0829",
+      "timestamp": "2026-01-01T23:29:30.781330",
+      "corrige": false
+    },
+    {
+      "type": "syntax_error",
+      "message": "App.tsx: Ligne 18 - Erreur de syntaxe détectée",
+      "langage": "typescript",
+      "tentative": 3,
+      "projet": "application_react_306456_bd0829",
+      "timestamp": "2026-01-01T23:29:30.790529",
+      "corrige": false
+    },
+    {
+      "type": "undefined_variable",
+      "message": "App.tsx: Ligne 3 - Variable non définie détectée",
+      "langage": "typescript",
+      "tentative": 3,
+      "projet": "application_react_306456_bd0829",
+      "timestamp": "2026-01-01T23:29:30.798617"
+    },
+    {
+      "type": "syntax_error",
+      "message": "App.tsx: Ligne 18 - Erreur de syntaxe détectée",
+      "langage": "typescript",
+      "tentative": 3,
+      "projet": "application_react_306456_bd0829",
+      "timestamp": "2026-01-01T23:29:30.815116"
+    }
+  ]
+}

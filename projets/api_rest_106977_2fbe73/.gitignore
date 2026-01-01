@@ -1,0 +1,28 @@
+python
+# .gitignore
+
+# Fichiers et dossiers générés par l'application
+venv/
+__pycache__/
+*.log
+*.pytest_cache
+
+# Données de développement
+*.env
+settings_local.py
+
+# Traces et journaux
+*.gz
+app/*/.pytest_cache/
+
+# Fichiers de build et artefacts
+dist/
+*.egg-info/
+env/
+*.tar.gz
+target/
+
+# Traces et artefacts de tests
+tests/functional/*.html
+tests/unit/output/*/.pyc
+tests/unit/output/*

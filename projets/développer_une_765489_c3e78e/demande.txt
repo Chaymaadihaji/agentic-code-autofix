@@ -1,0 +1,11 @@
+Développer une application médicale pour suivi des patients :
+- Fiches patients détaillées
+- Historique médical
+- Ordonnances numériques
+- Prise de rendez-vous
+- Alertes médicaments
+- Dossier médical partagé
+- Graphiques de suivi santé
+- Rapports pour médecins
+- Chiffrement des données
+- Conforme RGPD/HIPAA

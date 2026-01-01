@@ -1,0 +1,1 @@
+{"nom_fichier": ".env.example", "code": "typescript\n// .env.example\n\n// API JSONPlaceholder\nAPI_URL = 'https://jsonplaceholder.typicode.com/posts'\n\n// Nombre d'éléments par page\nITEMS_PER_PAGE = 10\n\n// Page actuelle\nCURRENT_PAGE = 1\n", "langage": "typescript", "bugs_introduits": [], "corrections_appliquees": [], "timestamp": 1767306470.736004, "tentative": 1}

@@ -1,0 +1,12 @@
+Flask-Bootstrap
+matplotlib==3.5.1
+Flask==2.3.3
+Flask
+seaborn==0.11.2
+Streamlit
+python-dotenv==1.0.0
+streamlit==1.13.0
+matplotlib
+Seaborn
+pandas
+pandas==1.4.3

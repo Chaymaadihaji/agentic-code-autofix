@@ -1,0 +1,1 @@
+Application React avec TypeScript, Redux Toolkit, Tailwind CSS, connexion à une API REST, et pagination

@@ -1,0 +1,1 @@
+{"nom_fichier": "README.md", "code": "bash\npip install fastapi uvicorn aiomongodb fastapi-security\n", "langage": "markdown", "bugs_introduits": [], "corrections_appliquees": [], "timestamp": 1767108260.91711, "tentative": 1}

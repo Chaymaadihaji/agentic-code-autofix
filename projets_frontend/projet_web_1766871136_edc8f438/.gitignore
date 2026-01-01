@@ -1,0 +1,20 @@
+# .gitignore
+
+# Fichiers générés par les outils de build
+target/
+node_modules/
+
+# Fichiers de configuration
+.env
+
+# Fichiers de logs
+logs/
+
+# Fichiers de documentation
+docs/
+swagger.json
+swagger.yaml
+
+# Fichiers de bases de données
+*.db
+*.sql

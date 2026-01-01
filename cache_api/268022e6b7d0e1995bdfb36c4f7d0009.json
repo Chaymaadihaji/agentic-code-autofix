@@ -1,0 +1,1 @@
+{"nom_fichier": "README.md", "code": "bash\ngit clone https://github.com/votre-username/projet.git\ncd projet\npip install -r requirements.txt\n", "langage": "markdown", "bugs_introduits": ["undefined_variable", "syntax_error"], "corrections_appliquees": [], "timestamp": 1767106526.185299, "tentative": 1}

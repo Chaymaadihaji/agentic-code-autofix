@@ -1,0 +1,1 @@
+{"nom_fichier": "README.md", "code": "bash\npython -m venv env\n", "langage": "markdown", "bugs_introduits": [], "corrections_appliquees": [], "timestamp": 1767108443.137713, "tentative": 4}

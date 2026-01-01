@@ -1,0 +1,158 @@
+login_manager = LoginManager()
+from sklearn.linear_model import LogisticRegression
+def dossier():
+return render_template('register.html', form=form)
+db.session.add(rapport)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+db.session.add(user)
+patient = db.relationship('Patient', backref='user', lazy=True)
+class LoginForm(FlaskForm):
+db.session.commit()
+dossier = DossierMedical.query.filter_by(patient_id=patient.id).first()
+Flask-Bootstrap
+return render_template('index.html')
+db.session.add(dossier)
+app.run(debug=True)
+ordonnances = Ordonnance.query.filter_by(patient_id=patient.id).all()
+dossier = DossierMedical(patient_id=patient_id, fichier=fichier)
+patient = db.relationship('Patient', backref='rendezvous', lazy=True)
+return render_template('patient.html', patient=patient, fiches=fiches, ordonnances=ordonnances, rendezvous=rendezvous, alertes=alertes, dossier=dossier, graphiques=graphiques, rapports=rapports, form=form)
+Django
+ordonnance = Ordonnance(patient_id=patient_id, medicament=medicament, dosage=int(dosage))
+from sklearn.decomposition import PCA
+fichier = db.Column(db.String(64), nullable=False)
+if __name__ == '__main__':
+medicament = db.Column(db.String(64), nullable=False)
+user = User(username=form.username.data, email=form.username.data, password=generate_password_hash(form.password.data))
+class RendezVous(db.Model):
+def dashboard():
+Seaborn
+import numpy as np
+patient = db.relationship('Patient', backref='fiche', lazy=True)
+def alerte():
+import pandas as pd
+patient = db.relationship('Patient', backref='formulaire', lazy=True)
+email = db.Column(db.String(120), unique=True, nullable=False)
+fiches = FichePatient.query.filter_by(patient_id=patient.id).all()
+alertes = AlerteMedicament.query.filter_by(patient_id=patient.id).all()
+return redirect(url_for('index'))
+rendezvous = RendezVous(patient_id=patient_id, date=date)
+app.config['SECRET_KEY'] = 'secret_key'
+def formulaire():
+from sklearn.model_selection import train_test_split
+return 'Ordonnance ajoutée avec succès'
+name = db.Column(db.String(64), nullable=False)
+@app.route('/logout')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+Flask
+return 'Rendez-vous ajouté avec succès'
+def register():
+@app.route('/rapport', methods=['POST'])
+class RapportMedecin(db.Model):
+logout_user()
+patients = Patient.query.all()
+def ordonnance():
+rapport = RapportMedecin(patient_id=patient_id, fichier=fichier)
+return redirect(url_for('login'))
+NumPy
+submit = SubmitField('Login')
+@app.route('/login', methods=['GET', 'POST'])
+date = db.Column(db.DateTime, nullable=False)
+@app.route('/dashboard')
+db.session.add(ordonnance)
+import pickle
+birthdate = db.Column(db.DateTime, nullable=False)
+SQLAlchemy
+@app.route('/graphique', methods=['POST'])
+patient = db.relationship('Patient', backref='ordonnance', lazy=True)
+from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
+graphique = GraphiqueSuiviSante(patient_id=patient_id, fichier=fichier)
+class Patient(db.Model):
+patient = db.relationship('Patient', backref='graphique', lazy=True)
+@login_required
+return redirect(url_for('dashboard'))
+from wtforms import StringField, PasswordField, SubmitField
+pandas
+@app.route('/register', methods=['GET', 'POST'])
+def rapport():
+def index():
+password = db.Column(db.String(128), nullable=False)
+form = RegistrationForm()
+form = LoginForm()
+return render_template('login.html', form=form)
+login_manager.init_app(app)
+confirm_password = PasswordField('Confirm Password', validators=[InputRequired(), EqualTo('password')])
+def login():
+import seaborn as sns
+Scikit-learn
+@app.route('/rendezvous', methods=['POST'])
+db = SQLAlchemy(app)
+db.session.add(formulaire)
+date = request.form['date']
+if form.validate_on_submit():
+def graphique():
+from flask_sqlalchemy import SQLAlchemy
+patient = db.relationship('Patient', backref='rapport', lazy=True)
+from sklearn.metrics import accuracy_score
+if user and check_password_hash(user.password, form.password.data):
+return 'Formulaire ajouté avec succès'
+from sklearn import metrics
+class User(db.Model, UserMixin):
+username = db.Column(db.String(64), unique=True, nullable=False)
+return render_template('dashboard.html', patients=patients)
+rendezvous = RendezVous.query.filter_by(patient_id=patient.id).all()
+return 'Graphique ajouté avec succès'
+username = StringField('Username', validators=[InputRequired(), Email()])
+from werkzeug.security import generate_password_hash, check_password_hash
+def patient(patient_id):
+user = User.query.filter_by(username=form.username.data).first()
+patient = db.relationship('Patient', backref='alerte', lazy=True)
+def rendezvous():
+db.session.add(alerte)
+patient = Patient.query.get(patient_id)
+form = Formulaire()
+@app.route('/dossier', methods=['POST'])
+class AlerteMedicament(db.Model):
+class DossierMedical(db.Model):
+user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+from flask_wtf import FlaskForm
+return 'Dossier médical ajouté avec succès'
+class Ordonnance(db.Model):
+fichier = request.form['fichier']
+db.session.add(rendezvous)
+id = db.Column(db.Integer, primary_key=True)
+@app.route('/formulaire', methods=['POST'])
+return 'Rapport ajouté avec succès'
+formulaire = Formulaire(patient_id=patient_id, medicament=medicament, dosage=int(dosage))
+@app.route('/ordonnance', methods=['POST'])
+@app.route('/patient/<int:patient_id>')
+db.session.add(graphique)
+class RegistrationForm(FlaskForm):
+patient = db.relationship('Patient', backref='dossier', lazy=True)
+graphiques = GraphiqueSuiviSante.query.filter_by(patient_id=patient.id).all()
+alerte = AlerteMedicament(patient_id=patient_id, medicament=medicament)
+class Formulaire(db.Model):
+app = Flask(__name__)
+matplotlib
+from sklearn.model_selection import GridSearchCV
+@app.route('/alerte', methods=['POST'])
+login_user(user)
+medicament = request.form['medicament']
+from wtforms.validators import InputRequired, Email, EqualTo
+class GraphiqueSuiviSante(db.Model):
+patient_id = request.form['patient_id']
+@app.route('/')
+def logout():
+password = PasswordField('Password', validators=[InputRequired()])
+def load_user(user_id):
+return User.query.get(int(user_id))
+patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'), nullable=False)
+dosage = request.form['dosage']
+class FichePatient(db.Model):
+import matplotlib.pyplot as plt
+dosage = db.Column(db.Integer, nullable=False)
+submit = SubmitField('Register')
+@login_manager.user_loader
+rapports = RapportMedecin.query.filter_by(patient_id=patient.id).all()
+from flask import Flask, render_template, request, redirect, url_for
+return 'Alerte ajoutée avec succès'

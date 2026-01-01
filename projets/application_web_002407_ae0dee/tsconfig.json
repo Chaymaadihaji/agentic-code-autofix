@@ -1,0 +1,32 @@
+json
+{
+  "compilerOptions": {
+    "target": "es2022",
+    "module": "commonjs",
+    "sourceMap": true,
+    "outDir": "dist",
+    "rootDir": "src",
+    "allowJs": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "noImplicitAny": true,
+    "strict": true,
+    "strictFunctionTypes": true,
+    "strictPropertyInitialization": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true
+  },
+  "baseUrl": ".",
+  "moduleResolution": "node",
+  "paths": {
+    "!@types/node": ["node_modules/@types/node/index"],
+    "!@types/dotenv": ["node_modules/@types/dotenv/index"],
+    "!@types/sequelize": ["node_modules/@types/sequelize/index"],
+    "!@types/django-rest-framework": ["node_modules/@types/django-rest-framework/index"]
+  },
+  "types": ["node", "express", "reflect-metadata", "dotenv", "sequelize", "mysql2"],
+  "include": ["src/**/*"]
+}

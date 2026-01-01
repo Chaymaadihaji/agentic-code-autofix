@@ -1,0 +1,1 @@
+{"nom_fichier": "requirements.txt", "code": "bash\nFlask==2.3.3\nFlask-SQLAlchemy==2.6.3\nFlask-Mail==0.9.1\nFlask-SMS==1.2.1\nbcrypt==4.0.1\nsqlalchemy==1.4.40\npython-dotenv==0.20.0\nFlask-WTF==1.0.0\nFlask-Login==0.5.0\nFlask-Bcrypt==0.7.1\nFlask-SQLAlchemy==2.6.3\nFlask-Mail==0.9.1\nFlask-SMS==1.2.1\n", "timestamp": 1766865218.3542159}

@@ -1,0 +1,21 @@
+json
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "build",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "commonjs",
+    "target": "es6",
+    "allowJs": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules/", ".vscode/", "**/*.test.ts", "**/*.spec.ts"]
+}

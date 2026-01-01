@@ -1,0 +1,1 @@
+{"nom_fichier": ".env.example", "code": "STREAMLIT_PORT=8501\nSTREAMLIT_SERVER_IP=0.0.0.0\nSTREAMLIT_SERVER_SECRET=\"entrez_votre_secret\"\nDATABASE_NAME=\"database.db\"\nDATABASE_USER=\"utilisateur\"\nDATABASE_PASSWORD=\"mot_de_passe\"\n", "timestamp": 1767000559.5825365}

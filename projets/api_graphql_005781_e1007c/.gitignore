@@ -1,0 +1,31 @@
+go
+# Gqlgen
+*.gql
+*.gqlgen
+#gqlgen.yml
+
+# PostgreSQL
+pg_config
+pg_service
+
+# GraphQL Schema
+schema.graphql.json
+
+# JWT Secret
+jwt_secret.txt
+
+# WebSocket
+websocket.sock
+sockjs
+
+# Kubernetes
+.kubernetes/
+*.pod
+
+# Build
+bin/
+vendor/
+
+# Go Modules
+go.mod
+go.sum

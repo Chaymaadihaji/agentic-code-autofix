@@ -1,0 +1,39 @@
+{
+  "type_application": "web",
+  "type_projet": "fullstack",
+  "besoin_interface": true,
+  "type_interface": "web_gui",
+  "complexite_interface": "moyenne",
+  "composants_ui_attendus": [
+    "tableaux"
+  ],
+  "technologies_frontend": [
+    "react",
+    "typescript"
+  ],
+  "technologies_backend": [
+    "express",
+    "node.js"
+  ],
+  "base_de_donnees": [],
+  "authentification": [],
+  "langage_backend": "javascript",
+  "langage_principal": "typescript",
+  "framework_ui": "react",
+  "description_technique": "Application TypeScript basée sur: Application React qui fetch les données de l'API JSONPlaceholder et les affiche dans un tableau avec...",
+  "fonctionnalites_cles": [
+    "tableau"
+  ],
+  "dependances": [
+    "react",
+    "react-dom",
+    "@types/react",
+    "typescript",
+    "@types/node",
+    "ts-node"
+  ],
+  "deploiement": [
+    "vercel",
+    "heroku"
+  ]
+}

@@ -1,0 +1,37 @@
+from flask import Flask, render_template, request
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField
+from wtforms.validators import DataRequired
+import random
+import string
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'secret_key'
+
+class PenduForm(FlaskForm):
+    lettre = StringField('Lettre', validators=[DataRequired()])
+    submit = SubmitField('Soumettre')
+
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    word = ''.join(random.choice(string.ascii_lowercase) for _ in range(7))
+    lettres_utilisees = []
+    erreurs = 0
+    if request.method == 'POST':
+        forme = PenduForm(request.form)
+        if forme.validate_on_submit():
+            lettre = forme.letrer.data.lower()
+            if lettre in word:
+                # traitement pour trouver la lettre dans le mot
+                pass
+            else:
+                erreurs += 1
+                lettres_utilisees.append(lettre)
+    return render_template('index.html', word=word, lettres_utilisees=lettres_utilisees, erreurs=erreurs)
+
+@app.route('/resultat')
+def resultat():
+    return 'Vous avez gagné !'
+
+if __name__ == '__main__':
+    app.run(debug=True)

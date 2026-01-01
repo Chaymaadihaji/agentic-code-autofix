@@ -1,0 +1,1 @@
+Application web Django avec interface admin, authentification utilisateurs, base de données PostgreSQL, API REST avec Django REST Framework, et déploiement Docker

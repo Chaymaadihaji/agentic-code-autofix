@@ -1,0 +1,1 @@
+{"nom_fichier": "README.md", "code": "bash\ngit clone https://github.com/your-github-username/bibliothèque-en-ligne.git\ncd bibliothèque-en-ligne\npip install -r requirements.txt\n", "timestamp": 1766873032.751598}

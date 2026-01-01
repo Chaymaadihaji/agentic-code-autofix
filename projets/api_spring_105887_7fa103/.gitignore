@@ -1,0 +1,48 @@
+# .gitignore
+
+# Fichier temporaire Java
+*.class
+*.jar
+*.war
+
+# Fichier de compilation
+*.java~
+
+# Fichier de compilation Maven
+target/
+
+# Fichier de compilation Gradle
+/build/
+
+# Fichier de connexion PostgreSQL
+~/.pgpass
+
+# Config de Maven
+.settings
+ pom.xml~
+
+# Config de Gradle
+ gradle/
+
+# Logs Spring Boot
+logs/
+
+# Swagger
+/target/swagger-ui.html
+
+# Docker
+*Dockerfile
+docker-compose.yml
+
+# IntelliJ IDEA
+*.iml
+*.ipr
+.idea/
+
+# Éclipse
+*.project
+.metadata/
+
+# NetBeans
+nbproject/
+-#-#

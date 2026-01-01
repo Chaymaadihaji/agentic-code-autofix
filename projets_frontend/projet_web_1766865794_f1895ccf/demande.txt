@@ -1,0 +1,1 @@
+python main.py "Je veux une app Android de météo avec : localisation, prévisions 7 jours, alertes, favoris villes. Kotlin avec Android SDK, API REST OpenWeather."

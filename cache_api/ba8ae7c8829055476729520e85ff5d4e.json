@@ -1,0 +1,1 @@
+{"nom_fichier": ".env.example", "code": "# .env.example\n\n# Base de données\nDB_HOST=localhost\nDB_PORT=5432\nDB_USER=postgres\nDB_PASSWORD=postgres\nDB_NAME=mydb\n\n# API\nAPI_PORT=8080\nAPI_HOST=localhost\n", "timestamp": 1766868033.344228}

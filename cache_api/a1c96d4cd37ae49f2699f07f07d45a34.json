@@ -1,0 +1,1 @@
+{"nom_fichier": "README.md", "code": "bash\npip install fastapi uvicorn mongomodel jwt-crypt pyjwt aiomongodb swagger\n", "langage": "markdown", "bugs_introduits": [], "corrections_appliquees": [], "timestamp": 1767108314.677018, "tentative": 2}

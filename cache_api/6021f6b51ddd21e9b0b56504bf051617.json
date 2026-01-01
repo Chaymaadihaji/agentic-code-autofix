@@ -1,0 +1,1 @@
+{"nom_fichier": ".gitignore", "code": "# .gitignore\n\n# Fichiers générés par les outils de build\ntarget/\nnode_modules/\n\n# Fichiers de configuration\n.env\n\n# Fichiers de logs\nlogs/\n\n# Fichiers de documentation\ndocs/\nswagger.json\nswagger.yaml\n\n# Fichiers de bases de données\n*.db\n*.sql\n", "timestamp": 1766871139.2778273}

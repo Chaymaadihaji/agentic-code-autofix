@@ -1,0 +1,1 @@
+{"nom_fichier": "static/dashboard.css", "code": "# Fichier Python Flask\nfrom flask import Flask, render_template\nfrom flask import request\n\napp = Flask(__name__)\n\n@app.route(\"/\")\ndef index():\n    return render_template(\"index.html\")\n\nif __name__ == \"__main__\":\n    app.run(debug=True)\n", "timestamp": 1766748680.0185833}

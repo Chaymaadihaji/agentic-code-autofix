@@ -1,0 +1,1 @@
+{"nom_fichier": "README.md", "code": "bash\nnpm install\nnpm start\n", "langage": "markdown", "bugs_introduits": ["syntax_error", "undefined_variable"], "corrections_appliquees": [], "timestamp": 1767009973.3401887, "tentative": 1}

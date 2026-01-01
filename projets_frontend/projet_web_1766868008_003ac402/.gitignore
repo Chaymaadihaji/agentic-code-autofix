@@ -1,0 +1,16 @@
+markdown
+# Ignorer les fichiers de build
+node_modules/
+dist/
+vendor/
+
+# Ignorer les fichiers de configuration
+.env
+go.mod
+go.sum
+
+# Ignorer les fichiers de logs
+logs/
+
+# Ignorer les fichiers binaires
+bin/

@@ -1,0 +1,1 @@
+{"nom_fichier": "requirements.txt", "code": "numpy==1.23.2\npandas==1.5.2\nmatplotlib==3.7.0\nscikit-learn==1.1.2\nscipy==1.10.0\nseaborn==0.12.1\n", "langage": "requirements", "bugs_introduits": ["syntax_error", "undefined_variable"], "corrections_appliquees": [], "timestamp": 1767105384.4313753, "tentative": 3}

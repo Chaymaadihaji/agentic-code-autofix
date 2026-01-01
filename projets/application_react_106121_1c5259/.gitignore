@@ -1,0 +1,20 @@
+typescript
+# .gitignore
+
+# Ignorer les fichiers de compilation
+/node_modules/
+
+# Ignorer les fichiers de cache de VSCode
+/.vscode/
+
+# Ignorer les fichiers de configuration de Tailwind CSS
+/tailwind.config.js
+
+# Ignorer les fichiers de configuration de Redux Toolkit
+/configureStore.js
+
+# Ignorer les fichiers de configuration d'express
+/server.js
+
+# Ignorer les fichiers de configuration de MongoDB
+/mongodb.conf.json

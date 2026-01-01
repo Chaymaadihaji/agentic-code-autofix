@@ -1,0 +1,35 @@
+json
+{
+  "name": "mon-projet-django",
+  "version": "1.0.0",
+  "description": "Application web Django pour gérer un projet",
+  "main": "manage.py",
+  "scripts": {
+    "start": "python manage.py runserver",
+    "test": " Coverage run --source '.' --omit='venv/*",
+    "deploy": "docker-compose up --build",
+    "build": "docker-compose build"
+  },
+  "keywords": ["Django", "PostgreSQL", "API"],
+  "author": "Toni",
+  "license": "MIT",
+  "dependencies": {
+    "django": "^3.2.11",
+    "django-rest-framework": "^3.12.4",
+    "psycopg2-binary": "^2.9.3",
+    "pipenv": "^2021.5.16",
+    "docker": "^5.0.3",
+    "docker-compose": "^2.2.3"
+  },
+  "devDependencies": {
+    "pytest": "^6.2.5",
+    "pytest-cov": "^2.12.1",
+    "coverage": "^6.2.2",
+    "pipenv-run": "^2021.7.15"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/touhami123/sd-technoir.git",
+    "path": "mon-projet-django/"
+  }
+}

@@ -1,0 +1,48 @@
+json
+{
+  "name": "react-redux-app",
+  "version": "1.0.0",
+  "description": "App React avec Redux Toolkit, Axios et Material-UI",
+  "main": "index.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.8.0",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^0.24.0",
+    "material-ui": "^4.12.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "^5.0.1",
+    "redux": "^4.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.24.1",
+    "eslint-plugin-react": "^7.32.3",
+    "jest": "^27.5.1",
+    "react-test-renderer": "^18.2.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "readmeFilename": "README.md",
+  "mainField": "main",
+  "engines": {
+    "node": "^16.17.0",
+    "npm": "^8.11.0"
+  }
+}

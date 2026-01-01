@@ -1,0 +1,21 @@
+json
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "commonjs",
+    "target": "es6",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "resolveJsonModule": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules/**/*"],
+  "ts-node": {
+    "transpileOnly": true
+  },
+  "extends": ["./tsconfig.base.json"]
+}

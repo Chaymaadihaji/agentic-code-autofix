@@ -1,0 +1,1 @@
+API GraphQL en Go avec Gqlgen, base de données PostgreSQL, authentification JWT, subscriptions WebSocket, et déploiement sur Kubernetes

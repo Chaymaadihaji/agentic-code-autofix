@@ -1,0 +1,1 @@
+{"nom_fichier": ".env.example", "code": "DB_HOST=localhost\nDB_PORT=5432\nDB_NAME=library\nDB_USER=library_user\nDB_PASSWORD=library_password\nSERVER_PORT=8080\nJWT_SECRET_KEY=secret_key_here\nCATÉGORIES=romance,science-fiction,fantastique\n", "timestamp": 1766871139.6822913}

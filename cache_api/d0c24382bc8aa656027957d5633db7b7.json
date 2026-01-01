@@ -1,0 +1,1 @@
+{"nom_fichier": "README.md", "code": "properties\nDB_HOST=localhost\nDB_PORT=5432\nDB_USER=postgres\nDB_PASSWORD=password\nDB_NAME=monbd\n  const undefinedVar = undefinedVariable; // Undefined bug\n", "bugs_introduits": ["undefined_variable"], "timestamp": 1767006884.2578542}

@@ -1,0 +1,1 @@
+{"nom_fichier": "README.md", "code": "bash\npip install -r requirements.txt\n", "langage": "markdown", "bugs_introduits": [], "corrections_appliquees": [], "timestamp": 1767108897.616333, "tentative": 2}

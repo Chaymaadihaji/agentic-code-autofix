@@ -1,6 +1,6 @@
 """
 🧠 Module d'analyse COMPLÈTE des demandes utilisateur
-Détecte automatiquement les besoins backend ET frontend
+Version avec DÉTECTION MANUELLE FORCÉE - Pas d'API pour Go, Java, Django, etc.
 """
 
 import json
@@ -12,311 +12,628 @@ from dotenv import load_dotenv
 # Charger .env
 load_dotenv()
 
-class Analyser:
+class AnalysateurAvance:
     def __init__(self):
-        # Vérifier que la clé API est disponible
+    
         api_key = os.getenv("GROQ_API_KEY")
         if not api_key:
             raise ValueError("GROQ_API_KEY non trouvée dans .env")
         
-        print(f"🔑 Initialisation API Groq...")
+        print(f"Initialisation API Groq...")
         self.client = Groq(api_key=api_key)
-        self.model = os.getenv("LLM_MODEL", "llama-3.3-70b-versatile")
+        self.model = os.getenv("LLM_MODEL", "llama-3.1-8b-instant")
         print(f"   → Modèle : {self.model}")
     
     def analyser_demande(self, demande):
         """
-        Analyse COMPLÈTE pour déterminer les besoins backend + frontend
+        Analyse COMPLÈTE avec DÉTECTION MANUELLE FORCÉE
+        PAS D'API pour les langages spécifiques !
         """
-        print(f"🧠 Analyse intelligente : {demande[:60]}...")
+        print(f" Analyse intelligente : {demande[:60]}...")
         
-        prompt = f"""
-        Analyse cette demande de développement et identifie TOUS les besoins techniques.
+        demande_lower = demande.lower()
         
-        DEMANDE ORIGINALE : "{demande}"
+        # ============ DÉTECTION MANUELLE FORCÉE ============
+        # Go - PRIORITÉ ABSOLUE
+        if any(mot in demande_lower for mot in ['go ', 'golang', 'gqlgen', '.go', 'func ', 'package ', 'fmt.println']):
+            print(f"   Détection FORCÉE: GO")
+            return self._generer_analyse_go(demande, demande_lower)
         
-        Questions critiques à analyser :
-        1. Cette application nécessite-t-elle une interface utilisateur (UI) ?
-        2. Si oui, quel type d'interface (CLI simple, web GUI, desktop, mobile) ?
-        3. Quels composants UI sont attendus (cartes, formulaires, tableaux, graphiques, galerie, dashboard, etc.) ?
-        4. Quelle est la complexité technique globale ?
-        5. Quelles sont les fonctionnalités clés à implémenter ?
-        6. Quel est le langage backend le plus adapté ?
+        # Django
+        if 'django' in demande_lower:
+            print(f"   Détection FORCÉE: DJANGO")
+            return self._generer_analyse_django(demande, demande_lower)
         
-        IMPORTANT : Évalue objectivement. Même une calculatrice simple a besoin d'une interface.
+        # Java/Spring Boot
+        if any(mot in demande_lower for mot in ['java', 'spring', 'spring boot', 'spring-boot', 'jpa', 'hibernate']):
+            print(f"    Détection FORCÉE: JAVA")
+            return self._generer_analyse_java(demande, demande_lower)
         
-        Retourne UNIQUEMENT et EXACTEMENT ce JSON (pas d'autres texte) :
-        {{
-            "type_application": "web|desktop|mobile|cli|api|jeu|utilitaire|dashboard|autre",
-            "besoin_interface": true|false,
-            "type_interface": "web_gui|desktop_gui|mobile_gui|cli|aucune",
-            "complexite_interface": "simple|moyenne|complexe",
-            "composants_ui_attendus": ["cartes", "formulaires", "tableaux", "graphiques", "galerie", "dashboard", "jeu", "calculatrice", "visualisation", "autre"],
-            "langage_backend": "python|javascript|autre",
-            "framework_ui": "flask_html|streamlit|tkinter|autre",
-            "description_technique": "description courte et précise de ce que doit faire l'application",
-            "fonctionnalites_cles": ["liste des fonctionnalités principales à implémenter"],
-            "dependances": ["Flask", "autres dépendances probables selon le type d'application"]
-        }}
+        # Rust
+        if 'rust' in demande_lower or '.rs' in demande_lower:
+            print(f"    Détection FORCÉE: RUST")
+            return self._generer_analyse_rust(demande, demande_lower)
         
-        Exemples de décisions :
-        - "calculatrice" → besoin_interface:true, type_interface:web_gui, composants:["calculatrice"]
-        - "site web météo" → besoin_interface:true, type_interface:web_gui, composants:["cartes", "graphiques"]
-        - "todo list" → besoin_interface:true, type_interface:web_gui, composants:["formulaires", "tableaux"]
-        - "api de données" → besoin_interface:false, type_interface:aucune
-        - "jeu de memory" → besoin_interface:true, type_interface:web_gui, composants:["jeu", "cartes"]
-        """
+        # Python Flask/Streamlit
+        if 'flask' in demande_lower or 'streamlit' in demande_lower:
+            print(f"    Détection FORCÉE: PYTHON")
+            return self._generer_analyse_python(demande, demande_lower)
         
+        # TypeScript/React/Node.js
+        if any(mot in demande_lower for mot in ['typescript', 'javascript', 'react', 'vue', 'angular', 'node.js', 'express']):
+            print(f"     Détection FORCÉE: TYPESCRIPT/JAVASCRIPT")
+            return self._generer_analyse_typescript(demande, demande_lower)
+        
+        # Si aucun langage spécifique détecté, utiliser l'API
+        print("    Appel à l'API Groq (langage non spécifique)...")
         try:
-            print("   📡 Appel à l'API Groq pour analyse complète...")
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=[
-                    {"role": "system", "content": "Tu es un architecte logiciel expert. Analyse les besoins techniques objectivement et retourne uniquement du JSON valide."},
-                    {"role": "user", "content": prompt}
+                    {"role": "system", "content": "Tu es un architecte logiciel. Retourne uniquement du JSON."},
+                    {"role": "user", "content": f"Analyse: {demande}"}
                 ],
-                temperature=0.2,  # Plus bas pour plus de consistance
-                max_tokens=600
+                temperature=0.1,
+                max_tokens=500
             )
             
-            # Extraire le JSON de la réponse
             content = response.choices[0].message.content
             content = content.strip()
             
-            print(f"   ✅ Réponse API reçue ({len(content)} caractères)")
+            print(f"    Réponse API reçue ({len(content)} caractères)")
             
-            # Nettoyer la réponse agressivement
             content = self._nettoyer_reponse_json(content)
-            
             analyse = json.loads(content)
             
-            # Validation et normalisation des champs
-            analyse = self._valider_et_normaliser_analyse(analyse, demande)
-            
-            print(f"   📊 Analyse COMPLÈTE terminée :")
-            print(f"      Type: {analyse.get('type_application')}")
-            print(f"      Interface: {'✅' if analyse.get('besoin_interface') else '❌'} {analyse.get('type_interface')}")
-            if analyse.get('besoin_interface'):
-                print(f"      Composants UI: {', '.join(analyse.get('composants_ui_attendus', []))}")
-            print(f"      Fonctionnalités: {len(analyse.get('fonctionnalites_cles', []))} clés")
-            
-            return analyse
-            
-        except json.JSONDecodeError as e:
-            print(f"❌ Erreur de parsing JSON : {e}")
-            print(f"Contenu problématique : {content[:300]}...")
-            return self._analyse_par_defaut_ameliorée(demande)
-            
         except Exception as e:
-            print(f"❌ Erreur lors de l'analyse: {e}")
-            import traceback
-            traceback.print_exc()
-            return self._analyse_par_defaut_ameliorée(demande)
+            print(f"     Erreur API, utilisation de fallback: {e}")
+            analyse = self._analyse_fallback(demande, demande_lower)
+        
+        # Afficher les résultats
+        print(f"    Analyse COMPLÈTE terminée :")
+        print(f"      Type projet: {analyse.get('type_projet', 'N/A').upper()}")
+        print(f"      Type: {analyse.get('type_application')}")
+        print(f"      Langage: {analyse.get('langage_principal', 'N/A').upper()}")
+        print(f"      Interface: {'' if analyse.get('besoin_interface') else ''} {analyse.get('type_interface')}")
+        
+        if analyse.get('type_projet') == 'fullstack':
+            print(f"        FRONTEND: {', '.join(analyse.get('technologies_frontend', []))}")
+            print(f"       BACKEND: {', '.join(analyse.get('technologies_backend', []))}")
+            print(f"       DATABASE: {', '.join(analyse.get('base_de_donnees', []))}")
+        
+        if analyse.get('besoin_interface'):
+            print(f"       Composants UI: {', '.join(analyse.get('composants_ui_attendus', []))}")
+        print(f"       Fonctionnalités: {len(analyse.get('fonctionnalites_cles', []))} clés")
+        
+        return analyse
+    
+    def _generer_analyse_go(self, demande, demande_lower):
+        """Génère une analyse spécifique pour Go"""
+        print(f"    Détection projet: BACKEND (Go API)")
+        print(f"     Configuration projet BACKEND détectée")
+        
+        type_projet = 'backend'
+        besoin_interface = False
+        
+       
+        if any(mot in demande_lower for mot in ['react', 'vue', 'angular', 'frontend']):
+            type_projet = 'fullstack'
+            besoin_interface = True
+        
+        return {
+            "type_application": "api",
+            "type_projet": type_projet,
+            "besoin_interface": besoin_interface,
+            "type_interface": "web_gui" if besoin_interface else "aucune",
+            "complexite_interface": "complexe",
+            "composants_ui_attendus": ["graphiques", "tableaux"] if besoin_interface else [],
+            "technologies_frontend": ["react", "typescript"] if 'react' in demande_lower else [],
+            "technologies_backend": self._detecter_technologies_backend_go(demande_lower),
+            "base_de_donnees": self._detecter_bases_donnees(demande_lower),
+            "authentification": self._detecter_authentification(demande_lower),
+            "langage_backend": "go",
+            "langage_principal": "go",
+            "framework_ui": "gqlgen" if 'gqlgen' in demande_lower else "gin",
+            "description_technique": f"API Go basée sur: {demande[:100]}...",
+            "fonctionnalites_cles": self._extraire_fonctionnalites_go(demande_lower),
+            "dependances": self._generer_dependances_go(demande_lower),
+            "deploiement": self._detecter_deploiement(demande_lower)
+        }
+    
+    def _detecter_technologies_backend_go(self, demande_lower):
+        """Détecte les technologies backend spécifiques à Go"""
+        techs = []
+        
+        if 'gin' in demande_lower:
+            techs.append('gin')
+        elif 'echo' in demande_lower:
+            techs.append('echo')
+        elif 'fiber' in demande_lower:
+            techs.append('fiber')
+        else:
+            techs.append('gin')  # Par défaut
+            
+        if 'gqlgen' in demande_lower:
+            techs.append('gqlgen')
+        elif 'graphql' in demande_lower:
+            techs.append('graphql-go')
+            
+      
+        if 'websocket' in demande_lower or 'subscription' in demande_lower:
+            techs.append('websocket')
+            
+        return techs
+    
+    def _generer_dependances_go(self, demande_lower):
+        """Génère les dépendances Go"""
+        dependances = []
+        
+        
+        if 'gin' in demande_lower:
+            dependances.append('github.com/gin-gonic/gin')
+        elif 'echo' in demande_lower:
+            dependances.append('github.com/labstack/echo/v4')
+        elif 'fiber' in demande_lower:
+            dependances.append('github.com/gofiber/fiber/v2')
+        else:
+            dependances.append('github.com/gin-gonic/gin')  
+        
+        
+        if 'gqlgen' in demande_lower:
+            dependances.extend([
+                'github.com/99designs/gqlgen',
+                'github.com/vektah/gqlparser/v2'
+            ])
+        elif 'graphql' in demande_lower:
+            dependances.append('github.com/graph-gophers/graphql-go')
+        
+      
+        if 'websocket' in demande_lower or 'subscription' in demande_lower:
+            dependances.extend([
+                'github.com/gorilla/websocket',
+                'nhooyr.io/websocket'
+            ])
+        
+        if 'postgresql' in demande_lower or 'postgres' in demande_lower:
+            dependances.extend([
+                'github.com/jackc/pgx/v5',
+                'github.com/go-pg/pg/v10',
+                'github.com/jinzhu/gorm'
+            ])
+        
+        
+        if 'jwt' in demande_lower:
+            dependances.extend([
+                'github.com/golang-jwt/jwt/v5',
+                'github.com/auth0/go-jwt-middleware'
+            ])
+        
+        
+        dependances.append('github.com/rs/cors')
+        
+        
+        dependances.append('github.com/joho/godotenv')
+        
+        if 'kubernetes' in demande_lower or 'k8s' in demande_lower:
+            dependances.extend([
+                'k8s.io/client-go',
+                'k8s.io/apimachinery'
+            ])
+        
+        
+        dependances.append('github.com/sirupsen/logrus')
+        
+       
+        dependances.append('github.com/go-playground/validator/v10')
+        
+        return dependances
+    
+    def _extraire_fonctionnalites_go(self, demande_lower):
+        """Extrait les fonctionnalités spécifiques à Go"""
+        fonctionnalites = []
+        
+        if 'graphql' in demande_lower:
+            fonctionnalites.append("API GraphQL")
+        if 'postgresql' in demande_lower:
+            fonctionnalites.append("Base de données PostgreSQL")
+        if 'jwt' in demande_lower:
+            fonctionnalites.append("Authentification JWT")
+        if 'websocket' in demande_lower:
+            fonctionnalites.append("Subscriptions WebSocket")
+        if 'kubernetes' in demande_lower:
+            fonctionnalites.append("Déploiement Kubernetes")
+        if 'subscription' in demande_lower:
+            fonctionnalites.append("Subscriptions en temps réel")
+        
+        if not fonctionnalites:
+            fonctionnalites = ["API Go", "Performance élevée", "Concurrence native"]
+        
+        return fonctionnalites
+    
+    def _generer_analyse_django(self, demande, demande_lower):
+        """Génère une analyse spécifique pour Django"""
+        return {
+            "type_application": "web",
+            "type_projet": "backend",
+            "besoin_interface": True,
+            "type_interface": "web_gui",
+            "complexite_interface": "complexe",
+            "composants_ui_attendus": ["formulaires", "tableaux", "dashboard"],
+            "technologies_frontend": [],
+            "technologies_backend": ["django"],
+            "base_de_donnees": ["postgresql"] if 'postgresql' in demande_lower else ["sqlite"],
+            "authentification": ["session"],
+            "langage_backend": "python",
+            "langage_principal": "python",
+            "framework_ui": "django",
+            "description_technique": f"Application Django basée sur: {demande[:100]}...",
+            "fonctionnalites_cles": ["Interface admin", "Authentification", "API REST"],
+            "dependances": self._generer_dependances_django(demande_lower),
+            "deploiement": ["docker"]
+        }
+    
+    def _generer_analyse_java(self, demande, demande_lower):
+        """Génère une analyse spécifique pour Java"""
+        return {
+            "type_application": "api",
+            "type_projet": "backend",
+            "besoin_interface": False,
+            "type_interface": "aucune",
+            "complexite_interface": "complexe",
+            "composants_ui_attendus": [],
+            "technologies_frontend": [],
+            "technologies_backend": ["spring", "spring-boot"],
+            "base_de_donnees": self._detecter_bases_donnees(demande_lower),
+            "authentification": self._detecter_authentification(demande_lower),
+            "langage_backend": "java",
+            "langage_principal": "java",
+            "framework_ui": "spring-boot",
+            "description_technique": f"API Spring Boot basée sur: {demande[:100]}...",
+            "fonctionnalites_cles": ["API REST", "Sécurité", "Performance"],
+            "dependances": self._generer_dependances_spring_boot(demande_lower),
+            "deploiement": ["docker", "kubernetes"]
+        }
+    
+    def _generer_analyse_rust(self, demande, demande_lower):
+        """Génère une analyse spécifique pour Rust"""
+        return {
+            "type_application": "api",
+            "type_projet": "backend",
+            "besoin_interface": False,
+            "type_interface": "aucune",
+            "complexite_interface": "complexe",
+            "composants_ui_attendus": [],
+            "technologies_frontend": [],
+            "technologies_backend": ["actix-web"],
+            "base_de_donnees": self._detecter_bases_donnees(demande_lower),
+            "authentification": self._detecter_authentification(demande_lower),
+            "langage_backend": "rust",
+            "langage_principal": "rust",
+            "framework_ui": "actix",
+            "description_technique": f"API Rust basée sur: {demande[:100]}...",
+            "fonctionnalites_cles": ["Performance", "Sécurité mémoire", "Concurrence"],
+            "dependances": self._generer_dependances_rust(demande_lower),
+            "deploiement": ["docker"]
+        }
+    
+    def _generer_analyse_python(self, demande, demande_lower):
+        """Génère une analyse spécifique pour Python (Flask/Streamlit)"""
+        if 'streamlit' in demande_lower:
+            framework = "streamlit"
+            type_app = "streamlit"
+            besoin_interface = True
+            type_interface = "streamlit_gui"
+        else:
+            framework = "flask_html"
+            type_app = "web"
+            besoin_interface = True
+            type_interface = "web_gui"
+        
+        return {
+            "type_application": type_app,
+            "type_projet": "web",
+            "besoin_interface": besoin_interface,
+            "type_interface": type_interface,
+            "complexite_interface": "moyenne",
+            "composants_ui_attendus": self._detecter_composants_ui(demande_lower),
+            "technologies_frontend": [],
+            "technologies_backend": ["flask"] if 'flask' in demande_lower else [],
+            "base_de_donnees": [],
+            "authentification": [],
+            "langage_backend": "python",
+            "langage_principal": "python",
+            "framework_ui": framework,
+            "description_technique": f"Application Python basée sur: {demande[:100]}...",
+            "fonctionnalites_cles": self._extraire_fonctionnalites(demande),
+            "dependances": self._generer_dependances_python(demande_lower),
+            "deploiement": []
+        }
+    
+    def _generer_analyse_typescript(self, demande, demande_lower):
+        """Génère une analyse spécifique pour TypeScript/JavaScript"""
+        type_projet = 'fullstack' if any(mot in demande_lower for mot in ['frontend', 'react', 'vue', 'angular']) else 'backend'
+        besoin_interface = type_projet == 'fullstack'
+        
+        return {
+            "type_application": "web",
+            "type_projet": type_projet,
+            "besoin_interface": besoin_interface,
+            "type_interface": "web_gui" if besoin_interface else "aucune",
+            "complexite_interface": "moyenne",
+            "composants_ui_attendus": self._detecter_composants_ui(demande_lower),
+            "technologies_frontend": ["react", "typescript"] if 'react' in demande_lower else ["javascript"],
+            "technologies_backend": ["express", "node.js"],
+            "base_de_donnees": self._detecter_bases_donnees(demande_lower),
+            "authentification": self._detecter_authentification(demande_lower),
+            "langage_backend": "javascript",
+            "langage_principal": "typescript",
+            "framework_ui": "react" if 'react' in demande_lower else "vanilla",
+            "description_technique": f"Application TypeScript basée sur: {demande[:100]}...",
+            "fonctionnalites_cles": self._extraire_fonctionnalites(demande),
+            "dependances": self._generer_dependances_typescript(demande_lower),
+            "deploiement": ["vercel", "heroku"]
+        }
+    
+    def _generer_dependances_typescript(self, demande_lower):
+        """Génère les dépendances TypeScript"""
+        dependances = []
+        
+        
+        if 'express' in demande_lower or 'node.js' in demande_lower:
+            dependances.extend(['express', 'cors', '@types/express'])
+        
+       
+        if 'react' in demande_lower:
+            dependances.extend(['react', 'react-dom', '@types/react'])
+        
+        
+        dependances.extend(['typescript', '@types/node', 'ts-node'])
+        
+       
+        if 'mongodb' in demande_lower:
+            dependances.append('mongoose')
+        elif 'postgresql' in demande_lower:
+            dependances.extend(['pg', '@types/pg'])
+        
+        
+        if 'jwt' in demande_lower:
+            dependances.extend(['jsonwebtoken', '@types/jsonwebtoken', 'bcryptjs'])
+        
+        
+        if 'graphql' in demande_lower:
+            dependances.extend(['graphql', 'apollo-server', '@apollo/client'])
+        
+        return dependances
+    
+    def _analyse_fallback(self, demande, demande_lower):
+        """Analyse de fallback générique"""
+        return {
+            "type_application": "web",
+            "type_projet": "web",
+            "besoin_interface": True,
+            "type_interface": "web_gui",
+            "complexite_interface": "moyenne",
+            "composants_ui_attendus": ["formulaires", "tableaux"],
+            "technologies_frontend": [],
+            "technologies_backend": [],
+            "base_de_donnees": [],
+            "authentification": [],
+            "langage_backend": "python",
+            "langage_principal": "python",
+            "framework_ui": "flask_html",
+            "description_technique": f"Application basée sur: {demande[:100]}...",
+            "fonctionnalites_cles": self._extraire_fonctionnalites(demande),
+            "dependances": ["Flask"],
+            "deploiement": []
+        }
+    
+    
     
     def _nettoyer_reponse_json(self, content):
-        """Nettoie agressivement la réponse pour extraire le JSON"""
-        # Chercher le premier { et le dernier }
+        """Nettoie le JSON"""
+       
         start = content.find('{')
         end = content.rfind('}') + 1
         
         if start != -1 and end != 0:
             content = content[start:end]
         
-        # Enlever les blocs de code
-        content = content.replace('```json', '').replace('```', '')
+        content = content.replace('```json', '').replace('```', '').strip()
         
-        # Enlever les espaces/tabulations extrêmes
-        content = content.strip()
-        
-        # Valider que c'est du JSON
         try:
-            json.loads(content)  # Test de validation
+            json.loads(content)
             return content
         except:
-            # Essayer de réparer le JSON
             return self._reparer_json(content)
     
     def _reparer_json(self, content):
         """Tente de réparer un JSON malformé"""
-        # Enlever les caractères problématiques
         content = re.sub(r'[\x00-\x1F\x7F]', '', content)
         
-        # Essayer d'extraire un objet JSON
         match = re.search(r'\{.*\}', content, re.DOTALL)
         if match:
             content = match.group(0)
         
-        # Remplacer les guillemets simples par doubles si nécessaire
         if "'" in content and '"' not in content:
             content = content.replace("'", '"')
         
-        # Ajouter des guillemets manquants aux clés
         content = re.sub(r'(\w+):', r'"\1":', content)
         
         return content
     
-    def _valider_et_normaliser_analyse(self, analyse, demande):
-        """Valide et normalise l'analyse pour la cohérence"""
-        # Champs obligatoires
-        defaults = {
-            "type_application": "web",
-            "besoin_interface": True,
-            "type_interface": "web_gui",
-            "complexite_interface": "moyenne",
-            "composants_ui_attendus": [],
-            "langage_backend": "python",
-            "framework_ui": "flask_html",
-            "description_technique": f"Application basée sur: {demande[:80]}...",
-            "fonctionnalites_cles": ["fonctionnalite_principale"],
-            "dependances": ["Flask"]
-        }
+    def _detecter_bases_donnees(self, demande_lower):
+        """Détecte les bases de données mentionnées"""
+        databases = []
+        db_techs = ['mongodb', 'postgresql', 'mysql', 'sqlite', 'redis', 'firebase', 'supabase']
         
-        # Appliquer les defaults pour les champs manquants
-        for key, default in defaults.items():
-            if key not in analyse or analyse[key] is None:
-                analyse[key] = default
+        for db in db_techs:
+            if db in demande_lower and db not in databases:
+                databases.append(db)
         
-        # Normalisation des valeurs
-        if isinstance(analyse.get("composants_ui_attendus"), str):
-            analyse["composants_ui_attendus"] = [analyse["composants_ui_attendus"]]
-        
-        if isinstance(analyse.get("fonctionnalites_cles"), str):
-            analyse["fonctionnalites_cles"] = [analyse["fonctionnalites_cles"]]
-        
-        if isinstance(analyse.get("dependances"), str):
-            analyse["dependances"] = [analyse["dependances"]]
-        
-        # Détection automatique basée sur la demande
-        demande_lower = demande.lower()
-        
-        # Détection type application
-        if any(mot in demande_lower for mot in ['web', 'site', 'page', 'flask', 'django']):
-            analyse["type_application"] = "web"
-            analyse["type_interface"] = "web_gui"
-        
-        elif any(mot in demande_lower for mot in ['jeu', 'game', 'jouer', 'score', 'memory', 'quiz']):
-            analyse["type_application"] = "jeu"
-            analyse["besoin_interface"] = True
-            analyse["type_interface"] = "web_gui"
-            if "jeu" not in analyse["composants_ui_attendus"]:
-                analyse["composants_ui_attendus"].append("jeu")
-        
-        elif any(mot in demande_lower for mot in ['dashboard', 'tableau', 'métrique', 'statistique', 'graphique']):
-            analyse["type_application"] = "dashboard"
-            analyse["besoin_interface"] = True
-            if "graphiques" not in analyse["composants_ui_attendus"]:
-                analyse["composants_ui_attendus"].append("graphiques")
-            if "dashboard" not in analyse["composants_ui_attendus"]:
-                analyse["composants_ui_attendus"].append("dashboard")
-        
-        elif any(mot in demande_lower for mot in ['calcul', 'math', 'addition', 'soustraction']):
-            analyse["type_application"] = "utilitaire"
-            analyse["besoin_interface"] = True
-            if "calculatrice" not in analyse["composants_ui_attendus"]:
-                analyse["composants_ui_attendus"].append("calculatrice")
-        
-        # Détection composants UI
-        if "carte" in demande_lower or "card" in demande_lower:
-            if "cartes" not in analyse["composants_ui_attendus"]:
-                analyse["composants_ui_attendus"].append("cartes")
-        
-        if "formulaire" in demande_lower or "form" in demande_lower:
-            if "formulaires" not in analyse["composants_ui_attendus"]:
-                analyse["composants_ui_attendus"].append("formulaires")
-        
-        if "tableau" in demande_lower or "liste" in demande_lower or "table" in demande_lower:
-            if "tableaux" not in analyse["composants_ui_attendus"]:
-                analyse["composants_ui_attendus"].append("tableaux")
-        
-        if "graphique" in demande_lower or "chart" in demande_lower or "statistique" in demande_lower:
-            if "graphiques" not in analyse["composants_ui_attendus"]:
-                analyse["composants_ui_attendus"].append("graphiques")
-        
-        # S'assurer que Flask est dans les dépendances pour les apps web
-        if analyse["type_application"] == "web" and "Flask" not in analyse["dependances"]:
-            analyse["dependances"].append("Flask")
-        
-        # Pour les apps CLI, pas d'interface
-        if analyse["type_interface"] == "cli":
-            analyse["besoin_interface"] = False
-            analyse["composants_ui_attendus"] = []
-        
-        return analyse
+        return databases
     
-    def _analyse_par_defaut_ameliorée(self, demande):
-        """Analyse par défaut améliorée avec détection intelligente"""
-        print("⚠️  Utilisation de l'analyse par défaut améliorée")
+    def _detecter_authentification(self, demande_lower):
+        """Détecte les méthodes d'authentification mentionnées"""
+        auth_methods = []
+        auth_techs = ['jwt', 'oauth', 'session', 'basic auth', 'firebase auth', 'auth0']
         
-        demande_lower = demande.lower()
+        for auth in auth_techs:
+            if auth in demande_lower and auth not in auth_methods:
+                auth_methods.append(auth)
         
-        # Détection intelligente
-        if any(mot in demande_lower for mot in ['web', 'site', 'page', 'flask', 'html', 'css']):
-            type_app = "web"
-            besoin_interface = True
-            type_interface = "web_gui"
-            composants = []
-            dependances = ["Flask"]
-            
-            if "carte" in demande_lower:
-                composants.append("cartes")
-            if "formulaire" in demande_lower:
-                composants.append("formulaires")
-            if "graphique" in demande_lower:
-                composants.append("graphiques")
-            if "tableau" in demande_lower:
-                composants.append("tableaux")
-            
-        elif any(mot in demande_lower for mot in ['jeu', 'game', 'memory', 'quiz', 'puzzle']):
-            type_app = "jeu"
-            besoin_interface = True
-            type_interface = "web_gui"
-            composants = ["jeu"]
-            dependances = []
-            
-        elif any(mot in demande_lower for mot in ['api', 'rest', 'json', 'endpoint']):
-            type_app = "api"
-            besoin_interface = False
-            type_interface = "aucune"
-            composants = []
-            dependances = ["Flask"]  # Pour les API REST
-            
-        else:
-            # Par défaut, application web avec interface
-            type_app = "web"
-            besoin_interface = True
-            type_interface = "web_gui"
-            composants = []
-            dependances = ["Flask"]
+        return auth_methods
+    
+    def _detecter_deploiement(self, demande_lower):
+        """Détecte les plateformes de déploiement mentionnées"""
+        deploiement = []
+        deploiement_techs = ['vercel', 'heroku', 'aws', 'docker', 'kubernetes', 'netlify', 'railway']
         
-        # Extraire les fonctionnalités clés
-        fonctionnalites = self._extraire_fonctionnalites(demande)
+        for dep in deploiement_techs:
+            if dep in demande_lower and dep not in deploiement:
+                deploiement.append(dep)
         
-        return {
-            "type_application": type_app,
-            "besoin_interface": besoin_interface,
-            "type_interface": type_interface,
-            "complexite_interface": "moyenne",
-            "composants_ui_attendus": composants,
-            "langage_backend": "python",
-            "framework_ui": "flask_html",
-            "description_technique": f"Application basée sur la demande : {demande[:100]}...",
-            "fonctionnalites_cles": fonctionnalites,
-            "dependances": dependances
+        return deploiement
+    
+    def _detecter_composants_ui(self, demande_lower):
+        """Détecte les composants UI mentionnés"""
+        composants = []
+        mapping = {
+            'carte': 'cartes',
+            'card': 'cartes',
+            'formulaire': 'formulaires',
+            'form': 'formulaires',
+            'tableau': 'tableaux',
+            'liste': 'tableaux',
+            'table': 'tableaux',
+            'graphique': 'graphiques',
+            'chart': 'graphiques',
+            'statistique': 'graphiques',
+            'dashboard': 'dashboard',
+            'jeu': 'jeu',
+            'game': 'jeu',
+            'calcul': 'calculatrice',
+            'calculator': 'calculatrice',
+            'galerie': 'galerie',
+            'gallery': 'galerie'
         }
+        
+        for mot, composant in mapping.items():
+            if mot in demande_lower and composant not in composants:
+                composants.append(composant)
+        
+        return composants
+    
+    def _generer_dependances_django(self, demande_lower):
+        """Génère les dépendances Django"""
+        dependances = [
+            'django',
+            'djangorestframework',
+            'django-cors-headers'
+        ]
+        
+        if 'postgresql' in demande_lower or 'postgres' in demande_lower:
+            dependances.append('psycopg2-binary')
+        elif 'mysql' in demande_lower:
+            dependances.append('mysqlclient')
+        
+        if 'upload' in demande_lower or 'image' in demande_lower:
+            dependances.append('Pillow')
+        
+        if 'deploiement' in demande_lower or 'docker' in demande_lower:
+            dependances.extend(['gunicorn', 'whitenoise'])
+        
+        if 'jwt' in demande_lower:
+            dependances.append('djangorestframework-simplejwt')
+        
+        return dependances
+    
+    def _generer_dependances_spring_boot(self, demande_lower):
+        """Génère les dépendances Spring Boot"""
+        dependances = [
+            'spring-boot-starter-web',
+            'spring-boot-starter-data-jpa',
+            'spring-boot-starter-test',
+            'spring-boot-devtools'
+        ]
+        
+        if 'postgresql' in demande_lower or 'postgres' in demande_lower:
+            dependances.append('postgresql')
+        elif 'mysql' in demande_lower:
+            dependances.append('mysql-connector-java')
+        elif 'mongodb' in demande_lower:
+            dependances.append('spring-boot-starter-data-mongodb')
+        else:
+            dependances.append('h2')
+        
+        if 'jwt' in demande_lower:
+            dependances.extend(['jjwt-api', 'jjwt-impl', 'jjwt-jackson'])
+        
+        if 'swagger' in demande_lower:
+            dependances.extend(['springdoc-openapi-starter-webmvc-ui'])
+        
+        if 'lombok' in demande_lower:
+            dependances.append('lombok')
+        
+        return dependances
+    
+    def _generer_dependances_rust(self, demande_lower):
+        """Génère les dépendances Rust"""
+        dependances = []
+        
+        if 'actix' in demande_lower:
+            dependances.extend(['actix-web', 'actix-rt'])
+        elif 'rocket' in demande_lower:
+            dependances.extend(['rocket', 'rocket_dyn_templates'])
+        else:
+            dependances.extend(['actix-web', 'actix-rt'])
+        
+        if 'graphql' in demande_lower:
+            dependances.extend(['async-graphql', 'async-graphql-actix-web'])
+        
+        if 'postgresql' in demande_lower:
+            dependances.extend(['sqlx', 'postgres'])
+        
+        if 'jwt' in demande_lower:
+            dependances.extend(['jsonwebtoken', 'chrono'])
+        
+        if 'websocket' in demande_lower:
+            dependances.extend(['tokio-tungstenite', 'futures'])
+        
+        dependances.extend(['serde', 'serde_json'])
+        
+        return dependances
+    
+    def _generer_dependances_python(self, demande_lower):
+        """Génère les dépendances Python"""
+        dependances = []
+        
+        if 'flask' in demande_lower:
+            dependances.append('Flask')
+        elif 'streamlit' in demande_lower:
+            dependances.append('streamlit')
+        
+        if 'pandas' in demande_lower:
+            dependances.append('pandas')
+        
+        if 'plot' in demande_lower or 'graph' in demande_lower:
+            dependances.append('matplotlib')
+        
+        return dependances
     
     def _extraire_fonctionnalites(self, demande):
-        """Extrait les fonctionnalités clés de la demande"""
-        mots_cles_fonctionnalites = [
+        """Extrait les fonctionnalités clés"""
+        mots_cles = [
             "ajouter", "supprimer", "modifier", "rechercher", "filtrer", "trier",
             "afficher", "calculer", "convertir", "enregistrer", "importer", "exporter",
             "télécharger", "uploader", "partager", "commenter", "noter", "voter",
-            "comparer", "analyser", "statistique", "graphique", "rapport", "dashboard"
+            "comparer", "analyser", "statistique", "graphique", "rapport", "dashboard",
+            "visualiser", "voir", "montrer", "présenter", "tableau"
         ]
         
         fonctionnalites = []
         demande_lower = demande.lower()
         
-        for mot in mots_cles_fonctionnalites:
+        for mot in mots_cles:
             if mot in demande_lower:
                 fonctionnalites.append(mot)
         
@@ -325,32 +642,37 @@ class Analyser:
         
         return fonctionnalites
 
-# Test rapide
+
+
 if __name__ == "__main__":
-    print("🧪 Test de l'analyseur amélioré...")
+    print(" Test de l'analyseur FORCÉ FINAL...")
     
-    analyseur = Analyser()
+    analyseur = AnalysateurAvance()
     
     test_demandes = [
-        "application météo avec cartes pour 5 villes et graphiques",
-        "gestionnaire de contacts avec formulaire et tableau",
-        "jeu de memory avec cartes animées",
-        "api pour obtenir des données utilisateur en JSON",
-        "calculatrice scientifique avec interface moderne"
+        "API GraphQL en Go avec Gqlgen, base de données PostgreSQL, authentification JWT, subscriptions WebSocket, et déploiement sur Kubernetes",
+        "Application web Django avec PostgreSQL et API REST",
+        "API Spring Boot avec MongoDB et JWT",
+        "Application React avec Node.js backend et MongoDB"
     ]
     
     for demande in test_demandes:
-        print(f"\n{'='*60}")
+        print(f"\n{'='*80}")
         print(f"Test : {demande}")
-        print(f"{'='*60}")
+        print(f"{'='*80}")
         
         try:
             analyse = analyseur.analyser_demande(demande)
-            print(f"Résultat :")
+            print(f"\n RÉSULTAT D'ANALYSE :")
+            print(f"  Langage: {analyse.get('langage_principal', 'N/A').upper()}")
+            print(f"  Type projet: {analyse.get('type_projet', 'N/A').upper()}")
             print(f"  Type app: {analyse.get('type_application')}")
-            print(f"  Interface: {analyse.get('besoin_interface')} ({analyse.get('type_interface')})")
-            print(f"  Composants: {analyse.get('composants_ui_attendus')}")
-            print(f"  Fonctionnalités: {analyse.get('fonctionnalites_cles')}")
-            print(f"  Dépendances: {analyse.get('dependances')}")
+            print(f"  Framework: {analyse.get('framework_ui')}")
+            print(f"  Backend tech: {', '.join(analyse.get('technologies_backend', []))}")
+            print(f"  Database: {', '.join(analyse.get('base_de_donnees', []))}")
+            print(f"  Dépendances: {', '.join(analyse.get('dependances', []))}")
+            
         except Exception as e:
-            print(f"❌ Erreur: {e}")
+            print(f" Erreur: {e}")
+            import traceback
+            traceback.print_exc()

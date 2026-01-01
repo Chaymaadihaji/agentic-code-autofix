@@ -1,0 +1,25 @@
+{
+  "type_application": "dashboard",
+  "besoin_interface": true,
+  "type_interface": "web_gui",
+  "complexite_interface": "moyenne",
+  "composants_ui_attendus": [
+    "cartes",
+    "graphiques",
+    "dashboard"
+  ],
+  "langage_backend": "python",
+  "framework_ui": "flask_html",
+  "description_technique": "Créer un dashboard de données météo avec graphiques et cartes",
+  "fonctionnalites_cles": [
+    "afficher les données météo en temps réel",
+    "afficher les prévisions météo",
+    "afficher les cartes météo"
+  ],
+  "dependances": [
+    "Flask",
+    "Dash",
+    "Plotly",
+    "Flask"
+  ]
+}

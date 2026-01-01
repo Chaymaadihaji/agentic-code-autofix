@@ -1,0 +1,1 @@
+{"nom_fichier": "README.md", "code": "bash\npip install flask sqlalchemy flask-restful pytest sphinx docker-compose\n", "timestamp": 1766872952.1086338}

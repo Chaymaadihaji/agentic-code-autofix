@@ -1,0 +1,24 @@
+ignore {
+    // Ignore les dossiers de développement spécifiques (React)
+    'node_modules/react',
+    'node_modules/@types/react',
+    'node_modules/@types/styled-components',
+    'node_modules/gatsby',
+    'node_modules/@testing-library',
+    '!node_modules/react/**/tests.*'
+
+    // Ignore les fichiers générés
+    'dist/**/*.js',
+    'dist/**/*.js.map',
+    '*.log',
+    'coverage/**/*',
+    '*.spec.js'
+
+
+    // Ignore les fichiers temporaires
+    'temp/**/*'
+    'npm-debug.log*',
+    'yarn-debug.log*',
+    'yarn-error.log*',
+    '.env'
+}

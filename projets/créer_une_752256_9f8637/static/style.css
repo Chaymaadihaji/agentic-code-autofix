@@ -1,0 +1,158 @@
+/* Feuille de style CSS */
+
+/* Reset CSS */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+/* Variables CSS */
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --background-color: #f9f9f9;
+    --text-color: #333;
+    --hover-color: #ccc;
+}
+
+/* Layout */
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Composants UI */
+
+/* Cartes */
+.custom-card {
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.custom-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.custom-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.custom-card .card-body {
+    padding: 20px;
+}
+
+.custom-card .card-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.custom-card .card-text {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Formulaire */
+.custom-form {
+    padding: 20px;
+}
+
+.custom-form .form-group {
+    margin-bottom: 20px;
+}
+
+.custom-form .form-control {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.custom-form .form-control:focus {
+    border-color: var(--primary-color);
+}
+
+.custom-form .form-btn {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.custom-form .form-btn:hover {
+    background-color: var(--hover-color);
+}
+
+/* Tableau */
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.custom-table th, .custom-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.custom-table th {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+/* Graphique */
+.custom-graph {
+    width: 100%;
+    height: 300px;
+}
+
+.custom-graph canvas {
+    width: 100%;
+    height: 100%;
+}
+
+/* Galerie */
+.custom-gallery {
+    padding: 20px;
+}
+
+.custom-gallery .gallery-item {
+    margin-bottom: 20px;
+}
+
+.custom-gallery .gallery-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+    .container {
+        margin: 20px auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .custom-card {
+        margin-bottom: 20px;
+    }
+}

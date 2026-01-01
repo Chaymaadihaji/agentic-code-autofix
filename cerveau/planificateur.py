@@ -1,5 +1,5 @@
 """
-📋 Module de planification des étapes de développement
+ Module de planification des étapes de développement
 """
 
 import json
@@ -59,3 +59,7 @@ class Planificateur:
                     {"ordre": 4, "description": "Tests et débogage", "duree_estimee": "10min", "priorite": "haute"}
                 ]
             }
+        
+
+
+      

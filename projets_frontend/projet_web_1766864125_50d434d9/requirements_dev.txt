@@ -1,0 +1,21 @@
+# requirements_dev.txt
+
+flask
+streamlit
+python
+sqlite
+sqlalchemy
+flask-sqlalchemy
+flask-jwt-extended
+reportlab
+requests
+pytest
+docker
+
+# Dépendances UI
+bootstrap5
+fontawesome
+
+# Dépendances tests
+pytest-flask
+pytest-cov

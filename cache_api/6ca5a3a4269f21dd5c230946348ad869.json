@@ -1,0 +1,1 @@
+{"nom_fichier": "README.md", "code": "bash\nmvn clean package\n", "langage": "markdown", "bugs_introduits": [], "corrections_appliquees": [], "timestamp": 1767105652.0012648, "tentative": 1}

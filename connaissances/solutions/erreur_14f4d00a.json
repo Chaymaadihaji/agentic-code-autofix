@@ -3,13 +3,12 @@
   "correction": {
     "corrige": true,
     "fichiers": [
-      "main.py",
-      "data_processor.py"
+      "app.py"
     ],
-    "action": "Correction compl\u00e8te: Correction bas\u00e9e sur l'analyse de l'erreur",
+    "action": "Correction compl\u00e8te: Extraction et remplacement de code",
     "type_correction": "complete_api",
-    "details": "Correction manuelle"
+    "details": "Correction bas\u00e9e sur l'extraction de code"
   },
-  "date": "2025-12-23T13:51:58.485327",
-  "utilisations": 3
+  "date": "2025-12-26T12:32:24.434347",
+  "utilisations": 5
 }

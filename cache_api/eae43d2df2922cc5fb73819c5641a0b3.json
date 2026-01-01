@@ -1,0 +1,1 @@
+{"nom_fichier": "README.md", "code": "bash\n# Cloner le dépôt\ngit clone https://github.com/tonusername/gestion_projet.git\n\n# Se positionner dans le répertoire du projet\ncd gestion_projet\n\n# Installer les dépendances\nnpm install\n\n# Lancer l'application\nnpm start\n", "bugs_introduits": [], "timestamp": 1767006151.987696}

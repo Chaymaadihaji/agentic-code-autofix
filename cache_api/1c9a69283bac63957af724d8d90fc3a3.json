@@ -1,0 +1,1 @@
+{"nom_fichier": "README.md", "code": "sql\nCREATE DATABASE api_rest;\nCREATE ROLE api_rest_user WITH PASSWORD 'password';\nGRANT ALL PRIVILEGES ON DATABASE api_rest TO api_rest_user;\n", "langage": "markdown", "bugs_introduits": ["undefined_variable", "syntax_error"], "corrections_appliquees": [], "timestamp": 1767105891.2912476, "tentative": 1}

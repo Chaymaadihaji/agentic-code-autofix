@@ -1,0 +1,34 @@
+bash
+# requierements.txt
+
+# Dépendances du jeu du pendu
+
+# Bibliothèque pour la génération de mots au hasard
+requests
+
+# Bibliothèque pour la gestion de la console
+colorama
+
+# Bibliothèque pour la gestion des erreurs
+pyparsing
+
+# Bibliothèque pour la génération de mots au hasard (alternative)
+faker
+
+# Bibliothèque pour la gestion du temps
+schedule
+
+# Bibliothèque pour la gestion des threads
+threading
+
+# Bibliothèque pour la gestion des exceptions
+pytz
+
+# Bibliothèque pour la gestion des fichiers
+pathlib
+
+# Bibliothèque pour la gestion des données
+pandas
+
+# Bibliothèque pour la génération de mots au hasard (alternative)
+numpy

@@ -1,0 +1,1 @@
+API REST en Python avec FastAPI, MongoDB, authentification JWT, CORS, et documentation Swagger automatique

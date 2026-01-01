@@ -1,0 +1,43 @@
+import streamlit as st
+from streamlit import caching
+import db
+from models import Livre, Membre, Emprunt
+from auth import Auth
+
+st.title("Bibliothèque")
+
+auth = Auth()
+
+if auth.is_authenticated():
+    st.write("Bonjour", auth.get_username())
+
+    livre_id = st.selectbox("Sélectionnez un livre", [livre.id for livre in db.get_livres()])
+    livre = db.get_livre(livre_id)
+
+    if st.button("Consulter le livre"):
+        st.write(livre)
+
+    st.write("Liste des livres")
+    st.write(db.get_livres())
+
+    st.write("Liste des membres")
+    st.write(db.get_membres())
+
+    st.write("Liste des emprunts")
+    st.write(db.get_emprunts())
+
+    if st.button("Créer un emprunt"):
+        membre_id = st.selectbox("Sélectionnez un membre", [membre.id for membre in db.get_membres()])
+        membre = db.get_membre(membre_id)
+        db.create_emprunt(livre.id, membre.id)
+        st.write("Emprunt créé")
+
+else:
+    username = st.text_input("Nom d'utilisateur")
+    password = st.text_input("Mot de passe", type="password")
+    if st.button("Se connecter"):
+        auth.login(username, password)
+        if auth.is_authenticated():
+            st.write("Authentification réussie")
+        else:
+            st.write("Authentification échouée")

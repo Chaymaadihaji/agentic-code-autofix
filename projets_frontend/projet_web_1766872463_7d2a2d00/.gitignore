@@ -1,0 +1,7 @@
+bash
+# .gitignore
+node_modules/
+public/.gitkeep
+.env
+*.log
+coverage

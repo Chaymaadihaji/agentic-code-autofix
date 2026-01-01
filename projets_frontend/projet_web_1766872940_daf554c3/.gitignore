@@ -1,0 +1,38 @@
+makefile
+# Fichier de configuration Git
+
+# Ignorer les fichiers de configuration de l'environnement virtuel
+venv/
+
+# Ignorer les fichiers de build et d'installation de Python
+__pycache__/
+*.py[co]
+
+# Ignorer les fichiers de configuration de Flask
+instance/
+
+# Ignorer les fichiers de base de données SQLite
+*.db
+
+# Ignorer les fichiers de configuration de l'API REST
+app/api/v1/
+
+# Ignorer les fichiers de documentation
+docs/
+
+# Ignorer les fichiers de tests unitaires
+tests/
+
+# Ignorer les fichiers de déploiement Docker
+docker-compose.yml
+docker/
+
+# Ignorer les fichiers de déploiement
+requirements.txt
+
+# Ignorer les fichiers temporaires
+*.tmp
+*.log
+
+# Ignorer les fichiers de configuration de Bootstrap
+node_modules/

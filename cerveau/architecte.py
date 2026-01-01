@@ -1,6 +1,6 @@
 """
-🏗️ Module de conception d'architecture
-Détermine la structure de fichiers pour un projet
+ Module de conception d'architecture MULTI-LANGAGE
+Détermine la structure de fichiers pour un projet dans n'importe quel langage
 """
 
 import json
@@ -17,42 +17,27 @@ class Architecte:
     
     def creer_architecture(self, analyse):
         """
-        Crée une architecture de projet basée sur l'analyse
-        """
-        prompt = f"""
-        À partir de cette analyse de projet, crée une architecture de fichiers COMPLÈTE.
-        Retourne UNIQUEMENT un JSON valide.
-        
-        ANALYSE : {json.dumps(analyse, indent=2)}
-        
-        IMPORTANT : Ne pas inclure de dossiers dans la liste 'fichiers' - uniquement des fichiers.
-        Les dossiers doivent aller dans 'structure_dossiers'.
-        
-        Retourne un JSON avec ces champs EXACTS :
-        - nom_projet : nom suggéré (sans caractères spéciaux, underscore pour espaces)
-        - fichiers : liste d'objets avec 'nom', 'type', 'description' (UNIQUEMENT DES FICHIERS, PAS DE DOSSIERS)
-        - structure_dossiers : liste de dossiers à créer (terminés par /)
-        - point_entree : nom du fichier principal (ex: main.py)
-        
-        EXEMPLES CORRECTS :
-        FICHIERS: main.py, app.py, models.py, requirements.txt
-        DOSSIERS: templates/, static/, models/, routes/
-        
-        EXEMPLE INCORRECT :
-        FICHIERS: templates/ (← c'est un dossier, pas un fichier!)
-        
-        Pour une application web Flask typique :
-        - FICHIERS: main.py, app.py, models.py, forms.py, config.py, requirements.txt
-        - DOSSIERS: templates/, static/, instance/
-        
-        Le nom des fichiers doit être VALIDE pour Windows/Linux/Mac.
+        Crée une architecture de projet basée sur l'analyse AVEC LANGAGE
         """
         
+        langage = analyse.get('langage_principal', 'python')
+        type_app = analyse.get('type_application', 'web')
+        besoin_interface = analyse.get('besoin_interface', False)
+        framework_ui = analyse.get('framework_ui', '')
+        
+        print(f"     Architecture pour: {langage.upper()} - {type_app}")
+        
+        
+        architecture_base = self._architecture_par_langage(langage, type_app, besoin_interface, framework_ui, analyse)
+        
+       
         try:
+            prompt = self._creer_prompt_architecture(analyse, langage, type_app)
+            
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=[
-                    {"role": "system", "content": "Tu es un architecte logiciel. Retourne uniquement du JSON valide. Les fichiers sont des fichiers, les dossiers sont des dossiers."},
+                    {"role": "system", "content": f"Tu es un architecte logiciel expert en {langage}. Retourne uniquement du JSON valide."},
                     {"role": "user", "content": prompt}
                 ],
                 temperature=0.4,
@@ -60,40 +45,258 @@ class Architecte:
             )
             
             content = response.choices[0].message.content.strip()
-            
-            # Nettoyer le JSON
             content = self._nettoyer_json(content)
             
-            architecture = json.loads(content)
+            api_architecture = json.loads(content)
             
-            # POST-PROCESSING : Filtrer pour enlever les dossiers de la liste fichiers
-            architecture = self._filtrer_architecture(architecture)
             
-            return architecture
+            architecture = self._fusionner_architectures(architecture_base, api_architecture)
             
         except Exception as e:
-            print(f"Erreur création architecture: {e}")
-            # Architecture par défaut
-            return self._architecture_par_defaut(analyse)
+            print(f"    Erreur API architecture: {e}")
+            architecture = architecture_base
+        
+        
+        architecture = self._filtrer_architecture(architecture)
+        
+        print(f"   {len(architecture.get('fichiers', []))} fichiers, {len(architecture.get('structure_dossiers', []))} dossiers")
+        
+        return architecture
+    
+    def _architecture_par_langage(self, langage, type_app, besoin_interface, framework_ui, analyse):
+        """Retourne l'architecture adaptée au langage"""
+        # Architecture par défaut minimale
+        architecture = {
+            "nom_projet": self._generer_nom_projet(analyse, langage),
+            "fichiers": [],
+            "structure_dossiers": [],
+            "point_entree": ""
+        }
+        
+        # Ajouter des fichiers communs selon le langage
+        if langage == 'go':
+            architecture['fichiers'].extend([
+                {"nom": "main.go", "type": "code", "description": "Point d'entrée principal Go"},
+                {"nom": "go.mod", "type": "config", "description": "Module Go avec dépendances"},
+                {"nom": "README.md", "type": "documentation", "description": "Documentation du projet"},
+                {"nom": ".gitignore", "type": "config", "description": "Fichiers à ignorer pour Go"}
+            ])
+            architecture['structure_dossiers'] = ["cmd/", "internal/", "pkg/", "config/"]
+            architecture['point_entree'] = "main.go"
+            
+            if type_app in ['web', 'api']:
+                architecture['fichiers'].extend([
+                    {"nom": "cmd/api/main.go", "type": "code", "description": "Serveur HTTP API"},
+                    {"nom": "internal/handlers/handlers.go", "type": "code", "description": "Handlers HTTP"},
+                    {"nom": "internal/models/models.go", "type": "code", "description": "Structs et modèles Go"}
+                ])
+            
+        elif langage == 'javascript':
+            architecture['fichiers'].extend([
+                {"nom": "package.json", "type": "config", "description": "Dépendances NPM"},
+                {"nom": "README.md", "type": "documentation", "description": "Documentation"},
+                {"nom": ".gitignore", "type": "config", "description": "Fichiers à ignorer pour Node"}
+            ])
+            architecture['point_entree'] = "index.html" if besoin_interface else "server.js"
+            
+            if besoin_interface:
+                if framework_ui == 'react':
+                    architecture['fichiers'].extend([
+                        {"nom": "src/App.jsx", "type": "code", "description": "Composant principal React"},
+                        {"nom": "src/index.js", "type": "code", "description": "Point d'entrée React"},
+                        {"nom": "public/index.html", "type": "template", "description": "Template HTML"}
+                    ])
+                    architecture['structure_dossiers'] = ["src/", "public/", "components/", "hooks/"]
+                else:
+                    architecture['fichiers'].extend([
+                        {"nom": "index.html", "type": "template", "description": "Page principale"},
+                        {"nom": "src/main.js", "type": "code", "description": "Logique JavaScript principale"}
+                    ])
+                    architecture['structure_dossiers'] = ["src/", "public/"]
+            
+            if type_app in ['web', 'api'] and not (besoin_interface and framework_ui == 'react'):
+                architecture['fichiers'].extend([
+                    {"nom": "server.js", "type": "code", "description": "Serveur Express.js"}
+                ])
+                architecture['structure_dossiers'].append("routes/")
+                
+        elif langage == 'typescript':
+            architecture['fichiers'].extend([
+                {"nom": "package.json", "type": "config", "description": "Dépendances NPM"},
+                {"nom": "README.md", "type": "documentation", "description": "Documentation"},
+                {"nom": "tsconfig.json", "type": "config", "description": "Configuration TypeScript"},
+                {"nom": ".gitignore", "type": "config", "description": "Fichiers à ignorer"}
+            ])
+            architecture['point_entree'] = "src/index.ts"
+            architecture['structure_dossiers'] = ["src/", "dist/", "types/"]
+            
+            if besoin_interface and framework_ui == 'react':
+                architecture['fichiers'].extend([
+                    {"nom": "src/App.tsx", "type": "code", "description": "Composant principal React TypeScript"},
+                    {"nom": "src/index.tsx", "type": "code", "description": "Point d'entrée React"}
+                ])
+                
+        elif langage == 'rust':
+            architecture['fichiers'].extend([
+                {"nom": "Cargo.toml", "type": "config", "description": "Configuration Cargo"},
+                {"nom": "README.md", "type": "documentation", "description": "Documentation"},
+                {"nom": ".gitignore", "type": "config", "description": "Fichiers à ignorer pour Rust"},
+                {"nom": "src/main.rs", "type": "code", "description": "Point d'entrée Rust"}
+            ])
+            architecture['structure_dossiers'] = ["src/", "tests/", "examples/"]
+            architecture['point_entree'] = "src/main.rs"
+            
+            if type_app in ['web', 'api']:
+                architecture['fichiers'].extend([
+                    {"nom": "src/lib.rs", "type": "code", "description": "Bibliothèque principale"},
+                    {"nom": "src/handlers/mod.rs", "type": "code", "description": "Handlers HTTP"}
+                ])
+                
+        elif langage == 'python':
+            architecture['fichiers'].extend([
+                {"nom": "main.py", "type": "code", "description": "Point d'entrée principal"},
+                {"nom": "requirements.txt", "type": "config", "description": "Dépendances Python"},
+                {"nom": "README.md", "type": "documentation", "description": "Documentation du projet"},
+                {"nom": ".gitignore", "type": "config", "description": "Fichiers à ignorer pour Python"}
+            ])
+            architecture['point_entree'] = "main.py"
+            
+            if framework_ui == 'streamlit':
+                architecture['fichiers'].append({"nom": "app.py", "type": "code", "description": "Application Streamlit"})
+                architecture['structure_dossiers'] = ["pages/", "data/", "utils/"]
+            elif framework_ui == 'flask_html':
+                architecture['fichiers'].extend([
+                    {"nom": "app.py", "type": "code", "description": "Application Flask principale"},
+                    {"nom": "models.py", "type": "code", "description": "Modèles de données"}
+                ])
+                architecture['structure_dossiers'] = ["templates/", "static/", "instance/"]
+                
+                if besoin_interface:
+                    architecture['fichiers'].extend([
+                        {"nom": "templates/index.html", "type": "template", "description": "Template HTML principal"},
+                        {"nom": "static/style.css", "type": "style", "description": "Feuille de style CSS"}
+                    ])
+                    
+        else:
+           
+            extension = self._get_extension_langage(langage)
+            architecture['fichiers'].extend([
+                {"nom": f"main.{extension}", "type": "code", "description": f"Point d'entrée {langage}"},
+                {"nom": "README.md", "type": "documentation", "description": "Documentation du projet"},
+                {"nom": ".gitignore", "type": "config", "description": f"Fichiers à ignorer pour {langage}"}
+            ])
+            architecture['structure_dossiers'] = ["src/", "lib/", "docs/"]
+            architecture['point_entree'] = f"main.{extension}"
+        
+        
+        architecture['fichiers'].append({"nom": ".env.example", "type": "config", "description": "Variables d'environnement"})
+        
+        if any(mot in analyse.get('description_technique', '').lower() for mot in ['docker', 'container', 'image']):
+            architecture['fichiers'].append({"nom": "Dockerfile", "type": "config", "description": "Conteneurisation Docker"})
+        
+        return architecture
+    
+    def _creer_prompt_architecture(self, analyse, langage, type_app):
+        """Crée un prompt pour l'API d'architecture"""
+        return f"""
+        À partir de cette analyse de projet, crée une architecture de fichiers COMPLÈTE.
+        Retourne UNIQUEMENT un JSON valide.
+        
+        ANALYSE : {json.dumps(analyse, indent=2)}
+        
+        IMPORTANT : 
+        - Langage principal: {langage}
+        - Type d'application: {type_app}
+        - Ne pas inclure de dossiers dans la liste 'fichiers' - uniquement des fichiers.
+        - Les dossiers doivent aller dans 'structure_dossiers'.
+        
+        Retourne un JSON avec ces champs EXACTS :
+        - nom_projet : nom suggéré (sans caractères spéciaux, underscore pour espaces)
+        - fichiers : liste d'objets avec 'nom', 'type', 'description' (UNIQUEMENT DES FICHIERS, PAS DE DOSSIERS)
+        - structure_dossiers : liste de dossiers à créer (terminés par /)
+        - point_entree : nom du fichier principal (ex: main.py, main.go, index.js)
+        
+        EXEMPLES POUR {langage.upper()} :
+        """
+    
+    def _generer_nom_projet(self, analyse, langage):
+        """Génère un nom de projet basé sur l'analyse"""
+        type_app = analyse.get('type_application', 'app')
+        description = analyse.get('description_technique', 'projet')
+        
+        
+        mots = description.lower().split()[:3]
+        nom_mots = "_".join(mots[:2]) if len(mots) >= 2 else type_app
+        
+        
+        nom = f"{nom_mots}_{langage}_project"
+        nom = nom.replace('-', '_').replace(' ', '_').replace('.', '_').lower()
+        
+        return nom
+    
+    def _get_extension_langage(self, langage):
+        """Retourne l'extension de fichier pour un langage"""
+        extensions = {
+            'go': 'go',
+            'javascript': 'js',
+            'typescript': 'ts',
+            'rust': 'rs',
+            'python': 'py',
+            'java': 'java',
+            'c++': 'cpp',
+            'c': 'c',
+            'php': 'php',
+            'ruby': 'rb',
+            'bash': 'sh',
+            'html': 'html',
+            'css': 'css',
+            'sql': 'sql',
+            'yaml': 'yaml',
+            'json': 'json',
+            'markdown': 'md'
+        }
+        return extensions.get(langage, 'txt')
+    
+    def _fusionner_architectures(self, architecture_base, architecture_api):
+        """Fusionne l'architecture de base avec celle de l'API"""
+        fusion = architecture_base.copy()
+        
+        
+        fichiers_fusion = {f['nom']: f for f in architecture_base.get('fichiers', [])}
+        
+        for fichier in architecture_api.get('fichiers', []):
+            if isinstance(fichier, dict) and 'nom' in fichier:
+                fichiers_fusion[fichier['nom']] = fichier
+        
+        fusion['fichiers'] = list(fichiers_fusion.values())
+        
+        
+        dossiers_fusion = set(architecture_base.get('structure_dossiers', []))
+        dossiers_fusion.update(architecture_api.get('structure_dossiers', []))
+        
+        fusion['structure_dossiers'] = list(dossiers_fusion)
+        
+        
+        if 'point_entree' in architecture_api and architecture_api['point_entree']:
+            fusion['point_entree'] = architecture_api['point_entree']
+        
+        return fusion
     
     def _nettoyer_json(self, content):
         """Nettoie le JSON retourné par l'API"""
-        # Enlever les backticks de code
         if content.startswith("```json"):
             content = content[7:-3].strip()
         elif content.startswith("```"):
             content = content[3:-3].strip()
         
-        # Supprimer les notes ou explications
         lines = content.split('\n')
         json_lines = []
-        in_json = True
         
         for line in lines:
             if line.strip().startswith('//') or line.strip().startswith('#'):
-                continue  # Ignorer les commentaires
+                continue
             if line.strip() == '':
-                continue  # Ignorer les lignes vides
+                continue
             json_lines.append(line)
         
         return '\n'.join(json_lines)
@@ -103,152 +306,98 @@ class Architecte:
         if 'fichiers' not in architecture:
             architecture['fichiers'] = []
         
-        # Filtrer les fichiers qui sont en fait des dossiers
+       
         fichiers_filtres = []
         for fichier in architecture.get('fichiers', []):
             if isinstance(fichier, dict) and 'nom' in fichier:
                 nom = fichier['nom']
-                # Ne pas inclure les noms qui se terminent par / (dossiers)
+                
                 if not nom.endswith('/') and '/' not in nom.split('/')[-1:]:
                     fichiers_filtres.append(fichier)
                 else:
-                    # C'est un dossier, l'ajouter à structure_dossiers si pas déjà présent
+                    
                     dossier_nom = nom.rstrip('/') + '/'
                     if 'structure_dossiers' not in architecture:
                         architecture['structure_dossiers'] = []
                     
-                    # Normaliser le nom de dossier
                     if dossier_nom not in architecture['structure_dossiers']:
                         architecture['structure_dossiers'].append(dossier_nom)
         
         architecture['fichiers'] = fichiers_filtres
         
-        # S'assurer que structure_dossiers existe et est une liste
+        
         if 'structure_dossiers' not in architecture:
             architecture['structure_dossiers'] = []
         
-        # Ajouter des dossiers communs basés sur l'analyse
-        if not architecture['structure_dossiers']:
-            architecture['structure_dossiers'] = self._generer_dossiers_par_defaut(architecture)
         
-        # S'assurer que point_entree existe
-        if 'point_entree' not in architecture:
-            architecture['point_entree'] = 'main.py'
-        
-        return architecture
-    
-    def _generer_dossiers_par_defaut(self, architecture):
-        """Génère des dossiers par défaut basés sur l'architecture"""
-        dossiers = []
-        
-        # Vérifier les types de fichiers pour déterminer les dossiers nécessaires
-        fichiers_py = [f for f in architecture.get('fichiers', []) if f.get('nom', '').endswith('.py')]
-        fichiers_html = [f for f in architecture.get('fichiers', []) if f.get('nom', '').endswith('.html')]
-        fichiers_css = [f for f in architecture.get('fichiers', []) if f.get('nom', '').endswith('.css')]
-        
-        if fichiers_html or 'templates' in [f.get('nom', '') for f in architecture.get('fichiers', [])]:
-            dossiers.append('templates/')
-        
-        if fichiers_css or any('static' in f.get('nom', '') for f in architecture.get('fichiers', [])):
-            dossiers.append('static/')
-        
-        # Dossiers communs
-        if fichiers_py:
-            dossiers.append('models/')
-            dossiers.append('utils/')
-        
-        return dossiers
-    
-    def _architecture_par_defaut(self, analyse):
-        """Retourne une architecture par défaut en cas d'erreur"""
-        type_app = analyse.get('type_application', 'web')
-        besoin_interface = analyse.get('besoin_interface', False)
-        type_interface = analyse.get('type_interface', '')
-        
-        # Architecture de base
-        architecture = {
-            "nom_projet": "mon_projet",
-            "fichiers": [
-                {"nom": "main.py", "type": "code", "description": "Point d'entrée principal"},
-                {"nom": "requirements.txt", "type": "config", "description": "Dépendances Python"},
-                {"nom": "README.md", "type": "documentation", "description": "Documentation du projet"}
-            ],
-            "structure_dossiers": [],
-            "point_entree": "main.py"
-        }
-        
-        # Adapter selon le type d'application
-        if type_app == 'web' and besoin_interface and type_interface == 'web_gui':
-            architecture['fichiers'].extend([
-                {"nom": "app.py", "type": "code", "description": "Application Flask principale"},
-                {"nom": "models.py", "type": "code", "description": "Modèles de données"},
-                {"nom": "templates/index.html", "type": "template", "description": "Template HTML principal"},
-                {"nom": "static/style.css", "type": "style", "description": "Feuille de style CSS"}
-            ])
-            architecture['structure_dossiers'] = ['templates/', 'static/', 'models/', 'instance/']
-        
-        elif type_app == 'dashboard':
-            architecture['fichiers'].extend([
-                {"nom": "app.py", "type": "code", "description": "Application dashboard"},
-                {"nom": "dashboard.py", "type": "code", "description": "Logique du dashboard"},
-                {"nom": "data_processor.py", "type": "code", "description": "Traitement des données"},
-                {"nom": "templates/dashboard.html", "type": "template", "description": "Template du dashboard"},
-                {"nom": "static/dashboard.css", "type": "style", "description": "Style du dashboard"}
-            ])
-            architecture['structure_dossiers'] = ['templates/', 'static/', 'data/', 'utils/']
-        
-        elif type_app == 'jeu':
-            architecture['fichiers'].extend([
-                {"nom": "game.py", "type": "code", "description": "Logique principale du jeu"},
-                {"nom": "player.py", "type": "code", "description": "Gestion du joueur"},
-                {"nom": "config.py", "type": "config", "description": "Configuration du jeu"}
-            ])
-            if besoin_interface:
-                architecture['fichiers'].append({"nom": "ui.py", "type": "code", "description": "Interface utilisateur"})
-                architecture['structure_dossiers'] = ['assets/', 'sounds/', 'images/']
-        
-        # Filtrer les fichiers (post-processing)
-        architecture = self._filtrer_architecture(architecture)
+        if 'point_entree' not in architecture or not architecture['point_entree']:
+            
+            for fichier in architecture['fichiers']:
+                nom = fichier.get('nom', '')
+                if any(nom.endswith(ext) for ext in ['main.py', 'main.go', 'index.js', 'app.py', 'server.js']):
+                    architecture['point_entree'] = nom
+                    break
+            else:
+                architecture['point_entree'] = 'main.py'
         
         return architecture
 
-# Test rapide
+
 if __name__ == "__main__":
-    print("🧪 Test de l'Architecte...")
+    print(" Test de l'Architecte MULTI-LANGAGE...")
     
     architecte = Architecte()
     
-    # Test avec une analyse simulée
-    analyse_test = {
-        "type_application": "dashboard",
-        "besoin_interface": True,
-        "type_interface": "web_gui",
-        "composants_ui_attendus": ["cartes", "graphiques", "tableaux"],
-        "fonctionnalites_cles": ["Visualisation données", "Filtrage", "Export"],
-        "description_technique": "Dashboard interactif de visualisation de données"
-    }
+  
+    test_analyses = [
+        {
+            "langage_principal": "go",
+            "type_application": "api",
+            "besoin_interface": False,
+            "framework_ui": "gin",
+            "description_technique": "API REST en Go avec Gin",
+            "fonctionnalites_cles": ["JWT auth", "CRUD users", "PostgreSQL"],
+            "dependances": []
+        },
+        {
+            "langage_principal": "typescript",
+            "type_application": "web",
+            "besoin_interface": True,
+            "framework_ui": "react",
+            "description_technique": "Dashboard TypeScript avec React",
+            "fonctionnalites_cles": ["Graphiques", "Filtres", "Tableaux"],
+            "dependances": ["react", "typescript", "chart.js"]
+        },
+        {
+            "langage_principal": "python",
+            "type_application": "web",
+            "besoin_interface": True,
+            "framework_ui": "flask_html",
+            "description_technique": "Application Flask avec interface",
+            "fonctionnalites_cles": ["Formulaire", "Base de données", "API"],
+            "dependances": ["Flask", "SQLAlchemy"]
+        }
+    ]
     
-    print(f"\n📊 Analyse de test:")
-    print(json.dumps(analyse_test, indent=2))
-    
-    print(f"\n🏗️  Génération de l'architecture...")
-    architecture = architecte.creer_architecture(analyse_test)
-    
-    print(f"\n📁 Architecture générée:")
-    print(f"Nom projet: {architecture.get('nom_projet')}")
-    print(f"Point d'entrée: {architecture.get('point_entree')}")
-    
-    print(f"\n📄 Fichiers ({len(architecture.get('fichiers', []))}):")
-    for fichier in architecture.get('fichiers', []):
-        print(f"  - {fichier.get('nom')}: {fichier.get('description')}")
-    
-    print(f"\n📂 Dossiers ({len(architecture.get('structure_dossiers', []))}):")
-    for dossier in architecture.get('structure_dossiers', []):
-        print(f"  - {dossier}")
-    
-    # Vérifier qu'aucun dossier n'est dans la liste fichiers
-    fichiers = architecture.get('fichiers', [])
-    for fichier in fichiers:
-        nom = fichier.get('nom', '')
-        if nom.endswith('/'):
-            print(f"\n⚠️  ATTENTION: Dossier trouvé dans fichiers: {nom}")
+    for analyse in test_analyses:
+        print(f"\n{'='*60}")
+        print(f"Test {analyse['langage_principal'].upper()}: {analyse['description_technique']}")
+        print(f"{'='*60}")
+        
+        try:
+            architecture = architecte.creer_architecture(analyse)
+            
+            print(f"\n Architecture générée:")
+            print(f"Nom projet: {architecture.get('nom_projet')}")
+            print(f"Point d'entrée: {architecture.get('point_entree')}")
+            
+            print(f"\n Fichiers ({len(architecture.get('fichiers', []))}):")
+            for fichier in architecture.get('fichiers', []):
+                print(f"  - {fichier.get('nom')}: {fichier.get('description')}")
+            
+            print(f"\n Dossiers ({len(architecture.get('structure_dossiers', []))}):")
+            for dossier in architecture.get('structure_dossiers', []):
+                print(f"  - {dossier}")
+                
+        except Exception as e:
+            print(f" Erreur: {e}")

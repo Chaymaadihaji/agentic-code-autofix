@@ -1,0 +1,45 @@
+{
+  "type_application": "dashboard",
+  "besoin_interface": true,
+  "type_interface": "web_gui",
+  "complexite_interface": "complexe",
+  "composants_ui_attendus": [
+    "fiches patients détaillées",
+    "historique médical",
+    "ordonnances numériques",
+    "prise de rendez-vous",
+    "alertes médicaments",
+    "dossier médical partagé",
+    "graphiques de suivi santé",
+    "rapports pour médecins",
+    "chiffrement des données",
+    "graphiques",
+    "dashboard",
+    "formulaires"
+  ],
+  "langage_backend": "python",
+  "framework_ui": "flask_html",
+  "description_technique": "Application médicale pour suivi des patients avec gestion de fiches patients, historique médical, ordonnances numériques, prise de rendez-vous, alertes médicaments, dossier médical partagé, graphiques de suivi santé et rapports pour médecins",
+  "fonctionnalites_cles": [
+    "gestion de fiches patients",
+    "historique médical",
+    "ordonnances numériques",
+    "prise de rendez-vous",
+    "alertes médicaments",
+    "dossier médical partagé",
+    "graphiques de suivi santé",
+    "rapports pour médecins",
+    "chiffrement des données"
+  ],
+  "dependances": [
+    "Flask",
+    "Django",
+    "SQLAlchemy",
+    "Pandas",
+    "NumPy",
+    "Matplotlib",
+    "Seaborn",
+    "Scikit-learn",
+    "Flask"
+  ]
+}

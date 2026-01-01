@@ -1,0 +1,12 @@
+fontawesome==1.0.0
+numpy
+streamlit
+numpy==1.22.4
+Flask==2.3.3
+matplotlib
+matplotlib==3.5.1
+pandas==1.4.2
+streamlit==1.14.0
+bootstrap5==1.0.1
+pandas
+python-dotenv==1.0.0

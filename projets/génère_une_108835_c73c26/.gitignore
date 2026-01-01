@@ -1,0 +1,51 @@
+python
+# app.py
+from flask import Flask, render_template, request, redirect, url_for
+from models import Task, TaskList
+from templates import index as index_template
+from config import Config, DEBUG
+import sqlite3
+
+app = Flask(__name__)
+app.config.from_object(Config)
+task_list = TaskList(Config.DB_NAME)
+
+class TaskManager:
+    def __init__(self, db_name):
+        self.conn = sqlite3.connect(db_name)
+        self.cursor = self.conn.cursor()
+
+    def create_table(self):
+        self.cursor.execute("""
+            CREATE TABLE IF NOT EXISTS tasks
+            (id INTEGER PRIMARY KEY, title TEXT, done INTEGER)
+        """)
+        self.conn.commit()
+
+@app.route("/", methods=["GET", "POST"])
+def index():
+    try:
+        if request.method == "POST":
+            new_task = Task(title=request.form["title"])
+            task_list.add_task(new_task)
+            return redirect(url_for('index'))
+        task_list.create_table()
+        tasks = task_list.get_tasks()
+        return render_template(index_template, tasks=tasks)
+    except Exception as e:
+        return f"Erreur: {e}"
+
+@app.route("/delete-task/<int:task_id>")
+def delete_task(task_id):
+    try:
+        task_list.remove_task(task_id)
+        return redirect(url_for('index'))
+    except Exception as e:
+        return f"Erreur: {e}"
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return f"Erreur 404, page non trouvée.", 404
+
+if __name__ == "__main__":
+    app.run(debug=DEBUG)

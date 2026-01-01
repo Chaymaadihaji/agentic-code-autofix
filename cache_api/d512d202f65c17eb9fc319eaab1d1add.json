@@ -1,0 +1,1 @@
+{"nom_fichier": "requirements_dev.txt", "code": "# requirements_dev.txt\n\nflask\nstreamlit\npython\nsqlite\nsqlalchemy\nflask-sqlalchemy\nflask-jwt-extended\nreportlab\nrequests\npytest\ndocker\n\n# Dépendances UI\nbootstrap5\nfontawesome\n\n# Dépendances tests\npytest-flask\npytest-cov\n", "timestamp": 1766864251.0838068}

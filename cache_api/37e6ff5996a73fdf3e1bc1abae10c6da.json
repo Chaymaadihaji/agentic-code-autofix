@@ -1,0 +1,1 @@
+{"nom_fichier": "README.md", "code": "yml\ndependencies:\n  - fastapi\n  - motor\n  - pydantic\n  - secretstorage\n  - asyncstdlib\n", "langage": "markdown", "bugs_introduits": ["syntax_error", "undefined_variable"], "corrections_appliquees": [], "timestamp": 1767106650.8329191, "tentative": 3}

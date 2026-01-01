@@ -1,0 +1,1 @@
+{"nom_fichier": "README.md", "code": "bash\n# Installer les dépendances\nnpm install\n\n  const undefinedVar = undefinedVariable; // Undefined bug\n# Lancer le server\nnpm start\n\n# Lancer le container Docker\ndocker-compose up\n", "bugs_introduits": ["undefined_variable"], "timestamp": 1767006123.2912762}

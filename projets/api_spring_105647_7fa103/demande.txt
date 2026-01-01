@@ -1,0 +1,1 @@
+API Spring Boot en Java avec Spring Security JWT, PostgreSQL, Swagger, tests unitaires JUnit 5, et déploiement Docker

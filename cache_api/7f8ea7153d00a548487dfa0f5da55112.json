@@ -1,0 +1,1 @@
+{"nom_fichier": ".gitignore", "code": "bash\n.gitignore\nREADME.md\n.env\ndocker-compose.yaml\ndockerignore\nk8s/\nk8s/.*\nk8s/*/*-deployment.yaml\nk8s/*/*-service.yaml\nk8s/*/*-pods.yaml\nk8s/*/*-pvc.yaml\nk8s/*/*-secret.yaml\nk8s/*/*-configmap.yaml\n*.go*\ngo.mod\ngo.sum\n*.yaml\n*.yml\n*.env\n.DS_Store\nnode_modules/\n", "bugs_introduits": [], "timestamp": 1767006950.8297303}

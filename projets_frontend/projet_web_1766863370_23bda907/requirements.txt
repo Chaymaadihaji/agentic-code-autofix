@@ -1,0 +1,11 @@
+Flask==2.3.3
+python-dotenv==1.0.0
+Flask-WTF==1.0
+Flask-Bootstrap==3.3.7
+Flask-FontAwesome==1.0.0
+WTForms==3.0
+Flask-SQLAlchemy==2.6.5
+random
+tkinter
+pandas
+numpy

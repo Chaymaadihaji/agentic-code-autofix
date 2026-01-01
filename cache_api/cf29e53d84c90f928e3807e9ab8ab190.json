@@ -1,0 +1,1 @@
+{"nom_fichier": ".gitignore", "code": "bash\n# .gitignore\nnode_modules/\npublic/.gitkeep\n.env\n*.log\ncoverage\n", "timestamp": 1766872466.714579}

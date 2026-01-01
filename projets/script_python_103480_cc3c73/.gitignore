@@ -1,0 +1,38 @@
+# .gitignore
+
+# Fichiers temporairement générés
+.vscode/**
+*.vscode*
+
+# Fichiers de sauvegarde de IDE
+*.pyc
+__pycache__/
+
+# Fichiers de log et journalisation
+*.log
+*.out
+
+# Fichiers d'exécution
+*.py~
+
+# Projet Jupyter
+*.ipynb
+
+# Fichiers de machine learning (modèles, données entraînées)
+*.model
+*.pickle
+*.csv
+*.json
+
+# Fichiers de données
+*.data
+
+# Fichiers source non soumis (backup)
+*.py~
+*.backup
+
+# Fichiers d'images et de ressources
+*.png
+*.jpg
+*.jpeg
+static/

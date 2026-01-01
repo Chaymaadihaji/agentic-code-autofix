@@ -1,0 +1,8 @@
+# Dépendances générées automatiquement
+Flask
+bcrypt
+email-validator
+twilio
+sqlite3
+Flask
+python-dotenv

@@ -1,0 +1,9 @@
+Crée une API REST avec Spring Boot pour gérer une bibliothèque :
+- CRUD complet pour les livres (titre, auteur, ISBN, date publication)
+- Recherche par titre, auteur, catégorie
+- Gestion des emprunts de livres
+- Authentification JWT
+- Base de données PostgreSQL avec JPA/Hibernate
+- Documentation Swagger/OpenAPI
+- Tests unitaires avec JUnit 5
+- Validation des données avec Hibernate Validator

@@ -1,0 +1,36 @@
+go
+// .gitignore
+
+# Ignorer les fichiers de configuration
+.env
+config.json
+config.yaml
+
+# Ignorer les fichiers de build
+node_modules/
+dist/
+public/build/
+
+# Ignorer les fichiers de cache Redis
+*.rdb
+*.dump
+
+# Ignorer les fichiers PostgreSQL
+*.db
+*.sql
+
+# Ignorer les fichiers Go
+*.go~
+*.log
+
+# Ignorer les fichiers de déploiement
+Dockerfile
+docker-compose.yml
+
+# Ignorer les fichiers de test
+*.test
+*_test.go
+
+# Ignorer les fichiers de documentation
+README.md
+LICENSE

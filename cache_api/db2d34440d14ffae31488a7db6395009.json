@@ -1,0 +1,1 @@
+{"nom_fichier": "README.md", "code": "bash\npip install pandas matplotlib scikit-learn\n", "langage": "markdown", "bugs_introduits": [], "corrections_appliquees": [], "timestamp": 1767105329.161832, "tentative": 2}

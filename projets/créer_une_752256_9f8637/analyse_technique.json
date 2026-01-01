@@ -1,0 +1,28 @@
+{
+  "type_application": "web",
+  "besoin_interface": true,
+  "type_interface": "web_gui",
+  "complexite_interface": "moyenne",
+  "composants_ui_attendus": [
+    "cartes",
+    "formulaires",
+    "tableaux",
+    "graphiques",
+    "galerie"
+  ],
+  "langage_backend": "python",
+  "framework_ui": "streamlit",
+  "description_technique": "Application web interactive permettant d'afficher des données et des graphiques en temps réel.",
+  "fonctionnalites_cles": [
+    "affichage de données en temps réel",
+    "graphiques interactifs",
+    "filtrage et tri des données"
+  ],
+  "dependances": [
+    "Streamlit",
+    "Pandas",
+    "Matplotlib",
+    "Seaborn",
+    "Flask"
+  ]
+}

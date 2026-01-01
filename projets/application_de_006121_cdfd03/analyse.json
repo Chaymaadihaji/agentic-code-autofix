@@ -1,0 +1,48 @@
+{
+  "type_application": "web",
+  "type_projet": "fullstack",
+  "besoin_interface": true,
+  "type_interface": "web_gui",
+  "complexite_interface": "moyenne",
+  "composants_ui_attendus": [],
+  "technologies_frontend": [
+    "react",
+    "typescript"
+  ],
+  "technologies_backend": [
+    "express",
+    "node.js"
+  ],
+  "base_de_donnees": [
+    "mongodb"
+  ],
+  "authentification": [
+    "jwt"
+  ],
+  "langage_backend": "javascript",
+  "langage_principal": "typescript",
+  "framework_ui": "react",
+  "description_technique": "Application TypeScript basée sur: Application de gestion de projet avec React frontend, Node.js/Express backend, MongoDB, authentifica...",
+  "fonctionnalites_cles": [
+    "fonctionnalite_principale"
+  ],
+  "dependances": [
+    "express",
+    "cors",
+    "@types/express",
+    "react",
+    "react-dom",
+    "@types/react",
+    "typescript",
+    "@types/node",
+    "ts-node",
+    "mongoose",
+    "jsonwebtoken",
+    "@types/jsonwebtoken",
+    "bcryptjs"
+  ],
+  "deploiement": [
+    "vercel",
+    "heroku"
+  ]
+}

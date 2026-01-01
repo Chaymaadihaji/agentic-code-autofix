@@ -1,0 +1,8 @@
+Crée une application web complète pour une todo list avec :
+- Frontend en React avec TypeScript
+- Backend en Node.js/Express
+- Base de données MongoDB
+- Authentification utilisateur
+- Interface responsive avec Tailwind CSS
+- Déploiement sur Vercel/Heroku
+- Tests Cypress pour l'interface

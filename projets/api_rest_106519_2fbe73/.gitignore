@@ -1,0 +1,65 @@
+python
+# .gitignore
+
+# Fichiers de configuration
+.gitattributes
+.gitconfig
+.vscode/
+
+# Fichiers temporaires
+__pycache__/
+venv/
+env/
+dist/
+build/
+
+# Fichiers logs
+logs/
+
+# Fichiers de documentation
+docs/
+swagger/docs
+
+# Fichiers binaires
+*.exe
+*.dll
+*.so
+*.dylib
+*.o
+*.a
+*.lib
+
+# Fichiers de configuration MongoDB
+mongod.lock
+*.bson
+mongodb/
+
+# Fichiers de configuration pour l'authentification JWT
+*.jwk
+*.jws
+*.jwe
+jwt/
+
+# Fichiers de configuration pour CORS
+cors_settings.json
+
+# Fichiers de configuration pour la documentation Swagger
+swagger/OpenAPI.json
+swagger/swagger.yaml
+
+# Fichiers à ignorer pour tous les langages
+*.pyc
+*.pyo
+*.class
+*.swp
+*.bak
+*.tmp
+*.log
+*.cfg
+*.tmp
+*.cache
+
+# Fichiers spécifiques à Python
+coverage.xml
+test-results.xml
+python_virtenv/

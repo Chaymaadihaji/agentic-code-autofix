@@ -1,0 +1,1 @@
+Je veux un système de connexion avec mot de passe crypté, validation email, réinitialisation par SMS, historique des connexions, et protection contre les attaques bruteforce.

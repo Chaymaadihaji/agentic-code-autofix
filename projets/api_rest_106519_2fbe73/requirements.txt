@@ -1,0 +1,13 @@
+fastapi==0.95.3
+uvicorn==0.20.0
+.mongodb-engine==0.5.2
+mongoengine==0.27.0
+PyJWT==2.4.0
+python-jwt==3.4.3
+fastapi-async-logger==3.0.8
+fastapi-jwt-auth==0.13.0
+swagger-ui
+swagger-ui-bundle
+swagger-ui-extra
+
+mongo-python-driver==3.12.0

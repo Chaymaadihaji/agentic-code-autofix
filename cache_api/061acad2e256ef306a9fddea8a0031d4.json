@@ -1,0 +1,1 @@
+{"nom_fichier": "README.md", "code": "bash\npip install streamlit pandas matplotlib folium\n", "timestamp": 1767000607.5948803}

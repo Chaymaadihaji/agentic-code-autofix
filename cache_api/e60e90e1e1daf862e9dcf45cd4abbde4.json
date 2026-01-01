@@ -1,0 +1,1 @@
+{"nom_fichier": "requirements.txt", "code": "dashboard_streamlit\nStreamlit==1.12.0\npandas==1.5.2\nmatplotlib==3.6.2\nseaborn==0.12.1\nplotly==5.14.3\nnumpy==1.22.4\nscipy==1.9.3\ndash==2.5.1\ndash-bootstrap-components==1.2.1\ndash-core-components==2.5.1\ndash-html-components==2.5.1\nflask==2.2.2\n", "timestamp": 1767000552.0417233}

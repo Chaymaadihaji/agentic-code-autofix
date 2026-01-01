@@ -1,0 +1,48 @@
+go
+# .gitignore
+
+# Fichier générés par Gqlgen
+*.gqlgen
+
+# Fichiers temporaires
+*.tmp
+
+# Fichiers d'emplacement de build
+*_test.go
+*_example_test.go
+
+# Fichiers de déploiement
+*.jar
+*.war
+
+# Fichiers de logs
+*.log
+
+# Fichiers caches
+go-cache
+pgx-cache
+
+# Fichiers PostgreSQL
+*.backup
+*.sql
+*.backup.sql
+
+# Répertoires système
+/venv
+/node_modules
+
+# Dossiers de dépôt
+/dist
+/docs
+/build
+/tests
+
+# Fichiers d'exécution
+*.exe
+
+# Config
+/.pgpass
+
+# Fichiers secrets
+*.secret
+/secrets

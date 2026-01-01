@@ -1,0 +1,1 @@
+{"nom_fichier": ".env.example", "code": "bash\nPORT=3000\nDB_HOST=localhost\nDB_PORT=27017\nDB_USER=projet\nDB_PASSWORD=projet\nDB_NAME=projet\nSECRET_KEY=secret_key_here\nJWT_SECRET=jwt_secret_here\nJWT_EXPIRES_IN=1h\nFILE_UPLOAD_DIR=uploads\nNOTIFY_PORT=3001\nNOTIFY_SECRET=notify_secret_here\nDOCKER_IMAGE_NAME=projet\nDOCKER_PORT=3000\n", "timestamp": 1767001011.1514955}

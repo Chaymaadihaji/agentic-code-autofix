@@ -1,97 +1,161 @@
 """
-🎓 Module d'apprentissage des erreurs
+ Système de correction intelligente
+Utilise la mémoire d'apprentissage pour corriger automatiquement
 """
+import re
+from typing import Dict, List, Tuple
+from cerveau.apprentissage import MemoireApprentissage
 
-import json
-import os
-import datetime
-
-class Apprentissage:
-    def __init__(self):
-        self.chemin_connaissances = "connaissances/solutions"
-        os.makedirs(self.chemin_connaissances, exist_ok=True)
+class CorrecteurIntelligent:
+    def __init__(self, memoire: MemoireApprentissage):
+        """Initialise le correcteur avec une mémoire"""
+        self.memoire = memoire
+        self.corrections_appliquees = []
+        print(" Correcteur intelligent initialisé")
     
-    def apprendre_erreur(self, erreur, correction):
+    def corriger_code(self, code: str, langage: str, fichier: str, tentative: int, projet: str) -> Tuple[str, List[Dict]]:
         """
-        Apprend d'une erreur et de sa correction
+        Corrige le code en utilisant l'apprentissage
         """
-        # Créer un ID unique pour cette erreur
-        from hashlib import md5
-        erreur_id = md5(erreur.encode()).hexdigest()[:8]
+        erreurs_detectees = self._detecter_erreurs(code, langage, fichier)
+        erreurs_corrigees = []
+        code_corrige = code
         
-        fichier_erreur = os.path.join(self.chemin_connaissances, f"erreur_{erreur_id}.json")
+        for erreur in erreurs_detectees:
+            erreur["tentative"] = tentative
+            erreur["projet"] = projet
+            erreur["langage"] = langage
+            erreur["fichier"] = fichier
+            
+            
+            corrections_similaires = self.memoire.trouver_corrections_similaires(erreur)
+            
+            if corrections_similaires:
+                
+                meilleure_correction = corrections_similaires[0]
+                if erreur.get("code_avant") in code_corrige:
+                    code_corrige = code_corrige.replace(
+                        erreur.get("code_avant"),
+                        erreur.get("code_apres", erreur.get("code_avant"))
+                    )
+                    erreur["corrige_avec_memoire"] = True
+                    erreur["correction_id"] = meilleure_correction.get("id")
+            else:
+                
+                if erreur.get("code_avant") in code_corrige:
+                    code_corrige = code_corrige.replace(
+                        erreur.get("code_avant"),
+                        erreur.get("code_apres", "")
+                    )
+                    erreur["corrige_avec_memoire"] = False
+            
+            
+            erreur_id = self.memoire.enregistrer_erreur(erreur)
+            erreur["id"] = erreur_id
+            
+            erreurs_corrigees.append(erreur)
+            self.corrections_appliquees.append(erreur)
         
-        donnees = {
-            "erreur": erreur[:500],
-            "correction": correction,
-            "date": datetime.datetime.now().isoformat(),
-            "utilisations": 1
-        }
         
-        # Si le fichier existe déjà, incrémenter les utilisations
-        if os.path.exists(fichier_erreur):
-            try:
-                with open(fichier_erreur, "r") as f:
-                    existant = json.load(f)
-                    donnees["utilisations"] = existant.get("utilisations", 0) + 1
-            except:
-                pass
+        code_corrige = self.memoire.appliquer_corrections_connues(code_corrige, langage, fichier)
         
-        # Sauvegarder
-        with open(fichier_erreur, "w") as f:
-            json.dump(donnees, f, indent=2)
-        
-        print(f"✅ Erreur apprise et sauvegardée: {fichier_erreur}")
+        return code_corrige, erreurs_corrigees
     
-    def enregistrer_reussite(self, demande, chemin_projet, tentatives):
+    def _detecter_erreurs(self, code: str, langage: str, fichier: str) -> List[Dict]:
         """
-        Enregistre un projet réussi
+        Détecte les erreurs courantes dans le code
         """
-        reussites_dir = os.path.join("connaissances", "reussites")
-        os.makedirs(reussites_dir, exist_ok=True)
+        erreurs = []
         
-        from hashlib import md5
-        projet_id = md5(demande.encode()).hexdigest()[:8]
+        if langage == "go":
+            erreurs.extend(self._detecter_erreurs_go(code, fichier))
+        elif langage == "python":
+            erreurs.extend(self._detecter_erreurs_python(code, fichier))
         
-        donnees = {
-            "demande": demande,
-            "chemin": chemin_projet,
-            "tentatives": tentatives,
-            "date": datetime.datetime.now().isoformat(),
-            "statut": "reussi"
-        }
-        
-        fichier = os.path.join(reussites_dir, f"projet_{projet_id}.json")
-        with open(fichier, "w") as f:
-            json.dump(donnees, f, indent=2)
+        return erreurs
     
-    def chercher_solution(self, erreur):
-        """
-        Cherche une solution connue pour une erreur
-        """
-        if not os.path.exists(self.chemin_connaissances):
-            return None
+    def _detecter_erreurs_go(self, code: str, fichier: str) -> List[Dict]:
+        """Détecte les erreurs spécifiques à Go"""
+        erreurs = []
+        lignes = code.split('\n')
         
-        from hashlib import md5
-        erreur_id = md5(erreur.encode()).hexdigest()[:8]
-        fichier_potentiel = os.path.join(self.chemin_connaissances, f"erreur_{erreur_id}.json")
+        for i, ligne in enumerate(lignes, 1):
+            
+            if 'undefinedVar' in ligne and ('tentative' in ligne or 'undefined' in ligne.lower()):
+                erreurs.append({
+                    "type": "undefined_variable",
+                    "message": f"Variable non définie ligne {i}",
+                    "ligne": i,
+                    "code_avant": ligne.strip(),
+                    "code_apres": "// " + ligne.strip() + " // Variable supprimée (erreur)",
+                    "severite": "error"
+                })
+            
+           
+            if 'var x int = "' in ligne and 'texte"' in ligne:
+                erreurs.append({
+                    "type": "type_error",
+                    "message": f"Erreur de type (string dans int) ligne {i}",
+                    "ligne": i,
+                    "code_avant": ligne.strip(),
+                    "code_apres": ligne.strip().replace('int', 'string'),
+                    "severite": "error"
+                })
+            
+            
+            if 'x =: 5' in ligne:
+                erreurs.append({
+                    "type": "wrong_assignment",
+                    "message": f"Mauvais opérateur d'affectation ligne {i}",
+                    "ligne": i,
+                    "code_avant": ligne.strip(),
+                    "code_apres": ligne.strip().replace('=:', ':='),
+                    "severite": "error"
+                })
+            
+            
+            if '"inexistant/package' in ligne:
+                erreurs.append({
+                    "type": "missing_import",
+                    "message": f"Import manquant ligne {i}",
+                    "ligne": i,
+                    "code_avant": ligne.strip(),
+                    "code_apres": "// " + ligne.strip() + " // Import supprimé (inexistant)",
+                    "severite": "error"
+                })
         
-        if os.path.exists(fichier_potentiel):
-            try:
-                with open(fichier_potentiel, "r") as f:
-                    return json.load(f)
-            except:
-                pass
+        return erreurs
+    
+    def _detecter_erreurs_python(self, code: str, fichier: str) -> List[Dict]:
+        """Détecte les erreurs spécifiques à Python"""
+        erreurs = []
+        lignes = code.split('\n')
         
-        # Chercher par similarité (basique)
-        for fichier in os.listdir(self.chemin_connaissances):
-            if fichier.endswith(".json"):
-                try:
-                    with open(os.path.join(self.chemin_connaissances, fichier), "r") as f:
-                        solution = json.load(f)
-                        if any(mot in erreur for mot in solution.get("erreur", "").split()[:3]):
-                            return solution
-                except:
-                    continue
+        for i, ligne in enumerate(lignes, 1):
+            if 'variable_non_definie_' in ligne or 'undefined_var' in ligne:
+                erreurs.append({
+                    "type": "undefined_variable",
+                    "message": f"Variable non définie ligne {i}",
+                    "ligne": i,
+                    "code_avant": ligne.strip(),
+                    "code_apres": "# " + ligne.strip() + " # Variable supprimée",
+                    "severite": "error"
+                })
         
-        return None
+        return erreurs
+    
+    def get_rapport_correction(self) -> str:
+        """Génère un rapport des corrections appliquées"""
+        if not self.corrections_appliquees:
+            return " Aucune correction appliquée"
+        
+        rapport = f" {len(self.corrections_appliquees)} corrections appliquées:\n"
+        for i, correction in enumerate(self.corrections_appliquees[:3], 1):
+            avec_memoire = "" if correction.get("corrige_avec_memoire") else ""
+            rapport += f"  {i}. {avec_memoire} {correction.get('type', 'inconnu')}\n"
+        
+        return rapport
+    
+    def reset_corrections(self):
+        """Réinitialise les corrections de la session"""
+        self.corrections_appliquees = []

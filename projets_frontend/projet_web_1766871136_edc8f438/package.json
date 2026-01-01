@@ -1,0 +1,43 @@
+json
+{
+  "name": "bibliotheque-api",
+  "version": "1.0.0",
+  "description": "API REST pour gérer une bibliothèque",
+  "main": "com.example.BibliothequeApplication",
+  "scripts": {
+    "test": "mvn test",
+    "start": "mvn spring-boot:run"
+  },
+  "dependencies": {
+    "spring-boot-starter-web": "^2.5.2",
+    "spring-boot-starter-data-jpa": "^2.5.2",
+    "spring-boot-starter-security": "^2.5.2",
+    "javax.validation:validation-api:2.0.1.Final",
+    "org.springframework.boot:spring-boot-starter-swagger:2.5.2",
+    "io.springfox:springfox-swagger-ui:3.0.0",
+    "postgresql:postgresql:42.2.23",
+    "com.auth0:java-jwt:3.18.3",
+    "org.projectlombok:lombok:1.18.20",
+    "org.projectlombok:lombok-maven-plugin:1.18.20",
+    "org.junit.jupiter:junit-jupiter-api:5.7.0",
+    "org.junit.jupiter:junit-jupiter-engine:5.7.0"
+  },
+  "devDependencies": {
+    "org.springframework.boot:spring-boot-starter-test:2.5.2",
+    "net.bytebuddy:byte-buddy:1.11.7",
+    "org.mockito:mockito-core:3.12.4",
+    "org.springframework.boot:spring-boot-starter-data-test:2.5.2"
+  },
+  "keywords": [
+    "bibliotheque",
+    "api",
+    "rest",
+    "spring-boot",
+    "postgresql",
+    "jwt",
+    "validation",
+    "tests"
+  ],
+  "author": "Votre Nom",
+  "license": "Apache-2.0"
+}

@@ -1,0 +1,1 @@
+{"nom_fichier": ".gitignore", "code": "# .gitignore\n\nnode_modules/\ndist/\ncoverage/\n*.tsbuildinfo\n*.map\n!.next/\n!.vscode/\n!.gitignore\n.env\nsrc/**/tests\npublic/**/tests\npackage*.json\nnpm-debug.log\nyarn-debug.log\nyarn-error.log\nDockerfile\n", "bugs_introduits": [], "timestamp": 1767006252.4992967}

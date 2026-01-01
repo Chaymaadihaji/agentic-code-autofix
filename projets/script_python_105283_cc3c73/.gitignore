@@ -1,0 +1,40 @@
+python
+# .gitignore
+
+# Ignorer les fichiers de configuration de l'OS
+/config
+
+# Ignorer les fichiers de compilation temporaire
+/__pycache__
+*.pyc
+*.pyo
+
+# Ignorer les modules externes installés via pip
+env/lib/python*/*.*
+
+# Ignorer les logs et erreurs du serveur
+var/log/*
+var/errors/*
+
+# Ignorer les fichiers de données temporaires
+*.tmp
+
+# Ignorer les fichiers générés par Jupyter Notebooks
+*.ipynb_checkpoints/
+
+# Ignorer les fichiers de code de l'éditeur
+.vscode/*
+
+# Ignorer les fichiers de données et de cache de pandas
+pandas/*.db
+pandas/*.h5
+
+# Ignorer les fichiers de modèle de Matplotlib
+ matplotlib/*.mpl
+
+# Ignorer les fichiers de model de Scikit-learn
+sklearn/*.joblib
+sklearn/*.pkl
+
+# Ignorer les fichiers de données de test
+test_*

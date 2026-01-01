@@ -1,0 +1,1 @@
+{"nom_fichier": "requirements.txt", "code": "requirements.txt\nstreamlit==1.11.0\npandas==1.5.1\nmatplotlib==3.6.2\nseaborn==0.12.1\nplotly==5.12.0\ndash==2.12.2\ndash-bootstrap-components==2.3.0\ndash-core-components==2.12.2\ndash-html-components==2.3.0\nnumpy==1.23.4\nscikit-learn==1.1.3\npystan==2.26.0\n", "timestamp": 1767000633.000134}

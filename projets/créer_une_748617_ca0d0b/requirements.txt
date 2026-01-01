@@ -1,0 +1,61 @@
+import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import os
+from dotenv import load_dotenv
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+load_dotenv()
+
+# Charger les données CSV
+@st.cache
+def charger_donnes_csv(fichier):
+    return pd.read_csv(fichier)
+
+# Chargement des données CSV
+fichier = st.file_uploader("Charger un fichier CSV", type=["csv"])
+
+if fichier:
+    donnees = charger_donnes_csv(fichier)
+    st.write(donnees)
+
+    # Affichage de graphiques interactifs
+    st.subheader("Graphiques interactifs")
+    graphique = st.selectbox("Choisir un graphique", ["Scatter", "Bar", "Histogramme"])
+    if graphique == "Scatter":
+        st.line_chart(donnees)
+    elif graphique == "Bar":
+        st.bar_chart(donnees)
+    elif graphique == "Histogramme":
+        st.hist_chart(donnees)
+
+    # Filtres pour les données
+    st.subheader("Filtres")
+    filtres = st.multiselect("Choisir des filtres", donnees.columns)
+    if filtres:
+        donnees_filtrees = donnees[donnees[filtres[0]].notna()]
+        for filtre in filtres[1:]:
+            donnees_filtrees = donnees_filtrees[donnees_filtrees[filtre].notna()]
+        st.write(donnees_filtrees)
+
+    # Calcul de statistiques
+    st.subheader("Statistiques")
+    stat = st.selectbox("Choisir une statistique", ["Moyenne", "Médiane", "Écart-type"])
+    if stat == "Moyenne":
+        moyenne = donnees.mean().mean()
+        st.write(f"Moyenne : {moyenne}")
+    elif stat == "Médiane":
+        mediane = donnees.median().median()
+        st.write(f"Médiane : {mediane}")
+    elif stat == "Écart-type":
+        ecart_type = donnees.std().std()
+        st.write(f"Écart-type : {ecart_type}")
+
+    # Affichage de la table des données
+    st.subheader("Table des données")
+    st.write(donnees)
+
+if __name__ == "__main__":
+    app.run(debug=True)

@@ -1,0 +1,1 @@
+{"nom_fichier": ".env.example", "code": "bash\n# .env.example\n\nAPI_URL_DATA=\"https://api.example.com/data\"\nAPI_KEY=\"votre_cle_api\"\n", "timestamp": 1767000591.5284333}

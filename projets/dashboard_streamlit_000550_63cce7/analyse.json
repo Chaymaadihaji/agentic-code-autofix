@@ -1,0 +1,39 @@
+{
+  "type_application": "streamlit",
+  "type_projet": "web",
+  "besoin_interface": true,
+  "type_interface": "streamlit_gui",
+  "complexite_interface": "moyenne",
+  "composants_ui_attendus": [
+    "visualisations interactives",
+    "dashboard",
+    "graphiques",
+    "tableaux",
+    "filtres"
+  ],
+  "technologies_frontend": [
+    "streamlit"
+  ],
+  "technologies_backend": [],
+  "base_de_donnees": [
+    "aucune"
+  ],
+  "authentification": [
+    "aucune"
+  ],
+  "langage_backend": "python",
+  "langage_principal": "python",
+  "framework_ui": "streamlit",
+  "description_technique": "Application de dashboard avec visualisations interactives",
+  "fonctionnalites_cles": [
+    "visualisations interactives"
+  ],
+  "dependances": [
+    "streamlit",
+    "pandas",
+    "matplotlib"
+  ],
+  "deploiement": [
+    "aucun"
+  ]
+}

@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <header>
+            <h1>Dashboard</h1>
+        </header>
+        <main>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Graphiques</h2>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="myChart" width="400" height="400"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Filtres</h2>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="filter1">Filtre 1</label>
+                                    <select id="filter1" class="form-control">
+                                        <option value="">Tous</option>
+                                        <option value="option1">Option 1</option>
+                                        <option value="option2">Option 2</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="filter2">Filtre 2</label>
+                                    <select id="filter2" class="form-control">
+                                        <option value="">Tous</option>
+                                        <option value="option3">Option 3</option>
+                                        <option value="option4">Option 4</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Appliquer</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Statistiques</h2>
+                        </div>
+                        <div class="card-body">
+                            <p>Nombre de données : {{ stats.nbr_data }}</p>
+                            <p>Moyenne : {{ stats.mean }}</p>
+                            <p>Median : {{ stats.median }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Dashboard</h2>
+                        </div>
+                        <div class="card-body">
+                            <p>Vue actuelle : {{ view.current_view }}</p>
+                            <p>Navigation :</p>
+                            <ul>
+                                <li><a href="#" class="nav-link">Vue 1</a></li>
+                                <li><a href="#" class="nav-link">Vue 2</a></li>
+                                <li><a href="#" class="nav-link">Vue 3</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Initialisation du graphique
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Fév', 'Mar'],
+                datasets: [{
+                    label: 'Données',
+                    data: [10, 20, 30],
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Données'
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+{% endblock %}

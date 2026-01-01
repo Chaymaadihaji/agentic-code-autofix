@@ -1,5 +1,5 @@
 """
-💾 Cache pour réduire les appels API
+Cache pour réduire les appels API
 """
 
 import json

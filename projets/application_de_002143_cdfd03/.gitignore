@@ -1,0 +1,26 @@
+-node_modules/
+dist/
+.env*
+*.map
+*.log
+
+# Fichiers de build
+public/*
+!(public/index.html)
+!(public/favicon.ico)
+!(public/uploads/)
+
+# Fichiers de projet Node.js
+serverless.yml
+serverless.config.js
+serverless.ts
+serverless.ts.map
+
+# Fichiers de base de donnée MongoDB
+data/
+
+# Fichiers de cache Redis
+cache/
+
+# Fichiers de logs pour Docker Compose
+docker-compose.log

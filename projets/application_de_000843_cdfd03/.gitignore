@@ -1,0 +1,48 @@
+typescript
+# Node.js project files
+node_modules/
+*.log
+
+# MongoDB files
+node_modules/mongodb/.git/
+node_modules/mongodb/bin/
+
+# Socket.io files
+node_modules/socket.io/.git/
+
+# JWT secret
+jwt-secret
+
+# Docker build files
+docker-compose.yml
+Dockerfile
+
+# Upload de fichier
+public/uploads
+
+# Fichiers de config
+config/development.json
+config/production.json
+
+# Fichiers de session
+session/
+
+# Fichiers de logs
+logs/
+
+# Fichiers de déploiement
+deploy/
+
+# Fichiers temporaire
+temp/
+
+# Fichiers d'erreurs
+error.log
+
+# Fichiers de build
+*.js
+*.map
+
+# Fichiers de node_modules
+node_modules/mongodb/node_modules/
+node_modules/socket.io/node_modules/

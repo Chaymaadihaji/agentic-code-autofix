@@ -1,0 +1,1 @@
+{"nom_fichier": ".env.example", "code": "# Application settings\nVERCEL_API_KEY=\nVERCEL_PROJECT_ID=\nHEROKU_API_KEY=\nHEROKU_APP_NAME=\nMONGO_URI=mongodb://localhost:27017/\nMONGO_DB=todolist\nPORT=3000\nSECRET_KEY=secret_key_here\n", "timestamp": 1766870458.3344257}

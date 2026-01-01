@@ -1,0 +1,54 @@
+json
+{
+  "name": "gpp-gestion-projet",
+  "version": "1.0.0",
+  "description": "Application web de gestion de projet",
+  "scripts": {
+    "start": "node src/server.js",
+    "build": "tsc -p tsconfig.json && npm run lint",
+    "lint": "tslint --project src/tsconfig.json",
+    "test": "jest",
+    "start:docker": "docker-compose up",
+    "stop:docker": "docker-compose down"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.10",
+    "multer": "^1.4.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "socket.io": "^2.3.0",
+    "@types/body-parser": "^1.19.0",
+    "@types/express": "^4.17.13",
+    "@types/jsonwebtoken": "^8.5.0",
+    "@types/mongoose": "^5.9.14",
+    "@types/multer": "^1.3.7",
+    "@types/react": "^17.0.38",
+    "@types/react-dom": "^17.0.16",
+    "@typescript-eslint/eslint-plugin": "^4.21.0",
+    "typescript": "^4.2.3"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.25",
+    "jest": "^27.0.6",
+    "ts-jest": "^27.0.3",
+    "tslint": "^6.1.3",
+    "typescript": "^4.2.3"
+  },
+  "keywords": ["gpp", "gestion de projet", "authentification", "upload de fichiers", "notifications en temps réel"],
+  "author": "Jean-Pierre DUPRE (JPD)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JPDupre/gpp-gestion-projet/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JPDupre/gpp-gestion-projet.git"
+  },
+  "engines": {
+    "node": "14.x",
+    "npm": "6.x"
+  }
+}

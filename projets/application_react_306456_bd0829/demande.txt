@@ -1,0 +1,1 @@
+Application React qui fetch les données de l'API JSONPlaceholder et les affiche dans un tableau avec pagination

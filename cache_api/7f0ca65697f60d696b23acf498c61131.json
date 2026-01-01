@@ -1,0 +1,1 @@
+{"nom_fichier": "README.md", "code": "bash\npip install fastapi uvicorn motor pymongo\n", "langage": "markdown", "bugs_introduits": [], "corrections_appliquees": [], "timestamp": 1767107114.6655178, "tentative": 3}

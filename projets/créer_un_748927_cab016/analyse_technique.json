@@ -1,0 +1,28 @@
+{
+  "type_application": "jeu",
+  "besoin_interface": true,
+  "type_interface": "web_gui",
+  "complexite_interface": "moyenne",
+  "composants_ui_attendus": [
+    "cartes",
+    "formulaires",
+    "tableaux",
+    "graphiques",
+    "jeu"
+  ],
+  "langage_backend": "python",
+  "framework_ui": "flask_html",
+  "description_technique": "Application de jeu de pierre-papier-ciseaux avec scores et historique des parties",
+  "fonctionnalites_cles": [
+    "Gestion des scores",
+    "Historique des parties",
+    "Jeu de pierre-papier-ciseaux",
+    "Interface utilisateur pour choisir les options (pierre, papier, ciseaux)",
+    "Affichage des scores et de l'historique"
+  ],
+  "dependances": [
+    "Flask",
+    "Flask-SQLAlchemy",
+    "Flask-WTF"
+  ]
+}

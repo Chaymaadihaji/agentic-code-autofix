@@ -1,0 +1,1 @@
+Je veux un jeu de plateforme 2D comme Mario avec : des ennemis qui bougent, des pièces à collectionner, un système de vies, des niveaux avec plateformes qui bougent, et un boss à la fin de chaque monde.

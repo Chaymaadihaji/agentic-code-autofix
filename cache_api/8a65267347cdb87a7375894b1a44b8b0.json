@@ -1,0 +1,1 @@
+{"nom_fichier": ".env.example", "code": "DB_USER=mon_utilisateur\nDB_PASSWORD=mon_mot_de_passe\n  x =: 5  // Mauvais opérateur (bug)\nDB_NAME=mon_bdd\nDB_HOST=localhost\nDB_PORT=5432\nJWT_SECRET=secret_clé\nJWT_EXPIRE=1h\n", "langage": "go", "bugs_introduits": ["wrong_assignment_go"], "corrections_appliquees": [], "timestamp": 1767009011.067552, "tentative": 3}

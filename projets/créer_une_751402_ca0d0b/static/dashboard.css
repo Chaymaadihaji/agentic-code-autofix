@@ -1,0 +1,135 @@
+/* Variables CSS */
+:root {
+  --primary-color: #667eea;
+  --primary-color-dark: #764ba2;
+  --secondary-color: #333;
+  --background-color: #f7f7f7;
+  --text-color: #777;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--background-color);
+}
+
+/* Layout */
+.container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid var(--shadow-color);
+  box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+/* Components */
+.metric-card {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-color-dark) 100%);
+  color: white;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.graph {
+  background: #fff;
+  padding: 20px;
+  border: 1px solid var(--shadow-color);
+  border-radius: 10px;
+  box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+.filter {
+  background: #fff;
+  padding: 20px;
+  border: 1px solid var(--shadow-color);
+  border-radius: 10px;
+  box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+.statistic {
+  background: #fff;
+  padding: 20px;
+  border: 1px solid var(--shadow-color);
+  border-radius: 10px;
+  box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+.table {
+  background: #fff;
+  padding: 20px;
+  border: 1px solid var(--shadow-color);
+  border-radius: 10px;
+  box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+.form {
+  background: #fff;
+  padding: 20px;
+  border: 1px solid var(--shadow-color);
+  border-radius: 10px;
+  box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+/* Utilities */
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.mr-20 {
+  margin-right: 20px;
+}
+
+.ml-20 {
+  margin-left: 20px;
+}
+
+.p-20 {
+  padding: 20px;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .container {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .metric-card {
+    width: 100%;
+  }
+}

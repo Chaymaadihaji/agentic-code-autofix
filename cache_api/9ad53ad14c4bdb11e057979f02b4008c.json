@@ -1,0 +1,1 @@
+{"nom_fichier": "README.md", "code": "bash\npython -m virtualenv venv\nsource venv/bin/activate\npip install -r requirements.txt\n", "langage": "markdown", "bugs_introduits": [], "corrections_appliquees": [], "timestamp": 1767107180.6093695, "tentative": 4}

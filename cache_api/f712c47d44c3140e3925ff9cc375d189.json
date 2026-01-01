@@ -1,0 +1,1 @@
+{"nom_fichier": "README.md", "code": "markdown\npandas\nmatplotlib\nscikit-learn\n", "langage": "markdown", "bugs_introduits": ["syntax_error", "undefined_variable"], "corrections_appliquees": [], "timestamp": 1767103529.1918607, "tentative": 2}

@@ -1,0 +1,1 @@
+{"nom_fichier": "README.md", "code": "bash\ngo get -u github.com/gqlgen/gqlgen\ngo get github.com/lib/pq\ngo get github.com/dgrijalva/jwt-go\n", "langage": "markdown", "bugs_introduits": ["undefined_variable", "syntax_error"], "corrections_appliquees": [], "timestamp": 1767008849.6381953, "tentative": 1}

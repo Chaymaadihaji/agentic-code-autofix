@@ -1,0 +1,76 @@
+/* Styles pour dashboard */
+.metric-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+/* Composants UI */
+.fiches-patients {
+    background: #f7f7f7;
+    padding: 20px;
+}
+
+.historique-medical {
+    background: #f7f7f7;
+    padding: 20px;
+}
+
+.ordonnances-numeriques {
+    background: #f7f7f7;
+    padding: 20px;
+}
+
+.prise-de-rendez-vous {
+    background: #f7f7f7;
+    padding: 20px;
+}
+
+.alertes-medicaments {
+    background: #f7f7f7;
+    padding: 20px;
+}
+
+.dossier-medical-partage {
+    background: #f7f7f7;
+    padding: 20px;
+}
+
+.graphiques-suivi-sante {
+    background: #f7f7f7;
+    padding: 20px;
+}
+
+.rapports-medicins {
+    background: #f7f7f7;
+    padding: 20px;
+}
+
+/* Variables CSS pour les couleurs/thème */
+:root {
+    --primary-color: #667eea;
+    --secondary-color: #764ba2;
+    --background-color: #f7f7f7;
+}
+
+/* Animations subtiles pour l'interactivité */
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Media queries pour le responsive */
+@media (max-width: 768px) {
+    .metric-card {
+        width: 100%;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .metric-card {
+        width: 100%;
+        padding: 10px;
+    }
+}

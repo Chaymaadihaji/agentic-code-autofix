@@ -1,0 +1,49 @@
+json
+{
+  "compilerOptions": {
+    "allowJs": false,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "lib": ["es6"],
+    "moduleResolution": "node",
+    "module": "commonjs",
+    "noEmit": true,
+    "outDir": "./build",
+    "target": "es2020",
+    "sourceMap": true,
+    "jsx": "react"
+  },
+  "include": ["src/**/*",
+              "test/**/*",
+              "public/**/*"],
+  "include**: ["**/*.json"],
+  "globals": {
+    "__ Reached the root dir of your project__ " : false
+ },
+  "ts-node": {
+    "transpileOnly": true
+  },
+  "paths": {
+    "@/*": [
+      "src/*",
+      "!src/node_modules/*",
+      "!src/.vscode/*"
+    ],
+    "test/*": [
+      "src/__tests__/*"
+    ]
+},
+"filesGlob": [
+  "**.ts", "**.tsx", "**.js",
+],
+"options": {
+  "watch": true
+},
+"cache": {
+  "directory": "./.tmp"
+},
+"exclude": [
+  "node_modules/**/*",
+],
+"sourcemaps": true
+}

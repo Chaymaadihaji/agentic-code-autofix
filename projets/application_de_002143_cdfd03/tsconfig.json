@@ -1,0 +1,23 @@
+json
+{
+  "compilerOptions": {
+    "outDir": "./build",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "commonjs",
+    "target": "es6",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": [
+    "src/**/*",
+    "public/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "build",
+    "coverage"
+  ],
+  "types": ["@types/node", "@types/react", "@types/express", "@types/mongodb", "@types/socket.io"]
+}

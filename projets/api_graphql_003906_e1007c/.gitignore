@@ -1,0 +1,37 @@
+typescript
+# .gitignore
+
+# Générateur de code
+node_modules/
+dist/
+
+# Données de base de données
+*.sql
+
+# Logements
+logs/
+
+# NPM/Maven
+npm-debug.log*
+yarn-debug.log*
+
+# Résultats de la compilation
+*.o
+
+# Gestion Git
+# Dans /node_modules
+# - les versions spécifiques
+/node_modules/.bin/rollup
+/node_modules/.bin/parcel
+/node_modules/.bin/webpack
+
+# Résultats de l'implémentation
+npm-debug.log*
+yarn-debug.log*
+
+# Résultats de la compilation
+*.o
+
+# Résultats de l'implémentation
+yarn-error.log*
+npm-debug.log*
